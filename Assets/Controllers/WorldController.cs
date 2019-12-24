@@ -11,12 +11,15 @@ public class WorldController : MonoBehaviour {
     Dictionary<LandTile, GameObject> tileGameObjectMap;
     Dictionary<Furniture, GameObject> furnitureGameObjectMap;
     Dictionary<string,Sprite> landscapeSprites;
+    Dictionary<LandTile.TileType,string> landscapeSpritesNames;
 	Dictionary<string,Sprite> foundationSprites;//sprites for walls, windows, doors
     // Start is called before the first frame update
     void Start () {
 
         foundationSprites = new Dictionary<string, Sprite>();
         landscapeSprites = new Dictionary<string, Sprite>();
+        landscapeSpritesNames = new Dictionary<LandTile.TileType, string>();
+        populatelandscapeSpritesNames();
         Sprite[] foundationsprites = Resources.LoadAll<Sprite>("Images/Foundation/");
         Sprite[] landscapesprites = Resources.LoadAll<Sprite>("Images/Landscape/");
 
@@ -85,10 +88,6 @@ public class WorldController : MonoBehaviour {
             return;
         }
         GameObject tile_go = tileGameObjectMap[tile_data];
-        /* if(tile_data.X>0){World.CheckNeighbors(tile_data.X-1,tile_data.Y);}//Check Left
-        if(tile_data.X<World.Width){World.CheckNeighbors(tile_data.X+1,tile_data.Y);}//Check Right
-        if(tile_data.Y>0){World.CheckNeighbors(tile_data.X,tile_data.Y-1);}//Check Bottom
-        if(tile_data.Y>World.Height){World.CheckNeighbors(tile_data.X,tile_data.Y+1);}//Check Top */
         if (tile_go == null) {
             Debug.LogError ("tileGameObjectMap returned null-- forget to add the tile to the dictionary? Or unregister a callback?");
             return;
@@ -98,50 +97,11 @@ public class WorldController : MonoBehaviour {
     }
 
     void AssignSpriteToLandTile(LandTile tile_data,GameObject tile_go){
-        //Goes Through ALL Sprites to asign them to corresponding tiles
-        if (tile_data.Type == LandTile.TileType.FullGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_Full"];
-        } else if (tile_data.Type == LandTile.TileType.BottomGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_Bottom"];
-        } else if (tile_data.Type == LandTile.TileType.TopGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_Top"];
-        } else if (tile_data.Type == LandTile.TileType.LeftGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_Left"];
-        } else if (tile_data.Type == LandTile.TileType.RightGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_Right"];
-        } else if (tile_data.Type == LandTile.TileType.BRGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_BR"];
-        } else if (tile_data.Type == LandTile.TileType.BLGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_BL"];
-        } else if (tile_data.Type == LandTile.TileType.TRGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_TR"];
-        } else if (tile_data.Type == LandTile.TileType.TLGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Grass_TL"];
-        } 
-        
-        else if (tile_data.Type == LandTile.TileType.FullDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_Full"];
-        } else if (tile_data.Type == LandTile.TileType.BottomDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_Bottom"];
-        } else if (tile_data.Type == LandTile.TileType.TopDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_Top"];
-        } else if (tile_data.Type == LandTile.TileType.LeftDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_Left"];
-        } else if (tile_data.Type == LandTile.TileType.RightDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_Right"];
-        } else if (tile_data.Type == LandTile.TileType.BRDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_BR"];
-        } else if (tile_data.Type == LandTile.TileType.BLDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_BL"];
-        } else if (tile_data.Type == LandTile.TileType.TRDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_TR"];
-        } else if (tile_data.Type == LandTile.TileType.TLDirt) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["Dirt_TL"];
-        } 
-        
-        else if (tile_data.Type == LandTile.TileType.LowGrass) {
-            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites["LowGrass"];
-        } else {
+        if(landscapeSpritesNames.ContainsKey(tile_data.Type)==true){//Sometimes there is some bug here where full grass tile gets placed instead of anything else
+            //Debug.Log("Trying to assign this sprite:"+tile_data.Type);
+            tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites[landscapeSpritesNames[tile_data.Type]];
+        }        
+        else {
             Debug.LogError ("OnTileTypeChanged-Unrecognized tiletype:"+tile_data.Type);
         }
     }
@@ -201,5 +161,29 @@ public class WorldController : MonoBehaviour {
     }
     void OnFurnitureChanged (Furniture obj) {
         Debug.LogError ("OnFurnitureChanged not implemented");
+    }
+
+    void populatelandscapeSpritesNames( ){
+        landscapeSpritesNames.Add(LandTile.TileType.LowGrass,"LowGrass");
+        //Grass Tiles
+        landscapeSpritesNames.Add(LandTile.TileType.FullGrass,"Grass_Full");
+        landscapeSpritesNames.Add(LandTile.TileType.TopGrass,"Grass_Top");
+        landscapeSpritesNames.Add(LandTile.TileType.BottomGrass,"Grass_Bottom");
+        landscapeSpritesNames.Add(LandTile.TileType.RightGrass,"Grass_Right");
+        landscapeSpritesNames.Add(LandTile.TileType.LeftGrass,"Grass_Left");
+        landscapeSpritesNames.Add(LandTile.TileType.BLGrass,"Grass_BL");
+        landscapeSpritesNames.Add(LandTile.TileType.BRGrass,"Grass_BR");
+        landscapeSpritesNames.Add(LandTile.TileType.TLGrass,"Grass_TL");
+        landscapeSpritesNames.Add(LandTile.TileType.TRGrass,"Grass_TR");
+        //Dirt Tiles
+        landscapeSpritesNames.Add(LandTile.TileType.FullDirt,"Dirt_Full");
+        landscapeSpritesNames.Add(LandTile.TileType.TopDirt,"Dirt_Top");
+        landscapeSpritesNames.Add(LandTile.TileType.BottomDirt,"Dirt_Bottom");
+        landscapeSpritesNames.Add(LandTile.TileType.RightDirt,"Dirt_Right");
+        landscapeSpritesNames.Add(LandTile.TileType.LeftDirt,"Dirt_Left");
+        landscapeSpritesNames.Add(LandTile.TileType.BLDirt,"Dirt_BL");
+        landscapeSpritesNames.Add(LandTile.TileType.BRDirt,"Dirt_BR");
+        landscapeSpritesNames.Add(LandTile.TileType.TLDirt,"Dirt_TL");
+        landscapeSpritesNames.Add(LandTile.TileType.TRDirt,"Dirt_TR");
     }
 }

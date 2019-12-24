@@ -7,7 +7,7 @@ public class LandTile
 {
     public enum TileType {
                             FullGrass, BottomGrass, TopGrass, LeftGrass, RightGrass, TRGrass, TLGrass, BRGrass, BLGrass,
-                            FullDirt,BottomDirt, TopDirt,LeftDirt, RightDirt, TRDirt, TLDirt, BRDirt, BLDirt,
+                            FullDirt, BottomDirt, TopDirt, LeftDirt, RightDirt, TRDirt, TLDirt, BRDirt, BLDirt,
                             LowGrass, Empty}
     
     TileType type=TileType.LowGrass;

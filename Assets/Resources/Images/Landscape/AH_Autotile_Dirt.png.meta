@@ -6,49 +6,49 @@ TextureImporter:
     21300002: Dirst_ES
     21300004: Dirt_ESW
     21300006: Dirt_SW
-    21300008: Dirt_NW-SE
-    21300010: AH_Autotile_Dirt_5
-    21300012: AH_Autotile_Dirt_6
-    21300014: AH_Autotile_Dirt_7
+    21300008: Dirt_Dia-ES
+    21300010: Dirt_Full_ESW-L
+    21300012: Dirt_Full_ESW-R
+    21300014: Dirt_Dia-SW
     21300016: Dirt_TL
-    21300018: AH_Autotile_Dirt_9
+    21300018: Dirt_Exit_Top
     21300020: Dirt_Top
     21300022: Dirt_TR
     21300024: Dirt_NS
     21300026: Dirst_NES
     21300028: Dirt_NESW
     21300030: Dirt_NSW
-    21300032: Dirt_F_
-    21300034: AH_Autotile_Dirt_17
-    21300036: AH_Autotile_Dirt_18
-    21300038: AH_Autotile_Dirt_19
+    21300032: Dirt_Full_NES_T
+    21300034: Dirt_IC_TL
+    21300036: Dirt_IC_TR
+    21300038: Dirt_Full_NSW_T
     21300040: Dirt_Left
-    21300042: AH_Autotile_Dirt_21
+    21300042: Dirt_Full_SW-NE
     21300044: LowGrass
-    21300046: AH_Autotile_Dirt_23
-    21300048: AH_Autotile_Dirt_24
+    21300046: Dirt_Exit_Right
+    21300048: Dirt_N
     21300050: Dirt_NE
     21300052: Dirt_NEW
     21300054: Dirt_NW
-    21300056: AH_Autotile_Dirt_28
-    21300058: AH_Autotile_Dirt_29
-    21300060: AH_Autotile_Dirt_30
-    21300062: AH_Autotile_Dirt_31
-    21300064: AH_Autotile_Dirt_32
+    21300056: Dirt_Full_NES_B
+    21300058: Dirt_IC_BL
+    21300060: Dirt_IC_BR
+    21300062: Dirt_NSW_B
+    21300064: Dirt_Exit_Left
     21300066: Dirt_Full
-    21300068: AH_Autotile_Dirt_34
+    21300068: Dirt_Full_NW-SE
     21300070: Dirt_Right
     21300072: Dirt_
     21300074: Dirt_E
     21300076: Dirt_EW
     21300078: Dirt_W
-    21300080: AH_Autotile_Dirt_40
-    21300082: AH_Autotile_Dirt_41
-    21300084: AH_Autotile_Dirt_42
-    21300086: AH_Autotile_Dirt_43
+    21300080: Dirt_Dia_NE
+    21300082: Dirt_Full_NEW-L
+    21300084: Dirt_NEW-R
+    21300086: Dirt_Dia_NW
     21300088: Dirt_BL
     21300090: Dirt_Bottom
-    21300092: AH_Autotile_Dirt_46
+    21300092: Dirt_Exit_Bottom
     21300094: Dirt_BR
   externalObjects: {}
   serializedVersion: 9
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NW-SE
+      name: Dirt_Dia-ES
       rect:
         serializedVersion: 2
         x: 64
@@ -232,7 +232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_5
+      name: Dirt_Full_ESW-L
       rect:
         serializedVersion: 2
         x: 80
@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_6
+      name: Dirt_Full_ESW-R
       rect:
         serializedVersion: 2
         x: 96
@@ -272,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_7
+      name: Dirt_Dia-SW
       rect:
         serializedVersion: 2
         x: 112
@@ -312,7 +312,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_9
+      name: Dirt_Exit_Top
       rect:
         serializedVersion: 2
         x: 144
@@ -452,7 +452,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_F_
+      name: Dirt_Full_NES_T
       rect:
         serializedVersion: 2
         x: 64
@@ -472,7 +472,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_17
+      name: Dirt_IC_TL
       rect:
         serializedVersion: 2
         x: 80
@@ -492,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_18
+      name: Dirt_IC_TR
       rect:
         serializedVersion: 2
         x: 96
@@ -512,7 +512,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_19
+      name: Dirt_Full_NSW_T
       rect:
         serializedVersion: 2
         x: 112
@@ -552,7 +552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_21
+      name: Dirt_Full_SW-NE
       rect:
         serializedVersion: 2
         x: 144
@@ -592,7 +592,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_23
+      name: Dirt_Exit_Right
       rect:
         serializedVersion: 2
         x: 176
@@ -612,7 +612,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_24
+      name: Dirt_N
       rect:
         serializedVersion: 2
         x: 0
@@ -692,7 +692,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_28
+      name: Dirt_Full_NES_B
       rect:
         serializedVersion: 2
         x: 64
@@ -712,7 +712,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_29
+      name: Dirt_IC_BL
       rect:
         serializedVersion: 2
         x: 80
@@ -732,7 +732,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_30
+      name: Dirt_IC_BR
       rect:
         serializedVersion: 2
         x: 96
@@ -752,7 +752,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_31
+      name: Dirt_NSW_B
       rect:
         serializedVersion: 2
         x: 112
@@ -772,7 +772,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_32
+      name: Dirt_Exit_Left
       rect:
         serializedVersion: 2
         x: 128
@@ -812,7 +812,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_34
+      name: Dirt_Full_NW-SE
       rect:
         serializedVersion: 2
         x: 160
@@ -932,7 +932,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_40
+      name: Dirt_Dia_NE
       rect:
         serializedVersion: 2
         x: 64
@@ -952,7 +952,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_41
+      name: Dirt_Full_NEW-L
       rect:
         serializedVersion: 2
         x: 80
@@ -972,7 +972,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_42
+      name: Dirt_NEW-R
       rect:
         serializedVersion: 2
         x: 96
@@ -992,7 +992,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_43
+      name: Dirt_Dia_NW
       rect:
         serializedVersion: 2
         x: 112
@@ -1052,7 +1052,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Dirt_46
+      name: Dirt_Exit_Bottom
       rect:
         serializedVersion: 2
         x: 160
