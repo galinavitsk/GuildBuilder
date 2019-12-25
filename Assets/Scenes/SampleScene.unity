@@ -278,7 +278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 468}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &104580167
@@ -298,7 +298,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 8
+  m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -346,9 +346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95671ecabb98e2746bec682af9a62e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  full_grass_sprite: {fileID: 21300066, guid: 04cb6ad46381d2244873ad4d40abccdf, type: 3}
-  full_dirt_sprite: {fileID: 21300066, guid: 4a74281cae66f1546a9099614983b2b6, type: 3}
-  wall_sprite: {fileID: 21300016, guid: 2ea5616137df8e94cb8121c3c00e509a, type: 3}
 --- !u!4 &175889925
 Transform:
   m_ObjectHideFlags: 0

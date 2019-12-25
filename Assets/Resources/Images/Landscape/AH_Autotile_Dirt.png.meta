@@ -24,7 +24,7 @@ TextureImporter:
     21300038: Dirt_Full_NSW_T
     21300040: Dirt_Left
     21300042: Dirt_Full_SW-NE
-    21300044: LowGrass
+    21300044: Generic
     21300046: Dirt_Exit_Right
     21300048: Dirt_N
     21300050: Dirt_NE
@@ -572,7 +572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LowGrass
+      name: Generic
       rect:
         serializedVersion: 2
         x: 160

@@ -7,13 +7,13 @@ TextureImporter:
     21300004: Grass_ESW
     21300006: Grass_SW
     21300008: Grass_Dia-ES
-    21300010: Grass_Full_ESW-L
+    21300010: Grass_Full_ESW_L
     21300012: Grass_Full_ESW-R
-    21300014: Grass_Dia-SW
-    21300016: Grass_TL
+    21300014: Grass_Dia_SW
+    21300016: Grass_TR
     21300018: Grass_Exit_Top
     21300020: Grass_Top
-    21300022: Grass_TR
+    21300022: Grass_TL
     21300024: Grass_NS
     21300026: Dirst_NES
     21300028: Grass_NESW
@@ -22,8 +22,8 @@ TextureImporter:
     21300034: Grass_IC_TL
     21300036: Grass_IC_TR
     21300038: Grass_Full_NSW_T
-    21300040: Grass_Left
-    21300042: Grass_Full_SW-NE
+    21300040: Grass_Right
+    21300042: Grass_Full_SW_NE
     21300044: LowGrass
     21300046: Grass_Exit_Right
     21300048: AH_Autotile_Grass_24
@@ -36,25 +36,25 @@ TextureImporter:
     21300062: Grass_NSW_B
     21300064: Grass_Exit_Left
     21300066: Grass_Full
-    21300068: Grass_Full_NW-SE
-    21300070: Grass_Right
+    21300068: Grass_Full_NW_SE
+    21300070: Grass_Left
     21300072: Grass_
     21300074: Grass_E
     21300076: Grass_EW
     21300078: Grass_W
     21300080: Grass_Dia_NE
-    21300082: Grass_Full_NEW-L
+    21300082: Grass_Full_NEW_L
     21300084: Grass_NEW-R
     21300086: Grass_Dia_NW
-    21300088: Grass_BL
+    21300088: Grass_BR
     21300090: Grass_Bottom
     21300092: Grass_Exit_Bottom
-    21300094: Grass_BR
+    21300094: Grass_BL
     21300096: Grass_ES
-    21300098: Grass_Dia-SE
-    21300100: Grass_Full_ESW-L
-    21300102: Grass_ESW-R
-    21300104: Grass_Dia-SW
+    21300098: Grass_Dia_SE
+    21300100: Grass_Full_ESW_L
+    21300102: Grass_ESW_R
+    21300104: Grass_Dia_SW
     21300106: Grass_Exit_Top
     21300108: Grass_NES
     21300110: Grass_Full_NES_T
@@ -64,7 +64,7 @@ TextureImporter:
     21300118: AH_Autotile_Grass_21
     21300120: Grass_Exit_Right
     21300122: Grass_N
-    21300124: AH_Autotile_Grass_28
+    21300124: Grass_Full_NES_B
     21300126: AH_Autotile_Grass_29
     21300128: AH_Autotile_Grass_30
     21300130: AH_Autotile_Grass_31
@@ -76,6 +76,9 @@ TextureImporter:
     21300142: AH_Autotile_Grass_43
     21300144: AH_Autotile_Grass_45
     21300146: Grass_Exit_Bottom
+    21300148: Grass_Full_NSW_B
+    21300150: Grass_Full_NEW-R
+    21300152: Grass_Full_NEW_R
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -238,7 +241,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_Dia-SE
+      name: Grass_Dia_SE
       rect:
         serializedVersion: 2
         x: 64
@@ -258,7 +261,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_Full_ESW-L
+      name: Grass_Full_ESW_L
       rect:
         serializedVersion: 2
         x: 80
@@ -278,7 +281,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_ESW-R
+      name: Grass_ESW_R
       rect:
         serializedVersion: 2
         x: 96
@@ -298,7 +301,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_Dia-SW
+      name: Grass_Dia_SW
       rect:
         serializedVersion: 2
         x: 112
@@ -318,7 +321,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_TR
+      name: Grass_TL
       rect:
         serializedVersion: 2
         x: 128
@@ -378,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_TL
+      name: Grass_TR
       rect:
         serializedVersion: 2
         x: 176
@@ -558,7 +561,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_Right
+      name: Grass_Left
       rect:
         serializedVersion: 2
         x: 128
@@ -578,7 +581,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_21
+      name: Grass_Full_SW_NE
       rect:
         serializedVersion: 2
         x: 144
@@ -698,7 +701,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_28
+      name: Grass_Full_NES_B
       rect:
         serializedVersion: 2
         x: 64
@@ -718,7 +721,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_29
+      name: Grass_IC_BL
       rect:
         serializedVersion: 2
         x: 80
@@ -738,7 +741,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_30
+      name: Grass_IC_BR
       rect:
         serializedVersion: 2
         x: 96
@@ -758,7 +761,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_31
+      name: Grass_Full_NSW_B
       rect:
         serializedVersion: 2
         x: 112
@@ -818,7 +821,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_34
+      name: Grass_Full_NW_SE
       rect:
         serializedVersion: 2
         x: 160
@@ -838,7 +841,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_Left
+      name: Grass_Right
       rect:
         serializedVersion: 2
         x: 176
@@ -938,7 +941,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_40
+      name: Grass_Dia_NE
       rect:
         serializedVersion: 2
         x: 64
@@ -958,7 +961,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_41
+      name: Grass_Full_NEW_L
       rect:
         serializedVersion: 2
         x: 80
@@ -978,7 +981,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_42
+      name: Grass_Full_NEW_R
       rect:
         serializedVersion: 2
         x: 96
@@ -998,7 +1001,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AH_Autotile_Grass_43
+      name: Grass_Dia_NW
       rect:
         serializedVersion: 2
         x: 112
@@ -1018,7 +1021,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_BR
+      name: Grass_BL
       rect:
         serializedVersion: 2
         x: 128
@@ -1078,7 +1081,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_BL
+      name: Grass_BR
       rect:
         serializedVersion: 2
         x: 176
