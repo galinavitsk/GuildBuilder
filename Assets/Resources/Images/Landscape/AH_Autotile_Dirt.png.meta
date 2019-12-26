@@ -6,10 +6,10 @@ TextureImporter:
     21300002: Dirt_ES
     21300004: Dirt_ESW
     21300006: Dirt_SW
-    21300008: Dirt_Dia-ES
-    21300010: Dirt_Full_ESW-L
-    21300012: Dirt_Full_ESW-R
-    21300014: Dirt_Dia-SW
+    21300008: Dirt_Dia_ES
+    21300010: Dirt_Full_ESW_L
+    21300012: Dirt_Full_ESW_R
+    21300014: Dirt_Dia_SW
     21300016: Dirt_TL
     21300018: Dirt_Exit_Top
     21300020: Dirt_Top
@@ -23,7 +23,7 @@ TextureImporter:
     21300036: Dirt_IC_TR
     21300038: Dirt_Full_NSW_T
     21300040: Dirt_Left
-    21300042: Dirt_Full_SW-NE
+    21300042: Dirt_Full_SW_NE
     21300044: Generic
     21300046: Dirt_Exit_Right
     21300048: Dirt_N
@@ -33,18 +33,18 @@ TextureImporter:
     21300056: Dirt_Full_NES_B
     21300058: Dirt_IC_BL
     21300060: Dirt_IC_BR
-    21300062: Dirt_NSW_B
+    21300062: Dirt_Full_NSW_B
     21300064: Dirt_Exit_Left
     21300066: Dirt_Full
-    21300068: Dirt_Full_NW-SE
+    21300068: Dirt_Full_NW_SE
     21300070: Dirt_Right
     21300072: Dirt_
     21300074: Dirt_E
     21300076: Dirt_EW
     21300078: Dirt_W
     21300080: Dirt_Dia_NE
-    21300082: Dirt_Full_NEW-L
-    21300084: Dirt_NEW-R
+    21300082: Dirt_Full_NEW_L
+    21300084: Dirt_Full_NEW_R
     21300086: Dirt_Dia_NW
     21300088: Dirt_BL
     21300090: Dirt_Bottom
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Dia-ES
+      name: Dirt_Dia_ES
       rect:
         serializedVersion: 2
         x: 64
@@ -232,7 +232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_ESW-L
+      name: Dirt_Full_ESW_L
       rect:
         serializedVersion: 2
         x: 80
@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_ESW-R
+      name: Dirt_Full_ESW_R
       rect:
         serializedVersion: 2
         x: 96
@@ -272,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Dia-SW
+      name: Dirt_Dia_SW
       rect:
         serializedVersion: 2
         x: 112
@@ -552,7 +552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_SW-NE
+      name: Dirt_Full_SW_NE
       rect:
         serializedVersion: 2
         x: 144
@@ -752,7 +752,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NSW_B
+      name: Dirt_Full_NSW_B
       rect:
         serializedVersion: 2
         x: 112
@@ -812,7 +812,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NW-SE
+      name: Dirt_Full_NW_SE
       rect:
         serializedVersion: 2
         x: 160
@@ -952,7 +952,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NEW-L
+      name: Dirt_Full_NEW_L
       rect:
         serializedVersion: 2
         x: 80
@@ -972,7 +972,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NEW-R
+      name: Dirt_Full_NEW_R
       rect:
         serializedVersion: 2
         x: 96

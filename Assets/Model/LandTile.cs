@@ -87,7 +87,7 @@ public class LandTile {
         Dirt_IC_TL,
         Dirt_IC_BL,
         Dirt_Full_NEW_L,
-        Dirt_ESW_R,
+        Dirt_Full_ESW_R,
         Dirt_IC_TR,
         Dirt_IC_BR,
         Dirt_Full_NEW_R,
@@ -152,7 +152,7 @@ public class LandTile {
                 type == TileType.Grass_IC_TL ||
                 type == TileType.Grass_IC_BL ||
                 type == TileType.Grass_Full_NEW_L ||
-                type == TileType.Grass_ESW_R ||
+                type == TileType.Grass_Full_ESW_R ||
                 type == TileType.Grass_IC_TR ||
                 type == TileType.Grass_IC_BR ||
                 type == TileType.Grass_Full_NEW_R ||
@@ -198,7 +198,7 @@ public class LandTile {
                 type == TileType.Dirt_IC_TL ||
                 type == TileType.Dirt_IC_BL ||
                 type == TileType.Dirt_Full_NEW_L ||
-                type == TileType.Dirt_ESW_R ||
+                type == TileType.Dirt_Full_ESW_R ||
                 type == TileType.Dirt_IC_TR ||
                 type == TileType.Dirt_IC_BR ||
                 type == TileType.Dirt_Full_NEW_R ||

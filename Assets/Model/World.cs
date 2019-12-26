@@ -371,24 +371,24 @@ public class World {
         siblings.Add (LandTile.TileType.Grass_IC_TR, new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gr" }, { "gr", "gr", "gr" } });
         siblings.Add (LandTile.TileType.Grass_IC_BR, new string[4, 3] { { "gr", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gr" } });
 
-        siblings.Add (LandTile.TileType.Grass_Dia_SE new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" } });
-        siblings.Add (LandTile.TileType.Grass_Full_NES_T new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gen", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_NES_B new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gen", "gen", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Dia_NE new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_ESW_L new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_NEW_L new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_ESW_R new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_NEW_R new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gr" } });
-        siblings.Add (LandTile.TileType.Grass_Dia_SW new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_NSW_T new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_NSW_B new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" } });
-        siblings.Add (LandTile.TileType.Grass_Dia_NW new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Exit_Top new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gr" }, { "gr", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Exit_Right new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gr" } });
-        siblings.Add (LandTile.TileType.Grass_Exit_Left new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Exit_Bottom new string[4, 3] { { "gr", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" } });
-        siblings.Add (LandTile.TileType.Grass_Full_SW_NE new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
-        siblings.Add (LandTile.TileType.Grass_Full_NW_SE new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gr" } });
+        siblings.Add (LandTile.TileType.Grass_Dia_SE, new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" } });
+        siblings.Add (LandTile.TileType.Grass_Full_NES_T, new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gen", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_NES_B, new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gen", "gen", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Dia_NE, new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_ESW_L, new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_NEW_L, new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_ESW_R, new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_NEW_R, new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gr" } });
+        siblings.Add (LandTile.TileType.Grass_Dia_SW, new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_NSW_T, new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_NSW_B, new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gen", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" } });
+        siblings.Add (LandTile.TileType.Grass_Dia_NW, new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Exit_Top, new string[4, 3] { { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gr" }, { "gr", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Exit_Right, new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gr" } });
+        siblings.Add (LandTile.TileType.Grass_Exit_Left, new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Exit_Bottom, new string[4, 3] { { "gr", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gen" }, { "gen", "gr", "gr" } });
+        siblings.Add (LandTile.TileType.Grass_Full_SW_NE, new string[4, 3] { { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" } });
+        siblings.Add (LandTile.TileType.Grass_Full_NW_SE, new string[4, 3] { { "gr", "gr", "gen" }, { "gen", "gr", "gr" }, { "gr", "gr", "gen" }, { "gen", "gr", "gr" } });
 
         siblings.Add (LandTile.TileType.Dirt_S, new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "gen" }, { "gen", "gen", "gen" } });
         siblings.Add (LandTile.TileType.Dirt_NS, new string[4, 3] { { "gen", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "gen" }, { "gen", "gen", "gen" } });
@@ -411,25 +411,24 @@ public class World {
         siblings.Add (LandTile.TileType.Dirt_IC_TR, new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "di" }, { "di", "di", "di" } });
         siblings.Add (LandTile.TileType.Dirt_IC_BR, new string[4, 3] { { "di", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "di" } });
 
-        siblings.Add (LandTile.TileType.Dirt_Dia_SE new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_NES_T new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "gen", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_NES_B new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "di" }, { "gen", "gen", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Dia_NE new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_ESW_L new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_NEW_L new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_ESW_R new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_NEW_R new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "di" } });
-        siblings.Add (LandTile.TileType.Dirt_Dia_SW new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_NSW_T new string[4, 3] { { "gen", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_NSW_B new string[4, 3] { { "di", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" } });
-        siblings.Add (LandTile.TileType.Dirt_Dia_NW new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Exit_Top new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "di" }, { "di", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Exit_Right new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "di" } });
-        siblings.Add (LandTile.TileType.Dirt_Exit_Left new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Exit_Bottom new string[4, 3] { { "di", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_SW_NE new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
-        siblings.Add (LandTile.TileType.Dirt_Full_NW_SE new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "di" } });
-        
+        siblings.Add (LandTile.TileType.Dirt_Dia_SE, new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_NES_T, new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "gen", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_NES_B, new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "di" }, { "gen", "gen", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Dia_NE, new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_ESW_L, new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_NEW_L, new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_ESW_R, new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_NEW_R, new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "di" } });
+        siblings.Add (LandTile.TileType.Dirt_Dia_SW, new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_NSW_T, new string[4, 3] { { "gen", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_NSW_B, new string[4, 3] { { "di", "di", "gen" }, { "gen", "gen", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" } });
+        siblings.Add (LandTile.TileType.Dirt_Dia_NW, new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Exit_Top, new string[4, 3] { { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "di" }, { "di", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Exit_Right, new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "di" } });
+        siblings.Add (LandTile.TileType.Dirt_Exit_Left, new string[4, 3] { { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" }, { "gen", "gen", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Exit_Bottom, new string[4, 3] { { "di", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "gen" }, { "gen", "di", "di" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_SW_NE, new string[4, 3] { { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" } });
+        siblings.Add (LandTile.TileType.Dirt_Full_NW_SE, new string[4, 3] { { "di", "di", "gen" }, { "gen", "di", "di" }, { "di", "di", "gen" }, { "gen", "di", "di" } });
 
         return siblings;
     }

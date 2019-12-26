@@ -96,7 +96,7 @@ public class WorldController : MonoBehaviour {
 
     void AssignSpriteToLandTile (LandTile tile_data, GameObject tile_go) {
         if (landscapeSpritesNames.ContainsKey (tile_data.Type) == true) { //Sometimes there is some bug here where full grass tile gets placed instead of anything else
-            //Debug.Log("Trying to assign this sprite:"+tile_data.Type);
+            Debug.Log("Trying to assign this sprite:"+tile_data.Type);
             tile_go.GetComponent<SpriteRenderer> ().sprite = landscapeSprites[landscapeSpritesNames[tile_data.Type]];
         } else {
             Debug.LogError ("OnTileTypeChanged-Unrecognized tiletype:" + tile_data.Type);
@@ -251,7 +251,7 @@ public class WorldController : MonoBehaviour {
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_IC_TL,"Dirt_IC_TL");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_IC_BL,"Dirt_IC_BL");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_Full_NEW_L,"Dirt_Full_NEW_L");
-        landscapeSpritesNames.Add (LandTile.TileType.Dirt_ESW_R,"Dirt_ESW_R");
+        landscapeSpritesNames.Add (LandTile.TileType.Dirt_Full_ESW_R,"Dirt_Full_ESW_R");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_IC_TR,"Dirt_IC_TR");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_IC_BR,"Dirt_IC_BR");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_Full_NEW_R,"Dirt_Full_NEW_R");
