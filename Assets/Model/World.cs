@@ -23,7 +23,7 @@ public class World {
         }
     }
 
-    public World (int width = 10, int height = 10) {
+    public World (int width = 20, int height = 20) {
         this.width = width;
         this.height = height;
         tiles = new LandTile[width, height];
@@ -63,56 +63,45 @@ public class World {
                     neighbors = new Dictionary<LandTile.TileType, string[, ]> { };
                     neighbors = determineNeighbors (neighbors, x, y);
                     tiles[x, y].Type = NeighborCheckInitial (x, y, neighbors);
-                    LandTile.TileType tile_under = LandTile.TileType.Empty;
-                    LandTile.TileType tile_left = LandTile.TileType.Empty;
-                    LandTile.TileType tile_top = LandTile.TileType.Empty;
-                    LandTile.TileType tile_right = LandTile.TileType.Empty;
-                    if (y > 0) { //skip check if y is 0
-                        tile_under = tiles[x, y - 1].Type;
-                    } else if (y == 0) {
-                        tile_under = LandTile.TileType.Empty;
-                    }
-                    if (x > 0) { //skip check if x is 0
-                        tile_left = tiles[x - 1, y].Type;
-                    } else if (x == 0) {
-                        tile_left = LandTile.TileType.Empty;
-                    }
-                    if (y < height - 1) { //skip check if y is height
-                        tile_top = tiles[x, y + 1].Type;
-                    } else if (y == height - 1) {
-                        tile_top = LandTile.TileType.Empty;
-                    }
-                    if (x < width - 1) { //skip check if x is wdith
-                        tile_right = tiles[x + 1, y].Type;
-                    } else if (x == width - 1) {
-                        tile_right = LandTile.TileType.Empty;
-                    }
-                    List<LandTile.TileType> validLeftEdge = new List<LandTile.TileType> { };
-                    List<LandTile.TileType> validBottomEdge = new List<LandTile.TileType> { };
-                    List<LandTile.TileType> validRightEdge = new List<LandTile.TileType> { };
-                    List<LandTile.TileType> validTopEdge = new List<LandTile.TileType> { };
-                    List<LandTile.TileType> valid = new List<LandTile.TileType> { };
+                    LandTile.TileBasicType tile_to_the_south = LandTile.TileBasicType.Empty;
+                    LandTile.TileBasicType tile_to_the_west = LandTile.TileBasicType.Empty;
 
                     if (tiles[x, y].Type == LandTile.TileType.ErrorTile) {
                         //Activated when a tile gets assigned as an error tile.
-                        if (tiles[x - 1, y].BasicType == tiles[x, y - 1].BasicType) {
-                            //IF Left and Under Tile are both same basic type
-                            if (tiles[x - 1, y].BasicType == LandTile.TileBasicType.Grass) {
-                                tiles[x, y].Type = LandTile.TileType.FullGrass;
-                                tiles[x, y - 1].Type = ReassignUnderTile (tiles[x, y].Type, x, (y - 1), neighbors);
-                                tiles[x - 1, y].Type = ReassignLeftTile (tiles[x, y].Type, (x - 1), y, neighbors);
-                            }
-                            if (tiles[x - 1, y].BasicType == LandTile.TileBasicType.Dirt) {
-                                tiles[x, y].Type = LandTile.TileType.FullDirt;
+                        if (y > 0) { //skip check if y is 0, means there is no tile under this tile
+                            tile_to_the_south = tiles[x, y - 1].BasicType;
+                        } else if (y == 0) {
+                            tile_to_the_south = LandTile.TileBasicType.Empty;
+                        }
+                        if (x > 0) { //skip check if x is 0, means there is no tile to the west of this tile
+                            tile_to_the_west = tiles[x - 1, y].BasicType;
+                        } else if (x == 0) {
+                            tile_to_the_west = LandTile.TileBasicType.Empty;
+                        }
 
-                                tiles[x, y - 1].Type = ReassignUnderTile (tiles[x, y].Type, x, (y - 1), neighbors);
-                                tiles[x - 1, y].Type = ReassignLeftTile (tiles[x, y].Type, (x - 1), y, neighbors);
+                        if (tile_to_the_west == tile_to_the_south) {
+                            //IF Left and Under Tile are both same basic type, will not be triggered if either of them are empty.
+                            if (tile_to_the_south == LandTile.TileBasicType.Grass) {
+                                tiles[x, y].Type = LandTile.TileType.FullGrass;
+                                tiles[x, y - 1].Type = reassignSouthTile (tiles[x, y].Type, x, (y - 1), neighbors);
+                                tiles[x - 1, y].Type = reassignWestTile (tiles[x, y].Type, (x - 1), y, neighbors);
                             }
-                        } else {
+                            if (tile_to_the_south == LandTile.TileBasicType.Dirt) {
+                                tiles[x, y].Type = LandTile.TileType.FullDirt;
+                                tiles[x, y - 1].Type = reassignSouthTile (tiles[x, y].Type, x, (y - 1), neighbors);
+                                tiles[x - 1, y].Type = reassignWestTile (tiles[x, y].Type, (x - 1), y, neighbors);
+                            }
+                        } else if (tile_to_the_south == LandTile.TileBasicType.Empty) { //If Only West Tile Exists
                             tiles[x, y].Type = LandTile.TileType.Generic;
-                            tiles[x, y - 1].Type = ReassignUnderTile (tiles[x, y].Type, x, (y - 1), neighbors);
-                            tiles[x - 1, y].Type = ReassignLeftTile (tiles[x, y].Type, (x - 1), y, neighbors);
-                            //If the left tile and under tiles are NOT the same basic type
+                            tiles[x - 1, y].Type = reassignWestTile (tiles[x, y].Type, (x - 1), y, neighbors);
+                        } else if (tile_to_the_west == LandTile.TileBasicType.Empty) { //If Only West Tile Exists
+                            tiles[x, y].Type = LandTile.TileType.Generic;
+                            tiles[x, y - 1].Type = reassignSouthTile (tiles[x, y].Type, x, (y - 1), neighbors);
+                        } else {
+                            Debug.Log ("Trying to regenerate error Tile_" + x + "_" + y);
+                            tiles[x, y].Type = LandTile.TileType.Generic;
+                            tiles[x, y - 1].Type = reassignSouthTile (tiles[x, y].Type, x, (y - 1), neighbors);
+                            tiles[x - 1, y].Type = reassignWestTile (tiles[x, y].Type, (x - 1), y, neighbors);
                         }
                     }
                 }
@@ -154,42 +143,43 @@ public class World {
 
     public LandTile.TileType NeighborCheckInitial (int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
 
-        LandTile.TileType tile_under = LandTile.TileType.Empty;
-        LandTile.TileType tile_left = LandTile.TileType.Empty;
+        LandTile.TileType tile_to_the_south = LandTile.TileType.Empty;
+        LandTile.TileType tile_to_the_west = LandTile.TileType.Empty;
         if (y > 0) { //skip check if y is 0
-            if (tiles[x, y - 1].Type == LandTile.TileType.ErrorTile) { tile_under = LandTile.TileType.Empty; } else {
+            if (tiles[x, y - 1].Type == LandTile.TileType.ErrorTile) { tile_to_the_south = LandTile.TileType.Empty; } else {
                 //Debug.Log ("Tile Under :" + tiles[x, y - 1].Type);
-                tile_under = tiles[x, y - 1].Type;
+                tile_to_the_south = tiles[x, y - 1].Type;
             }
-        } else if (y == 0) {
-            tile_under = LandTile.TileType.Empty;
+        } else {
+            tile_to_the_south = LandTile.TileType.Empty;
         }
         if (x > 0) { //skip check if x is 0
-            if (tiles[x - 1, y].Type == LandTile.TileType.ErrorTile) { tile_left = LandTile.TileType.Empty; } else {
-                tile_left = tiles[x - 1, y].Type;
+            if (tiles[x - 1, y].Type == LandTile.TileType.ErrorTile) { tile_to_the_west = LandTile.TileType.Empty; } else {
+                tile_to_the_west = tiles[x - 1, y].Type;
             }
-        } else if (x == 0) {
-            tile_left = LandTile.TileType.Empty;
+        } else {
+            tile_to_the_west = LandTile.TileType.Empty;
         }
 
-        List<LandTile.TileType> validLeftEdge = new List<LandTile.TileType> { };
-        validLeftEdge = leftCheck (tile_left, siblings);
-        List<LandTile.TileType> validBottomEdge = new List<LandTile.TileType> { };
-        validBottomEdge = underCheck (tile_under, siblings);
+        List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
+        validWestEdge = westTileCheck (tile_to_the_west, siblings); //Gives tile[x,y] possibilites based ONLY on WEST Tile
+        List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
+        validSouthEdge = southTileCheck (tile_to_the_south, siblings); //Gives tile[x,y] possibilites based ONLY on WEST Tile
         List<LandTile.TileType> valid = new List<LandTile.TileType> { };
-        if (validLeftEdge.Count > 0 && (y == 0 || tile_under == LandTile.TileType.Empty)) {
-            foreach (var a in validLeftEdge) {
+        if (validWestEdge.Count > 0 && (y == 0 || tile_to_the_south == LandTile.TileType.Empty)) { //If only WEST Tile Exists
+            foreach (var a in validWestEdge) {
                 valid.Add (a);
             }
         }
-        if (validBottomEdge.Count > 0 && (x == 0 || tile_left == LandTile.TileType.Empty)) {
-            foreach (var a in validBottomEdge) {
+        if (validSouthEdge.Count > 0 && (x == 0 || tile_to_the_west == LandTile.TileType.Empty)) { //If only SOUTH Tile Exists
+            foreach (var a in validSouthEdge) {
                 valid.Add (a);
             }
         }
-        if (validBottomEdge.Count > 0 && validLeftEdge.Count > 0) {
-            foreach (var a in validBottomEdge) {
-                if (validLeftEdge.Contains (a)) {
+        if (validSouthEdge.Count > 0 && validWestEdge.Count > 0) { //if BOTH SOUTH & WEST Tiles Exist
+            //Goes through all the tiles in validSouthEdge and checks if validWestEdge has that tile, if it does adds tile to VALID array
+            foreach (var a in validSouthEdge) {
+                if (validWestEdge.Contains (a)) {
                     valid.Add (a);
 
                 }
@@ -200,181 +190,134 @@ public class World {
             //Debug.Log ("Valid Count:" + valid.Count + "   Random:" + random + " Result:" + valid[random]);
             tiles[x, y].Type = valid[random];
         } else {
-            Debug.Log ("There has been an Error Generating a tile");
+            Debug.Log ("There has been an Error Generating a tile, Tile_" + x + "_" + y);
             tiles[x, y].Type = LandTile.TileType.ErrorTile;
         }
         return tiles[x, y].Type;
 
     }
 
-    public LandTile.TileType fourNeighborCheck (int x, int y, LandTile.TileType checkedtile, Dictionary<LandTile.TileType, string[, ]> siblings) {
-
-        //pulls the right requirements for the tile to the left of the current tile
-        LandTile.TileType tile_under = LandTile.TileType.Empty;
-        LandTile.TileType tile_left = LandTile.TileType.Empty;
-        LandTile.TileType tile_top = LandTile.TileType.Empty;
-        LandTile.TileType tile_right = LandTile.TileType.Empty;
-        if (y > 0) { //skip check if y is 0
-            tile_under = tiles[x, y - 1].Type;
-        } else if (y == 0) {
-            tile_under = LandTile.TileType.Empty;
-        }
-        if (x > 0) { //skip check if x is 0
-            tile_left = tiles[x - 1, y].Type;
-        } else if (x == 0) {
-            tile_left = LandTile.TileType.Empty;
-        }
-        if (y < height - 1) { //skip check if y is height
-            tile_top = tiles[x, y + 1].Type;
-        } else if (y == height - 1) {
-            tile_top = LandTile.TileType.Empty;
-        }
-        if (x < width - 1) { //skip check if x is wdith
-            tile_right = tiles[x + 1, y].Type;
-        } else if (x == width - 1) {
-            tile_right = LandTile.TileType.Empty;
-        }
-        List<LandTile.TileType> validLeftEdge = new List<LandTile.TileType> { };
-        validLeftEdge = leftCheck (tile_left, siblings);
-        List<LandTile.TileType> validBottomEdge = new List<LandTile.TileType> { };
-        validBottomEdge = underCheck (tile_under, siblings);
-        List<LandTile.TileType> validRightEdge = new List<LandTile.TileType> { };
-        validRightEdge = rightCheck (tile_right, siblings);
-        List<LandTile.TileType> validTopEdge = new List<LandTile.TileType> { };
-        validTopEdge = overCheck (tile_top, siblings);
-        List<LandTile.TileType> valid = new List<LandTile.TileType> { };
-
-        if (valid.Count != 0) {
-            int random = UnityEngine.Random.Range (0, valid.Count);
-            Debug.Log ("Valid Count:" + valid.Count + "   Random:" + random + " Result:" + valid[random]);
-            tiles[x, y].Type = valid[random];
-        } else {
-            Debug.Log ("There has been an Error Generating a tile");
-            tiles[x, y].Type = LandTile.TileType.ErrorTile;
-        }
-
-        return tiles[x, y].Type;
-    }
-
-    public List<LandTile.TileType> leftCheck (LandTile.TileType tile_left, Dictionary<LandTile.TileType, string[, ]> siblings) {
-
-        List<LandTile.TileType> validLeftEdge = new List<LandTile.TileType> { };
-        string[, ] leftRequirements = siblings[tile_left]; //Pulls out requirements for the tile to the left
-        string[] rightEdge = new string[] { leftRequirements[1, 0], leftRequirements[1, 1], leftRequirements[1, 2] }; //pulls out the right edge requirements of tile_left
+    public List<LandTile.TileType> westTileCheck (LandTile.TileType tile_to_the_west, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
+        string[, ] westReq = siblings[tile_to_the_west]; //Pulls out all requirements for the tile to the west
+        string[] eastEdgeReq = new string[] { westReq[1, 0], westReq[1, 1], westReq[1, 2] }; //pulls out the west edge requirements of tile_to_the_west
         foreach (KeyValuePair<LandTile.TileType, string[, ]> tileType in siblings) {
             string[, ] testerTile = tileType.Value; //Pulls out tile to test
-            string[] testLeftEdge = new string[] { testerTile[3, 2], testerTile[3, 1], testerTile[3, 0] }; //pulls the left posibilites
+            string[] testWestEdge = new string[] { testerTile[3, 2], testerTile[3, 1], testerTile[3, 0] }; //pulls the left posibilites
 
-            if (rightEdge.SequenceEqual (testLeftEdge) && tile_left != LandTile.TileType.Empty) {
-                validLeftEdge.Add (tileType.Key);
+            if (eastEdgeReq.SequenceEqual (testWestEdge) && tile_to_the_west != LandTile.TileType.Empty) {
+                validWestEdge.Add (tileType.Key);
             }
         }
-        return validLeftEdge;
+        return validWestEdge;
     }
-    public List<LandTile.TileType> underCheck (LandTile.TileType tile_under, Dictionary<LandTile.TileType, string[, ]> siblings) {
-        List<LandTile.TileType> validBottomEdge = new List<LandTile.TileType> { };
-        //Debug.Log ("Tile_under Type:" + tile_under);
-        string[, ] underRequirements = siblings[tile_under];
-        string[] topEdge = new string[] { underRequirements[0, 0], underRequirements[0, 1], underRequirements[0, 2] };
+    public List<LandTile.TileType> southTileCheck (LandTile.TileType tile_to_the_south, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
+        string[, ] southReq = siblings[tile_to_the_south];
+        string[] northEdgeReq = new string[] { southReq[0, 0], southReq[0, 1], southReq[0, 2] };
 
         foreach (KeyValuePair<LandTile.TileType, string[, ]> tileType in siblings) {
             string[, ] testerTile = tileType.Value; //Pulls out tile to test
-            string[] testBottomEdge = new string[] { testerTile[2, 2], testerTile[2, 1], testerTile[2, 0] }; //pulls the left posibilites
+            string[] testSouthEdge = new string[] { testerTile[2, 2], testerTile[2, 1], testerTile[2, 0] }; //pulls the left posibilites
 
-            if (topEdge.SequenceEqual (testBottomEdge) && tile_under != LandTile.TileType.Empty) {
-                validBottomEdge.Add (tileType.Key);
+            if (northEdgeReq.SequenceEqual (testSouthEdge) && tile_to_the_south != LandTile.TileType.Empty) {
+                validSouthEdge.Add (tileType.Key);
             }
         }
-        return validBottomEdge;
+        return validSouthEdge;
     }
-    public List<LandTile.TileType> overCheck (LandTile.TileType tile_over, Dictionary<LandTile.TileType, string[, ]> siblings) {
-        List<LandTile.TileType> validTopEdge = new List<LandTile.TileType> { };
-        string[, ] overRequirements = siblings[tile_over];
-        string[] bottomEdge = new string[] { overRequirements[2, 2], overRequirements[2, 1], overRequirements[2, 0] };
+    public List<LandTile.TileType> northTileCheck (LandTile.TileType tile_to_the_north, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        List<LandTile.TileType> validNorthEdge = new List<LandTile.TileType> { };
+        string[, ] northReq = siblings[tile_to_the_north];
+        string[] southEdgeReq = new string[] { northReq[2, 2], northReq[2, 1], northReq[2, 0] };
 
         foreach (KeyValuePair<LandTile.TileType, string[, ]> tileType in siblings) {
             string[, ] testerTile = tileType.Value; //Pulls out tile to test
-            string[] testTopEdge = new string[] { testerTile[0, 0], testerTile[0, 1], testerTile[0, 2] }; //pulls the left posibilites
+            string[] testNorthEdge = new string[] { testerTile[0, 0], testerTile[0, 1], testerTile[0, 2] }; //pulls the left posibilites
 
-            if (bottomEdge.SequenceEqual (testTopEdge) && tile_over != LandTile.TileType.Empty) {
-                validTopEdge.Add (tileType.Key);
+            if (southEdgeReq.SequenceEqual (testNorthEdge) && tile_to_the_north != LandTile.TileType.Empty) {
+                validNorthEdge.Add (tileType.Key);
             }
         }
-        return validTopEdge;
+        return validNorthEdge;
     }
-    public List<LandTile.TileType> rightCheck (LandTile.TileType tile_right, Dictionary<LandTile.TileType, string[, ]> siblings) {
-        List<LandTile.TileType> validRightEdge = new List<LandTile.TileType> { };
-        string[, ] rightRequirements = siblings[tile_right];
-        string[] leftEdge = new string[] { rightRequirements[1, 0], rightRequirements[1, 1], rightRequirements[1, 2] };
+    public List<LandTile.TileType> eastTileCheck (LandTile.TileType tile_to_the_east, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        List<LandTile.TileType> validEastEdge = new List<LandTile.TileType> { };
+        string[, ] eastReq = siblings[tile_to_the_east];
+        string[] westEdgeReq = new string[] { eastReq[3, 2], eastReq[3, 1], eastReq[3, 0] };
 
         foreach (KeyValuePair<LandTile.TileType, string[, ]> tileType in siblings) {
             string[, ] testerTile = tileType.Value; //Pulls out tile to test
-            string[] testRightEdge = new string[] { testerTile[3, 2], testerTile[3, 1], testerTile[3, 0] }; //pulls the left posibilites
+            string[] testEastEdge = new string[] { testerTile[1, 0], testerTile[1, 1], testerTile[1, 2] }; //pulls the left posibilites
 
-            if (leftEdge.SequenceEqual (testRightEdge) && tile_right != LandTile.TileType.Empty) {
-                validRightEdge.Add (tileType.Key);
+            if (westEdgeReq.SequenceEqual (testEastEdge) && tile_to_the_east != LandTile.TileType.Empty) {
+                validEastEdge.Add (tileType.Key);
             }
         }
-        return validRightEdge;
+        return validEastEdge;
     }
 
-    public LandTile.TileType ReassignLeftTile (LandTile.TileType tile_right, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
-
-        List<LandTile.TileType> validLeftEdge = new List<LandTile.TileType> { };
-        List<LandTile.TileType> validBottomEdge = new List<LandTile.TileType> { };
-        List<LandTile.TileType> validTopEdge = new List<LandTile.TileType> { };
-        List<LandTile.TileType> validRightEdge = new List<LandTile.TileType> { };
+    public LandTile.TileType reassignWestTile (LandTile.TileType tile_to_the_east, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        Debug.Log ("Checking tile Tile_" + x + "_" + y);
+        List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validNorthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validEastEdge = new List<LandTile.TileType> { };
         List<LandTile.TileType> valid = new List<LandTile.TileType> { };
 
         List<LandTile.TileType> temp = new List<LandTile.TileType> { };
-        validRightEdge = rightCheck (tile_right, siblings);
+        validEastEdge = eastTileCheck (tile_to_the_east, siblings);
+        
         if (x > 0) {
-            //Checks if there is a tile to the left
-            validLeftEdge = leftCheck (tiles[x, y].Type, siblings);
+            validWestEdge = westTileCheck (tiles[x - 1, y].Type, siblings);
+
         }
         if (y > 0) {
-            validBottomEdge = underCheck (tiles[x, y].Type, siblings);
+            validSouthEdge = southTileCheck (tiles[x, y - 1].Type, siblings);
         }
-        if (y < height) {
-            validTopEdge = overCheck (tiles[x, y].Type, siblings);
+        if (y < height-1) {
+            validNorthEdge = northTileCheck (tiles[x,y+1].Type, siblings);
+            Debug.Log ("ValidNorthEdge:" + (string.Join (",", validNorthEdge)));
         }
-        if (validRightEdge.Count > 0) {
-            foreach (var a in validRightEdge) {
+
+        if (validEastEdge.Count > 0) {
+            foreach (var a in validEastEdge) {
                 temp.Add (a);
             }
         }
-        Debug.Log ("RIGHTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
-        if (validLeftEdge.Count > 0) {
-            foreach (var a in validLeftEdge) {
+        //Debug.Log ("RU TOPEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validWestEdge.Count > 0) {
+            foreach (var a in validWestEdge) {
                 if (temp.Contains (a)) {
                     valid.Add (a);
                 }
             }
+            //Debug.Log ("FIRST RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
             temp.Clear ();
             temp = valid.ToList ();
             valid.Clear ();
         }
-        Debug.Log ("LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
-        if (validBottomEdge.Count > 0) {
-            foreach (var a in validBottomEdge) {
-                if (temp.Contains (a)) {
-                    valid.Add (a);
-                }
-            }
-            temp.Clear ();
-            temp = valid.ToList ();
-            valid.Clear ();
+        //Debug.Log ("RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
 
+        if (validSouthEdge.Count > 0) {
+            foreach (var a in validSouthEdge) {
+                if (temp.Contains (a)) {
+                    valid.Add (a);
+                }
+            }
+            temp.Clear ();
+            temp = valid.ToList ();
+            valid.Clear ();
         }
-        Debug.Log ("BOTTOMEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
-        if (validTopEdge.Count > 0) {
-            foreach (var a in validTopEdge) {
+        //Debug.Log ("RU BOTTOMEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validNorthEdge.Count > 0) {
+            foreach (var a in validNorthEdge) {
                 if (temp.Contains (a)) {
                     valid.Add (a);
                 }
             }
         }
-        Debug.Log ("TOPEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        //Debug.Log ("RU RIGHTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
         if (valid.Count == 0) {
             valid = temp.ToList ();
         }
@@ -385,46 +328,52 @@ public class World {
 
     }
 
-    public LandTile.TileType ReassignUnderTile (LandTile.TileType tile_under, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
+    public LandTile.TileType reassignSouthTile (LandTile.TileType tile_to_the_south, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        Debug.Log ("Regenerating South tile Tile_" + x + "_" + y);
 
-        List<LandTile.TileType> validLeftEdge = new List<LandTile.TileType> { };
-        List<LandTile.TileType> validBottomEdge = new List<LandTile.TileType> { };
-        List<LandTile.TileType> validTopEdge = new List<LandTile.TileType> { };
-        List<LandTile.TileType> validRightEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validNorthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validEastEdge = new List<LandTile.TileType> { };
         List<LandTile.TileType> valid = new List<LandTile.TileType> { };
 
         List<LandTile.TileType> temp = new List<LandTile.TileType> { };
-        validTopEdge = overCheck (tile_under, siblings);
+
+        validNorthEdge = northTileCheck (tile_to_the_south, siblings); //generates possibilites based on the tile to the North Of current tile
         if (x > 0) {
-            validLeftEdge = leftCheck (tiles[x, y].Type, siblings);
+            validWestEdge = westTileCheck (tiles[x - 1, y].Type, siblings);
+
         }
         if (y > 0) {
-            validBottomEdge = underCheck (tiles[x, y].Type, siblings);
+            validSouthEdge = southTileCheck (tiles[x, y - 1].Type, siblings);
         }
-        if (x < width) {
-            validRightEdge = rightCheck (tiles[x, y].Type, siblings);
+        if (x < width-1) {
+            if (tiles[x + 1, y].Type != LandTile.TileType.Empty)
+            {
+                validEastEdge = eastTileCheck(tiles[x + 1, y].Type, siblings);
+            }
         }
-        if (validTopEdge.Count > 0) {
-            foreach (var a in validTopEdge) {
+        if (validNorthEdge.Count > 0) {
+            foreach (var a in validNorthEdge) {
                 temp.Add (a);
             }
         }
-        Debug.Log ("RU TOPEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
-        if (validLeftEdge.Count > 0) {
-            foreach (var a in validLeftEdge) {
+        //Debug.Log ("RU TOPEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validWestEdge.Count > 0) {
+            foreach (var a in validWestEdge) {
                 if (temp.Contains (a)) {
                     valid.Add (a);
                 }
             }
-            Debug.Log ("FIRST RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+            //Debug.Log ("FIRST RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
             temp.Clear ();
             temp = valid.ToList ();
             valid.Clear ();
         }
-        Debug.Log ("RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        //Debug.Log ("RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
 
-        if (validBottomEdge.Count > 0) {
-            foreach (var a in validBottomEdge) {
+        if (validSouthEdge.Count > 0) {
+            foreach (var a in validSouthEdge) {
                 if (temp.Contains (a)) {
                     valid.Add (a);
                 }
@@ -433,20 +382,20 @@ public class World {
             temp = valid.ToList ();
             valid.Clear ();
         }
-        Debug.Log ("RU BOTTOMEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
-        if (validRightEdge.Count > 0) {
-            foreach (var a in validRightEdge) {
+        //Debug.Log ("RU BOTTOMEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validEastEdge.Count > 0) {
+            foreach (var a in validEastEdge) {
                 if (temp.Contains (a)) {
                     valid.Add (a);
                 }
             }
         }
-        Debug.Log ("RU RIGHTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        //Debug.Log ("RU RIGHTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
         if (valid.Count == 0) {
             valid = temp.ToList ();
         }
         int random = UnityEngine.Random.Range (0, valid.Count);
-        Debug.Log ("Valid Count:" + valid.Count + "   Temp Count:" + temp.Count + "  Random:" + random);
+        //Debug.Log ("Valid Count:" + valid.Count + "   Temp Count:" + temp.Count + "  Random:" + random);
         tiles[x, y].Type = valid[random];
         return tiles[x, y].Type;
 
