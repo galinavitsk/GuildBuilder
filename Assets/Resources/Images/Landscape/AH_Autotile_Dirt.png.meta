@@ -3,7 +3,7 @@ guid: 4a74281cae66f1546a9099614983b2b6
 TextureImporter:
   fileIDToRecycleName:
     21300000: Dirt_S
-    21300002: Dirst_ES
+    21300002: Dirt_ES
     21300004: Dirt_ESW
     21300006: Dirt_SW
     21300008: Dirt_Dia-ES
@@ -15,7 +15,7 @@ TextureImporter:
     21300020: Dirt_Top
     21300022: Dirt_TR
     21300024: Dirt_NS
-    21300026: Dirst_NES
+    21300026: Dirt_NES
     21300028: Dirt_NESW
     21300030: Dirt_NSW
     21300032: Dirt_Full_NES_T
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirst_ES
+      name: Dirt_ES
       rect:
         serializedVersion: 2
         x: 16
@@ -392,7 +392,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirst_NES
+      name: Dirt_NES
       rect:
         serializedVersion: 2
         x: 16

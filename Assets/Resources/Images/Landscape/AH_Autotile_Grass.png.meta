@@ -53,7 +53,7 @@ TextureImporter:
     21300096: Grass_ES
     21300098: Grass_Dia_SE
     21300100: Grass_Full_ESW_L
-    21300102: Grass_ESW_R
+    21300102: Grass_Full_ESW_R
     21300104: Grass_Dia_SW
     21300106: Grass_Exit_Top
     21300108: Grass_NES
@@ -281,7 +281,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass_ESW_R
+      name: Grass_Full_ESW_R
       rect:
         serializedVersion: 2
         x: 96

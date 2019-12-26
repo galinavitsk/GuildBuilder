@@ -24,7 +24,7 @@ public class LandTile {
         Grass,
         Grass_NE,
         Grass_NES,
-        Grass_SE,
+        Grass_ES,
         Grass_ESW,
         Grass_NESW,
         Grass_NEW,
@@ -39,7 +39,7 @@ public class LandTile {
         Grass_IC_TL,
         Grass_IC_BL,
         Grass_Full_NEW_L,
-        Grass_ESW_R,
+        Grass_Full_ESW_R,
         Grass_IC_TR,
         Grass_IC_BR,
         Grass_Full_NEW_R,
@@ -72,7 +72,7 @@ public class LandTile {
         Dirt,
         Dirt_NE,
         Dirt_NES,
-        Dirt_SE,
+        Dirt_ES,
         Dirt_ESW,
         Dirt_NESW,
         Dirt_NEW,
@@ -103,7 +103,8 @@ public class LandTile {
         Dirt_Full_NW_SE,
 
         Generic,
-        Empty
+        Empty,
+        ErrorTile
     }
     public enum TileBasicType { Generic, Grass, Dirt, Empty }
     public string[, ] neigh { get; protected set; }
@@ -136,7 +137,7 @@ public class LandTile {
                 type == TileType.Grass ||
                 type == TileType.Grass_NE ||
                 type == TileType.Grass_NES ||
-                type == TileType.Grass_SE ||
+                type == TileType.Grass_ES ||
                 type == TileType.Grass_ESW ||
                 type == TileType.Grass_NESW ||
                 type == TileType.Grass_NEW ||
@@ -182,7 +183,7 @@ public class LandTile {
                 type == TileType.Dirt ||
                 type == TileType.Dirt_NE ||
                 type == TileType.Dirt_NES ||
-                type == TileType.Dirt_SE ||
+                type == TileType.Dirt_ES ||
                 type == TileType.Dirt_ESW ||
                 type == TileType.Dirt_NESW ||
                 type == TileType.Dirt_NEW ||
@@ -215,14 +216,13 @@ public class LandTile {
             } else if (type == TileType.Empty) {
                 basictype = TileBasicType.Empty;
             }
-            Debug.Log ("TileType:" + type + " Basic TileType" + basictype);
         }
     }
 
     LooseObject looseObject;
-    public Furniture installedObject { get; protected set; }
+    public Furniture furniture { get; protected set; }
 
-    World world;
+    public World world{get;protected set;}
     int x;
     public int X {
         get { return x; }
@@ -250,14 +250,14 @@ public class LandTile {
 
     public bool PlaceObject (Furniture objInstance) {
         if (objInstance == null) {
-            installedObject = null;
+            furniture = null;
             return true;
         }
-        if (installedObject != null) {
+        if (furniture != null) {
             Debug.LogError ("Trying to assign an InstalledObject to a tile that already has one!");
             return false;
         }
-        installedObject = objInstance;
+        furniture = objInstance;
         return true;
 
     }

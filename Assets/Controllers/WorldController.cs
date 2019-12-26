@@ -12,19 +12,20 @@ public class WorldController : MonoBehaviour {
     Dictionary<Furniture, GameObject> furnitureGameObjectMap;
     Dictionary<string, Sprite> landscapeSprites;
     Dictionary<LandTile.TileType, string> landscapeSpritesNames;
-    Dictionary<string, Sprite> foundationSprites; //sprites for walls, windows, doors
+    Dictionary<string, Sprite> furnitureSprites; //sprites for walls, windows, doors
     // Start is called before the first frame update
     void Start () {
 
-        foundationSprites = new Dictionary<string, Sprite> ();
+        furnitureSprites = new Dictionary<string, Sprite> ();
         landscapeSprites = new Dictionary<string, Sprite> ();
         landscapeSpritesNames = new Dictionary<LandTile.TileType, string> ();
-        populatelandscapeSpritesNames ();
-        Sprite[] foundationsprites = Resources.LoadAll<Sprite> ("Images/Foundation/");
+        Sprite[] furnituresprites = Resources.LoadAll<Sprite> ("Images/Furniture/");
         Sprite[] landscapesprites = Resources.LoadAll<Sprite> ("Images/Landscape/");
+        
+        populatelandscapeSpritesNames ();
 
-        foreach (Sprite s in foundationsprites) {
-            foundationSprites[s.name] = s;
+        foreach (Sprite s in furnituresprites) {
+            furnitureSprites[s.name] = s;
         }
         foreach (Sprite s in landscapesprites) {
             landscapeSprites[s.name] = s;
@@ -67,7 +68,7 @@ public class WorldController : MonoBehaviour {
     void Update () { }
 
     //CURRENTLY THIS FUNCTION IS NOT USED
-    void DestroyAllTileGameObjects () {
+    public void DestroyAllTileGameObjects () {
         //Destroys all visual tiles, not the actual data, used if changing levels/floors
         while (tileGameObjectMap.Count > 0) {
             LandTile tile_data = tileGameObjectMap.Keys.First ();
@@ -124,9 +125,9 @@ public class WorldController : MonoBehaviour {
 
     Sprite GetSpriteForFurniture (Furniture obj) {
 
-        Debug.Log ("Obj.linkstoNeightbor" + obj.linksToNeightbor);
+        //Debug.Log ("Obj.linkstoNeightbor" + obj.linksToNeightbor);
         if (obj.linksToNeightbor == false) {
-            return foundationSprites[obj.objectType];
+            return furnitureSprites[obj.objectType];
         }
         string spriteName = obj.objectType + "_";
         int x = obj.tile.X;
@@ -134,32 +135,38 @@ public class WorldController : MonoBehaviour {
         //check for neightbors NESW
         LandTile t;
         t = World.GetTileAt (x, y + 1);
-        if (t != null && t.installedObject != null && t.installedObject.objectType == obj.objectType) {
+        if (t != null && t.furniture != null && t.furniture.objectType == obj.objectType) {
             spriteName += "N";
         }
         t = World.GetTileAt (x + 1, y);
-        if (t != null && t.installedObject != null && t.installedObject.objectType == obj.objectType) {
+        if (t != null && t.furniture != null && t.furniture.objectType == obj.objectType) {
             spriteName += "E";
         }
         t = World.GetTileAt (x, y - 1);
-        if (t != null && t.installedObject != null && t.installedObject.objectType == obj.objectType) {
+        if (t != null && t.furniture != null && t.furniture.objectType == obj.objectType) {
             spriteName += "S";
         }
         t = World.GetTileAt (x - 1, y);
-        if (t != null && t.installedObject != null && t.installedObject.objectType == obj.objectType) {
+        if (t != null && t.furniture != null && t.furniture.objectType == obj.objectType) {
             spriteName += "W";
         }
-        if (foundationSprites.ContainsKey (spriteName) == false) {
-            Debug.LogError ("GetSpriteForFurniture--foundationSprites does not contain the key:" + spriteName);
+        if (furnitureSprites.ContainsKey (spriteName) == false) {
+            Debug.LogError ("GetSpriteForFurniture--furnitureSprites does not contain the key:" + spriteName);
             return null;
         }
-        return foundationSprites[spriteName];
+        return furnitureSprites[spriteName];
     }
     void OnFurnitureChanged (Furniture obj) {
-        Debug.LogError ("OnFurnitureChanged not implemented");
+        if(furnitureGameObjectMap.ContainsKey(obj)==false){
+            Debug.LogError("Trying to change visuals for furniture not in the map");
+        }
+        GameObject furn_obj=furnitureGameObjectMap[obj];
+        furn_obj.GetComponent<SpriteRenderer> ().sprite = GetSpriteForFurniture (obj);
     }
 
     void populatelandscapeSpritesNames () {
+        
+        landscapeSpritesNames.Add (LandTile.TileType.ErrorTile, "ErrorTile");
         landscapeSpritesNames.Add (LandTile.TileType.Generic, "Generic");
         //Grass Tiles
         landscapeSpritesNames.Add (LandTile.TileType.FullGrass, "Grass_Full");
@@ -180,7 +187,7 @@ public class WorldController : MonoBehaviour {
         landscapeSpritesNames.Add (LandTile.TileType.Grass,"Grass_");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_NE,"Grass_NE");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_NES,"Grass_NES");
-        landscapeSpritesNames.Add (LandTile.TileType.Grass_SE,"Grass_SE");
+        landscapeSpritesNames.Add (LandTile.TileType.Grass_ES,"Grass_ES");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_ESW,"Grass_ESW");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_NESW,"Grass_NESW");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_NEW,"Grass_NEW");
@@ -195,7 +202,7 @@ public class WorldController : MonoBehaviour {
         landscapeSpritesNames.Add (LandTile.TileType.Grass_IC_TL,"Grass_IC_TL");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_IC_BL,"Grass_IC_BL");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_Full_NEW_L,"Grass_Full_NEW_L");
-        landscapeSpritesNames.Add (LandTile.TileType.Grass_ESW_R,"Grass_ESW_R");
+        landscapeSpritesNames.Add (LandTile.TileType.Grass_Full_ESW_R,"Grass_Full_ESW_R");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_IC_TR,"Grass_IC_TR");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_IC_BR,"Grass_IC_BR");
         landscapeSpritesNames.Add (LandTile.TileType.Grass_Full_NEW_R,"Grass_Full_NEW_R");
@@ -229,7 +236,7 @@ public class WorldController : MonoBehaviour {
         landscapeSpritesNames.Add (LandTile.TileType.Dirt,"Dirt_");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_NE,"Dirt_NE");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_NES,"Dirt_NES");
-        landscapeSpritesNames.Add (LandTile.TileType.Dirt_SE,"Dirt_SE");
+        landscapeSpritesNames.Add (LandTile.TileType.Dirt_ES,"Dirt_ES");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_ESW,"Dirt_ESW");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_NESW,"Dirt_NESW");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_NEW,"Dirt_NEW");
@@ -259,5 +266,5 @@ public class WorldController : MonoBehaviour {
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_Full_SW_NE,"Dirt_Full_SW_NE");
         landscapeSpritesNames.Add (LandTile.TileType.Dirt_Full_NW_SE,"Dirt_Full_NW_SE");
     }
-    
+
 }
