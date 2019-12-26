@@ -6,7 +6,7 @@ TextureImporter:
     21300002: Dirt_ES
     21300004: Dirt_ESW
     21300006: Dirt_SW
-    21300008: Dirt_Dia_ES
+    21300008: Dirt_Dia_SE
     21300010: Dirt_Full_ESW_L
     21300012: Dirt_Full_ESW_R
     21300014: Dirt_Dia_SW
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Dia_ES
+      name: Dirt_Dia_SE
       rect:
         serializedVersion: 2
         x: 64

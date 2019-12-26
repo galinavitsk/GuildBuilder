@@ -218,11 +218,12 @@ public class LandTile {
             }
         }
     }
+    public TileBasicType BasicType { get { return basictype; }}
 
     LooseObject looseObject;
     public Furniture furniture { get; protected set; }
 
-    public World world{get;protected set;}
+    public World world { get; protected set; }
     int x;
     public int X {
         get { return x; }
@@ -261,7 +262,5 @@ public class LandTile {
         return true;
 
     }
-
-    
 
 }

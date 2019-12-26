@@ -117,7 +117,7 @@ public class MouseController : MonoBehaviour
 					LandTile t=WorldController.Instance.World.GetTileAt(x,y);
 					if(t!=null){
 						if(buildModeIsObject==true){//Create InstalledObject and assign to the tile
-						WorldController.Instance.World.PlaceInstalledObject(buildModeObjectType,t);
+						WorldController.Instance.World.PlaceFurniture(buildModeObjectType,t);
 						}	
 						else if(buildModeIsObject==false){
 							t.Type=buildModeTile;
