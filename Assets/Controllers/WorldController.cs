@@ -90,7 +90,6 @@ public class WorldController : MonoBehaviour {
             Debug.LogError ("tileGameObjectMap returned null-- forget to add the tile to the dictionary? Or unregister a callback?");
             return;
         }
-
         AssignSpriteToLandTile (tile_data, tile_go);
 
     }

@@ -59,7 +59,6 @@ public class World {
                         break;
                 }
                 if (x != 0 || y != 0) {
-                    //FIXME:WHY WON"T THIS WORK
                     neighbors = new Dictionary<LandTile.TileType, string[, ]> { };
                     neighbors = determineNeighbors (neighbors, x, y);
                     tiles[x, y].Type = NeighborCheckInitial (x, y, neighbors);
@@ -98,7 +97,7 @@ public class World {
                             tiles[x, y].Type = LandTile.TileType.Generic;
                             tiles[x, y - 1].Type = reassignSouthTile (tiles[x, y].Type, x, (y - 1), neighbors);
                         } else {
-                            Debug.Log ("Trying to regenerate error Tile_" + x + "_" + y);
+                            //                            Debug.Log ("Trying to regenerate error Tile_" + x + "_" + y);
                             tiles[x, y].Type = LandTile.TileType.Generic;
                             tiles[x, y - 1].Type = reassignSouthTile (tiles[x, y].Type, x, (y - 1), neighbors);
                             tiles[x - 1, y].Type = reassignWestTile (tiles[x, y].Type, (x - 1), y, neighbors);
@@ -190,7 +189,7 @@ public class World {
             //Debug.Log ("Valid Count:" + valid.Count + "   Random:" + random + " Result:" + valid[random]);
             tiles[x, y].Type = valid[random];
         } else {
-            Debug.Log ("There has been an Error Generating a tile, Tile_" + x + "_" + y);
+            //            Debug.Log ("There has been an Error Generating a tile, Tile_" + x + "_" + y);
             tiles[x, y].Type = LandTile.TileType.ErrorTile;
         }
         return tiles[x, y].Type;
@@ -258,7 +257,7 @@ public class World {
     }
 
     public LandTile.TileType reassignWestTile (LandTile.TileType tile_to_the_east, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
-        Debug.Log ("Checking tile Tile_" + x + "_" + y);
+        //      Debug.Log ("Checking tile Tile_" + x + "_" + y);
         List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
         List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
         List<LandTile.TileType> validNorthEdge = new List<LandTile.TileType> { };
@@ -267,7 +266,7 @@ public class World {
 
         List<LandTile.TileType> temp = new List<LandTile.TileType> { };
         validEastEdge = eastTileCheck (tile_to_the_east, siblings);
-        
+
         if (x > 0) {
             validWestEdge = westTileCheck (tiles[x - 1, y].Type, siblings);
 
@@ -275,9 +274,9 @@ public class World {
         if (y > 0) {
             validSouthEdge = southTileCheck (tiles[x, y - 1].Type, siblings);
         }
-        if (y < height-1) {
-            validNorthEdge = northTileCheck (tiles[x,y+1].Type, siblings);
-            Debug.Log ("ValidNorthEdge:" + (string.Join (",", validNorthEdge)));
+        if (y < height - 1) {
+            validNorthEdge = northTileCheck (tiles[x, y + 1].Type, siblings);
+            //            Debug.Log ("ValidNorthEdge:" + (string.Join (",", validNorthEdge)));
         }
 
         if (validEastEdge.Count > 0) {
@@ -327,9 +326,78 @@ public class World {
         return tiles[x, y].Type;
 
     }
+    public LandTile.TileType reassignEastTile (LandTile.TileType tile_to_the_west, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        //      Debug.Log ("Checking tile Tile_" + x + "_" + y);
+        List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validNorthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validEastEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> valid = new List<LandTile.TileType> { };
 
+        List<LandTile.TileType> temp = new List<LandTile.TileType> { };
+        validWestEdge = westTileCheck (tile_to_the_west, siblings);
+
+        if (x < width - 1) {
+            validEastEdge = eastTileCheck (tiles[x + 1, y].Type, siblings);
+
+        }
+        if (y > 0) {
+            validSouthEdge = southTileCheck (tiles[x, y - 1].Type, siblings);
+        }
+        if (y < height - 1) {
+            validNorthEdge = northTileCheck (tiles[x, y + 1].Type, siblings);
+            //   Debug.Log ("ValidNorthEdge:" + (string.Join (",", validNorthEdge)));
+        }
+
+        if (validWestEdge.Count > 0) {
+            foreach (var a in validWestEdge) {
+                temp.Add (a);
+            }
+        }
+        //Debug.Log ("RU TOPEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validEastEdge.Count > 0) {
+            foreach (var a in validEastEdge) {
+                if (temp.Contains (a)) {
+                    valid.Add (a);
+                }
+            }
+            //Debug.Log ("FIRST RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+            temp.Clear ();
+            temp = valid.ToList ();
+            valid.Clear ();
+        }
+        //Debug.Log ("RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+
+        if (validSouthEdge.Count > 0) {
+            foreach (var a in validSouthEdge) {
+                if (temp.Contains (a)) {
+                    valid.Add (a);
+                }
+            }
+            temp.Clear ();
+            temp = valid.ToList ();
+            valid.Clear ();
+        }
+        //Debug.Log ("RU BOTTOMEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validNorthEdge.Count > 0) {
+            foreach (var a in validNorthEdge) {
+                if (temp.Contains (a)) {
+                    valid.Add (a);
+                }
+            }
+        }
+        //Debug.Log ("RU RIGHTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (valid.Count == 0) {
+            valid = temp.ToList ();
+        }
+        int random = UnityEngine.Random.Range (0, valid.Count);
+        //Debug.Log ("Valid Count:" + valid.Count + "   Random:" + random + " Result:" + valid[random]);
+        tiles[x, y].Type = valid[random];
+        return tiles[x, y].Type;
+
+    }
     public LandTile.TileType reassignSouthTile (LandTile.TileType tile_to_the_south, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
-        Debug.Log ("Regenerating South tile Tile_" + x + "_" + y);
+        //        Debug.Log ("Regenerating South tile Tile_" + x + "_" + y);
 
         List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
         List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
@@ -347,10 +415,9 @@ public class World {
         if (y > 0) {
             validSouthEdge = southTileCheck (tiles[x, y - 1].Type, siblings);
         }
-        if (x < width-1) {
-            if (tiles[x + 1, y].Type != LandTile.TileType.Empty)
-            {
-                validEastEdge = eastTileCheck(tiles[x + 1, y].Type, siblings);
+        if (x < width - 1) {
+            if (tiles[x + 1, y].Type != LandTile.TileType.Empty) {
+                validEastEdge = eastTileCheck (tiles[x + 1, y].Type, siblings);
             }
         }
         if (validNorthEdge.Count > 0) {
@@ -374,6 +441,77 @@ public class World {
 
         if (validSouthEdge.Count > 0) {
             foreach (var a in validSouthEdge) {
+                if (temp.Contains (a)) {
+                    valid.Add (a);
+                }
+            }
+            temp.Clear ();
+            temp = valid.ToList ();
+            valid.Clear ();
+        }
+        //Debug.Log ("RU BOTTOMEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validEastEdge.Count > 0) {
+            foreach (var a in validEastEdge) {
+                if (temp.Contains (a)) {
+                    valid.Add (a);
+                }
+            }
+        }
+        //Debug.Log ("RU RIGHTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (valid.Count == 0) {
+            valid = temp.ToList ();
+        }
+        int random = UnityEngine.Random.Range (0, valid.Count);
+        //Debug.Log ("Valid Count:" + valid.Count + "   Temp Count:" + temp.Count + "  Random:" + random);
+        tiles[x, y].Type = valid[random];
+        return tiles[x, y].Type;
+
+    }
+    public LandTile.TileType reassignNorthTile (LandTile.TileType tile_to_the_north, int x, int y, Dictionary<LandTile.TileType, string[, ]> siblings) {
+        //      Debug.Log ("Regenerating North tile Tile_" + x + "_" + y);
+
+        List<LandTile.TileType> validWestEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validSouthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validNorthEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> validEastEdge = new List<LandTile.TileType> { };
+        List<LandTile.TileType> valid = new List<LandTile.TileType> { };
+
+        List<LandTile.TileType> temp = new List<LandTile.TileType> { };
+
+        validSouthEdge = southTileCheck (tile_to_the_north, siblings); //generates possibilites based on the tile to the North Of current tile
+        if (x > 0) {
+            validWestEdge = westTileCheck (tiles[x - 1, y].Type, siblings);
+
+        }
+        if (y > 0) {
+            validNorthEdge = northTileCheck (tiles[x, y + 1].Type, siblings);
+        }
+        if (x < width - 1) {
+            if (tiles[x + 1, y].Type != LandTile.TileType.Empty) {
+                validEastEdge = eastTileCheck (tiles[x + 1, y].Type, siblings);
+            }
+        }
+        if (validSouthEdge.Count > 0) {
+            foreach (var a in validSouthEdge) {
+                temp.Add (a);
+            }
+        }
+        //Debug.Log ("RU TOPEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+        if (validWestEdge.Count > 0) {
+            foreach (var a in validWestEdge) {
+                if (temp.Contains (a)) {
+                    valid.Add (a);
+                }
+            }
+            //Debug.Log ("FIRST RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+            temp.Clear ();
+            temp = valid.ToList ();
+            valid.Clear ();
+        }
+        //Debug.Log ("RU LEFTEDGE Valid Count:" + valid.Count + "   Temp Count:" + temp.Count);
+
+        if (validNorthEdge.Count > 0) {
+            foreach (var a in validNorthEdge) {
                 if (temp.Contains (a)) {
                     valid.Add (a);
                 }
