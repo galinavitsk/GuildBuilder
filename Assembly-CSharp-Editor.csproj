@@ -61,6 +61,9 @@
  <Reference Include="Unity.VSCode.Editor">
  <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+ <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -88,6 +91,9 @@
  <Reference Include="Unity.2D.Tilemap.Editor">
  <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.2D.Tilemap.Extras">
+ <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
  <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
@@ -108,12 +114,6 @@
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
  <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Tilemap.Extras.Editor">
- <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Tilemap.Extras">
- <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
