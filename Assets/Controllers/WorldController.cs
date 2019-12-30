@@ -29,7 +29,9 @@ public class WorldController : MonoBehaviour {
         Instance = this;
         World = new World ();
         World.RandomizeTiles();
-        
+        //Center Camera
+        Camera.main.transform.position = new Vector3(World.Width / 2, World.Height / 2, Camera.main.transform.position.z);
+
     }
 
     // Update is called once per frame

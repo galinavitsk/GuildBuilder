@@ -50,6 +50,7 @@
      <Compile Include="Assets\ExtensionsMethods\ExtensionMethods.cs" />
      <Compile Include="Assets\Model\CustomTileBase.cs" />
      <Compile Include="Assets\Model\InstalledObject.cs" />
+     <Compile Include="Assets\Model\Job.cs" />
      <Compile Include="Assets\Model\LooseObject.cs" />
      <Compile Include="Assets\Model\World.cs" />
      <Compile Include="Assets\UI\AutomaticHorizonalSize.cs" />
