@@ -13,10 +13,12 @@ public class MouseController : MonoBehaviour {
 	Vector3 currFramePosition;
 	Vector3 dragStartPosition;
 	public GameObject circleCursorPrefab;
-	Tile.TileType buildModeTile = Tile.TileType.Generic;
+	public GameObject mainMenu;
+	String buildModeTile = "Generic";
 	string buildModeObjectType;
 	List<GameObject> dragPreviewGameObjects;
-	bool buildModeIsObject = false;
+	String buildModeIsObject = "ground";
+	String floorType = "Wood";
 
 	// Start is called before the first frame update
 	void Start () {
@@ -55,7 +57,7 @@ public class MouseController : MonoBehaviour {
 			return;
 		}
 
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0) || Input.GetMouseButtonDown (1)) {
 			dragStartPosition = currFramePosition;
 		}
 
@@ -83,7 +85,7 @@ public class MouseController : MonoBehaviour {
 			Destroy (go);
 		}
 
-		if (Input.GetMouseButton (0)) {
+		if (Input.GetMouseButton (0) || Input.GetMouseButton (1)) {
 			// Display a preview of the drag area
 			for (int x = start_x; x <= end_x; x++) {
 				for (int y = start_y; y <= end_y; y++) {
@@ -99,53 +101,141 @@ public class MouseController : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) { //Stop Drag
 			Vector3 pos = Input.mousePosition;
 			pos = pos.Round (1);
+			Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
 
-			if (buildModeIsObject == false) {
+			if (buildModeIsObject == "ground") {
 				for (int x = start_x; x <= end_x; x++) {
 					for (int y = start_y; y <= end_y; y++) {
 						Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
 						if (tilePos.x < WorldController.Instance.World.Width && tilePos.y < WorldController.Instance.World.Height && tilePos.x >= 0 && tilePos.y >= 0) {
 
-							if (buildModeTile == Tile.TileType.Dirt) {
-								WorldController.Instance.tilemapLandscape.SetTile (tilePos, WorldController.Instance.tileDirt);
-							}
-							if (buildModeTile == Tile.TileType.Grass) {
-								WorldController.Instance.tilemapLandscape.SetTile (tilePos, WorldController.Instance.tileGrass);
+							TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/" + buildModeTile);
+							WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
+						}
+					}
+				}
+			} else if (buildModeIsObject == "WallOnly") {
+
+				if (buildModeObjectType.Contains ("Wall") == true) {
+					for (int x = start_x; x <= end_x; x++) {
+						for (int y = start_y; y <= end_y; y++) {
+							Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
+							if ((tilemapFoundation.GetSprite (tilePos) == null) ||
+								(tilemapFoundation.GetSprite (tilePos).name.ToString ().Contains ("Floor_")) ||
+								(tilemapFoundation.GetTile (tilePos).name.ToString ().Contains ("Wall"))) {
+								WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType);
+
+							} else {
+								Debug.LogError ("Trying to place an object where one already exists");
 							}
 						}
 					}
 				}
-			} else if (buildModeIsObject == true) {
-				Tilemap tilemapFurniture = WorldController.Instance.tilemapFurniture.GetComponent<Tilemap> ();
+				if (buildModeObjectType.Contains ("Door") == true || buildModeObjectType.Contains ("Window") == true) {
+					Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (end_x, end_y, 0));
+					WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType);
+					if (WorldController.Instance.tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_") == false) {
+						CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
+						tile.sprite = WorldController.Instance.installedObjectSprites["Floor_Wood"];
+						WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
+					}
+				}
+
+			} else if (buildModeIsObject == "Room") {
+				for (int x = start_x; x <= end_x; x++) {
+					Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, start_y, 0));
+					WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType);
+					tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, end_y, 0));
+					WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType);
+				}
+				for (int y = start_y; y <= end_y; y++) {
+					Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (start_x, y, 0));
+					WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType);
+					tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (end_x, y, 0));
+					WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType);
+				}
+				for (int x = start_x + 1; x <= end_x - 1; x++) {
+					for (int y = start_y + 1; y <= end_y - 1; y++) {
+						Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
+						CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
+						tile.sprite = WorldController.Instance.installedObjectSprites["Floor_" + floorType];
+						if (y == 1 || x == 1 || x == WorldController.Instance.World.Width - 2 || y == WorldController.Instance.World.Height - 2) { WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType); } else {
+							WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
+							tilemapFoundation.SetTile (tilePos, null);
+						}
+					}
+				}
+
+			}
+
+		}
+		if (Input.GetMouseButtonUp (1)) { //BULDOZING 
+
+			Vector3 pos = Input.mousePosition;
+			pos = pos.Round (1);
+			Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
+			Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
+			if (buildModeIsObject == "ground") {
 				for (int x = start_x; x <= end_x; x++) {
 					for (int y = start_y; y <= end_y; y++) {
 						Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
-						if (tilemapFurniture.GetSprite (tilePos) == null) {
-							if (tilePos.x < WorldController.Instance.World.Width && tilePos.y < WorldController.Instance.World.Height && tilePos.x >= 0 && tilePos.y >= 0) {
-								WorldController.Instance.PlaceFurniture (tilePos, buildModeObjectType);
-							}
-						} else { Debug.LogError ("Trying to place an object where one already exists"); }
+						if (tilePos.x < WorldController.Instance.World.Width && tilePos.y < WorldController.Instance.World.Height && tilePos.x >= 0 && tilePos.y >= 0) {
+
+							TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Generic");
+							WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
+						}
 					}
 				}
-				//TileBase t = WorldController.Instance.tilemapLandscape.GetTile(tilePos);
-				//WorldController.Instance.World.PlaceFurniture (buildModeObjectType, t);
+			} else if (buildModeIsObject == "WallOnly" || buildModeIsObject == "Room") {
+				TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Dirt");
+				for (int x = start_x; x <= end_x; x++) {
+					for (int y = start_y; y <= end_y; y++) {
+						Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
+						if ((tilemapFoundation.GetTile (tilePos) == null ||
+								tilemapFoundation.GetTile (tilePos).name.ToString ().Contains ("Wall") == true ||
+								tilemapFoundation.GetSprite (tilePos).name.ToString ().Contains ("Door") == true)) {
+							tilemapFoundation.SetTile (tilePos, null);
+							tilemapLandscape.SetTile (tilePos, tile);
+							if ((tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_")) == true) {
+
+								tilemapLandscape.SetTile (tilePos, tile);
+							}
+
+						} else {
+							Debug.LogError ("Trying to place an object where one already exists");
+						}
+					}
+				}
+
+			} else if (buildModeIsObject == "Furniture") {
+				Debug.Log ("Placing Furniture");
 			}
+
 		}
 	}
 
-	public void SetMode_BuildDirt () {
-		buildModeIsObject = false;
-		buildModeTile = Tile.TileType.Dirt;
-	}
-
-	public void SetMode_BuildGrass () {
-		buildModeIsObject = false;
-		buildModeTile = Tile.TileType.Grass;
+	public void OpenLandScapeMenu (string objectType) {
 
 	}
+	public void SetMode_BuildGround (string objectType) {
+		buildModeIsObject = "ground";
+		buildModeTile = objectType;
+	}
+
 	public void SetMode_BuildInstalledObject (string objectType) {
-		buildModeIsObject = true;
+		buildModeIsObject = "WallOnly";
 		buildModeObjectType = objectType;
 	}
+	public void SetMode_BuildRoom (string roomType) {
+		String[] room = roomType.Split (',');
+		buildModeIsObject = "Room";
+		buildModeObjectType = room[0];
+		floorType = room[1];
+	}
+	public void RandomizeAllLandscapeTiles () {
+		Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
+        tilemapLandscape.ClearAllTiles();
+        WorldController.Instance.World.RandomizeTiles();
+    }
 
 }

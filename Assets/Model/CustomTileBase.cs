@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CustomTileBase : TileBase {
     public Sprite sprite;
+    public String tag;
 
     // Docs: https://docs.unity3d.com/ScriptReference/Tilemaps.TileBase.GetTileData.html
 

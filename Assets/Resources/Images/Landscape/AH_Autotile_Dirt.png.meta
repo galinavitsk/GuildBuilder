@@ -1,57 +1,297 @@
 fileFormatVersion: 2
 guid: 4a74281cae66f1546a9099614983b2b6
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Dirt_S
-    21300002: Dirt_ES
-    21300004: Dirt_ESW
-    21300006: Dirt_SW
-    21300008: Dirt_Dia_SE
-    21300010: Dirt_Full_ESW_L
-    21300012: Dirt_Full_ESW_R
-    21300014: Dirt_Dia_SW
-    21300016: Dirt_TL
-    21300018: Dirt_Exit_Top
-    21300020: Dirt_Top
-    21300022: Dirt_TR
-    21300024: Dirt_NS
-    21300026: Dirt_NES
-    21300028: Dirt_NESW
-    21300030: Dirt_NSW
-    21300032: Dirt_Full_NES_T
-    21300034: Dirt_IC_TL
-    21300036: Dirt_IC_TR
-    21300038: Dirt_Full_NSW_T
-    21300040: Dirt_Left
-    21300042: Dirt_Full_SW_NE
-    21300044: Generic
-    21300046: Dirt_Exit_Right
-    21300048: Dirt_N
-    21300050: Dirt_NE
-    21300052: Dirt_NEW
-    21300054: Dirt_NW
-    21300056: Dirt_Full_NES_B
-    21300058: Dirt_IC_BL
-    21300060: Dirt_IC_BR
-    21300062: Dirt_Full_NSW_B
-    21300064: Dirt_Exit_Left
-    21300066: Dirt_Full
-    21300068: Dirt_Full_NW_SE
-    21300070: Dirt_Right
-    21300072: Dirt_
-    21300074: Dirt_E
-    21300076: Dirt_EW
-    21300078: Dirt_W
-    21300080: Dirt_Dia_NE
-    21300082: Dirt_Full_NEW_L
-    21300084: Dirt_Full_NEW_R
-    21300086: Dirt_Dia_NW
-    21300088: Dirt_BL
-    21300090: Dirt_Bottom
-    21300092: Dirt_Exit_Bottom
-    21300094: Dirt_BR
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Dirt_S
+  - first:
+      213: 21300002
+    second: Dirt_ES
+  - first:
+      213: 21300004
+    second: Dirt_ESW
+  - first:
+      213: 21300006
+    second: Dirt_SW
+  - first:
+      213: 21300008
+    second: Dirt_Dia_SE
+  - first:
+      213: 21300010
+    second: Dirt_Full_ESW_L
+  - first:
+      213: 21300012
+    second: Dirt_Full_ESW_R
+  - first:
+      213: 21300014
+    second: Dirt_Dia_SW
+  - first:
+      213: 21300016
+    second: Dirt_TL
+  - first:
+      213: 21300018
+    second: Dirt_Exit_Top
+  - first:
+      213: 21300020
+    second: Dirt_Top
+  - first:
+      213: 21300022
+    second: Dirt_TR
+  - first:
+      213: 21300024
+    second: Dirt_NS
+  - first:
+      213: 21300026
+    second: Dirt_NES
+  - first:
+      213: 21300028
+    second: Dirt_NESW
+  - first:
+      213: 21300030
+    second: Dirt_NSW
+  - first:
+      213: 21300032
+    second: Dirt_Full_NES_T
+  - first:
+      213: 21300034
+    second: Dirt_IC_TL
+  - first:
+      213: 21300036
+    second: Dirt_IC_TR
+  - first:
+      213: 21300038
+    second: Dirt_Full_NSW_T
+  - first:
+      213: 21300040
+    second: Dirt_Left
+  - first:
+      213: 21300042
+    second: Dirt_Full_SW_NE
+  - first:
+      213: 21300044
+    second: Generic
+  - first:
+      213: 21300046
+    second: Dirt_Exit_Right
+  - first:
+      213: 21300048
+    second: Dirt_N
+  - first:
+      213: 21300050
+    second: Dirt_NE
+  - first:
+      213: 21300052
+    second: Dirt_NEW
+  - first:
+      213: 21300054
+    second: Dirt_NW
+  - first:
+      213: 21300056
+    second: Dirt_Full_NES_B
+  - first:
+      213: 21300058
+    second: Dirt_IC_BL
+  - first:
+      213: 21300060
+    second: Dirt_IC_BR
+  - first:
+      213: 21300062
+    second: Dirt_Full_NSW_B
+  - first:
+      213: 21300064
+    second: Dirt_Exit_Left
+  - first:
+      213: 21300066
+    second: Dirt_Full
+  - first:
+      213: 21300068
+    second: Dirt_Full_NW_SE
+  - first:
+      213: 21300070
+    second: Dirt_Right
+  - first:
+      213: 21300072
+    second: Dirt_
+  - first:
+      213: 21300074
+    second: Dirt_E
+  - first:
+      213: 21300076
+    second: Dirt_EW
+  - first:
+      213: 21300078
+    second: Dirt_W
+  - first:
+      213: 21300080
+    second: Dirt_Dia_NE
+  - first:
+      213: 21300082
+    second: Dirt_Full_NEW_L
+  - first:
+      213: 21300084
+    second: Dirt_Full_NEW_R
+  - first:
+      213: 21300086
+    second: Dirt_Dia_NW
+  - first:
+      213: 21300088
+    second: Dirt_BL
+  - first:
+      213: 21300090
+    second: Dirt_Bottom
+  - first:
+      213: 21300092
+    second: Dirt_Exit_Bottom
+  - first:
+      213: 21300094
+    second: Dirt_BR
+  - first:
+      213: -4470210060980828772
+    second: AH_Autotile_Dirt_0
+  - first:
+      213: -6798279533345376227
+    second: AH_Autotile_Dirt_1
+  - first:
+      213: 8675518419868353114
+    second: AH_Autotile_Dirt_2
+  - first:
+      213: 920732712815069247
+    second: AH_Autotile_Dirt_3
+  - first:
+      213: -8949183722271902678
+    second: AH_Autotile_Dirt_4
+  - first:
+      213: 8650746856823732630
+    second: AH_Autotile_Dirt_5
+  - first:
+      213: -589649859629671016
+    second: AH_Autotile_Dirt_6
+  - first:
+      213: 2269065846265066515
+    second: AH_Autotile_Dirt_7
+  - first:
+      213: 1803206243622733167
+    second: AH_Autotile_Dirt_8
+  - first:
+      213: 401522331229418297
+    second: AH_Autotile_Dirt_9
+  - first:
+      213: -6086166830421520431
+    second: AH_Autotile_Dirt_10
+  - first:
+      213: -7306951314775634251
+    second: AH_Autotile_Dirt_11
+  - first:
+      213: -5904700510007218512
+    second: AH_Autotile_Dirt_12
+  - first:
+      213: 5218009322257645860
+    second: AH_Autotile_Dirt_13
+  - first:
+      213: -2263978808148248920
+    second: AH_Autotile_Dirt_14
+  - first:
+      213: 324153854973027088
+    second: AH_Autotile_Dirt_15
+  - first:
+      213: 3669713305216211700
+    second: AH_Autotile_Dirt_16
+  - first:
+      213: 2274567754451031726
+    second: AH_Autotile_Dirt_17
+  - first:
+      213: 1513184816499092738
+    second: AH_Autotile_Dirt_18
+  - first:
+      213: -2186957222161678101
+    second: AH_Autotile_Dirt_19
+  - first:
+      213: -7123522313977015862
+    second: AH_Autotile_Dirt_20
+  - first:
+      213: -7744695495610937411
+    second: AH_Autotile_Dirt_21
+  - first:
+      213: -7036387886521799843
+    second: AH_Autotile_Dirt_22
+  - first:
+      213: 2906085953264512049
+    second: AH_Autotile_Dirt_23
+  - first:
+      213: -2515377605516762168
+    second: AH_Autotile_Dirt_24
+  - first:
+      213: 7148927007968047302
+    second: AH_Autotile_Dirt_25
+  - first:
+      213: -8775735745110184202
+    second: AH_Autotile_Dirt_26
+  - first:
+      213: -1785255963396644266
+    second: AH_Autotile_Dirt_27
+  - first:
+      213: -4130331475382484112
+    second: AH_Autotile_Dirt_28
+  - first:
+      213: 4634440142948509975
+    second: AH_Autotile_Dirt_29
+  - first:
+      213: -7535491412351252918
+    second: AH_Autotile_Dirt_30
+  - first:
+      213: 1563846339914551849
+    second: AH_Autotile_Dirt_31
+  - first:
+      213: -8894876623357386564
+    second: AH_Autotile_Dirt_32
+  - first:
+      213: -2271609171447806886
+    second: AH_Autotile_Dirt_33
+  - first:
+      213: -245517229914399537
+    second: AH_Autotile_Dirt_34
+  - first:
+      213: 9066358030196341473
+    second: AH_Autotile_Dirt_35
+  - first:
+      213: -7825619114461214595
+    second: AH_Autotile_Dirt_36
+  - first:
+      213: 6015219264082867715
+    second: AH_Autotile_Dirt_37
+  - first:
+      213: 261002025229436444
+    second: AH_Autotile_Dirt_38
+  - first:
+      213: -4037376482576877024
+    second: AH_Autotile_Dirt_39
+  - first:
+      213: -4926805634647872893
+    second: AH_Autotile_Dirt_40
+  - first:
+      213: -1961327607617156289
+    second: AH_Autotile_Dirt_41
+  - first:
+      213: 9006539083475795562
+    second: AH_Autotile_Dirt_42
+  - first:
+      213: 7709525404373616614
+    second: AH_Autotile_Dirt_43
+  - first:
+      213: 7358758861632361533
+    second: AH_Autotile_Dirt_44
+  - first:
+      213: 651708390402551725
+    second: AH_Autotile_Dirt_45
+  - first:
+      213: -6856803711370629522
+    second: AH_Autotile_Dirt_46
+  - first:
+      213: 3080401611917734129
+    second: AH_Autotile_Dirt_47
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -106,7 +346,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -117,7 +357,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -128,11 +369,12 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dirt_S
+      name: AH_Autotile_Dirt_0
       rect:
         serializedVersion: 2
         x: 0
@@ -140,19 +382,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c9fcbef9c22b0b4c91107ffe9221a25
+      spriteID: 2d228005ee0c782488156bd6bbd8b4c7
+      internalID: -4470210060980828772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_ES
+      name: AH_Autotile_Dirt_1
       rect:
         serializedVersion: 2
         x: 16
@@ -160,19 +403,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4750dae1690f9d48b4f11e276e72884
+      spriteID: a5a9fc886ab35404bbd3d7d1b5a57d65
+      internalID: -6798279533345376227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_ESW
+      name: AH_Autotile_Dirt_2
       rect:
         serializedVersion: 2
         x: 32
@@ -180,19 +424,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c2f2191759604344be81e16f98f42e1
+      spriteID: b6af5b9c441233546a12141d95979eaa
+      internalID: 8675518419868353114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_SW
+      name: AH_Autotile_Dirt_3
       rect:
         serializedVersion: 2
         x: 48
@@ -200,19 +445,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df7f7a0bdb7db894b8c91743bf46c484
+      spriteID: c75fca46400c81a45bcb816ccb17d341
+      internalID: 920732712815069247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Dia_SE
+      name: AH_Autotile_Dirt_4
       rect:
         serializedVersion: 2
         x: 64
@@ -220,19 +466,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31a9fda2b8c3fc14998b4f3180d2bf2e
+      spriteID: 66673e2552b81d94ba03a4bb2697547f
+      internalID: -8949183722271902678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_ESW_L
+      name: AH_Autotile_Dirt_5
       rect:
         serializedVersion: 2
         x: 80
@@ -240,19 +487,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfa45027a626ac746a180de693abd951
+      spriteID: 50b2e4b9f42eeb94cba7e5c32744d0c3
+      internalID: 8650746856823732630
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_ESW_R
+      name: AH_Autotile_Dirt_6
       rect:
         serializedVersion: 2
         x: 96
@@ -260,19 +508,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b14a952f98c7951469d5a35256d0c1a2
+      spriteID: 6bdef469756ed254fa89638ba18bf094
+      internalID: -589649859629671016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Dia_SW
+      name: AH_Autotile_Dirt_7
       rect:
         serializedVersion: 2
         x: 112
@@ -280,19 +529,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ab94d8205417eb49a569f3dc7b8b7a9
+      spriteID: d24203fcba6817640b342e75a4e7a3e5
+      internalID: 2269065846265066515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_TL
+      name: AH_Autotile_Dirt_8
       rect:
         serializedVersion: 2
         x: 128
@@ -300,19 +550,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05469f1ee9fbc9c46bbc11b0d46552ca
+      spriteID: 7b31f2386d10d9348b357f7943b5ce23
+      internalID: 1803206243622733167
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Exit_Top
+      name: AH_Autotile_Dirt_9
       rect:
         serializedVersion: 2
         x: 144
@@ -320,19 +571,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d383079c4664c64db584d3153d32243
+      spriteID: 2f31b76bb90a4a64b820cd66774b449d
+      internalID: 401522331229418297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Top
+      name: AH_Autotile_Dirt_10
       rect:
         serializedVersion: 2
         x: 160
@@ -340,19 +592,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c571f699ad5c74e4caf865409380e0c2
+      spriteID: 5b90cb1bd9b7a3d469ee447c94081ccf
+      internalID: -6086166830421520431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_TR
+      name: AH_Autotile_Dirt_11
       rect:
         serializedVersion: 2
         x: 176
@@ -360,19 +613,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a47f75b9e6498ea44b1bb706dfe89f7d
+      spriteID: d35cb67bd96b4404498c775dc539b4d9
+      internalID: -7306951314775634251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NS
+      name: AH_Autotile_Dirt_12
       rect:
         serializedVersion: 2
         x: 0
@@ -380,19 +634,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 612c8f5b43dbcb74cb92c85a6990e1f7
+      spriteID: ffc9a77a438787c479db18b13030a30c
+      internalID: -5904700510007218512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NES
+      name: AH_Autotile_Dirt_13
       rect:
         serializedVersion: 2
         x: 16
@@ -400,19 +655,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 157a7daab6cfbb2489e5e2f4762a7db1
+      spriteID: 2ecf90b8d29a0c141bc9cd05ec479ee0
+      internalID: 5218009322257645860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NESW
+      name: AH_Autotile_Dirt_14
       rect:
         serializedVersion: 2
         x: 32
@@ -420,19 +676,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 168718dd9be34ad4d894515f83902bea
+      spriteID: eefa540f3fc48cc438bb6e1834bae2fa
+      internalID: -2263978808148248920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NSW
+      name: AH_Autotile_Dirt_15
       rect:
         serializedVersion: 2
         x: 48
@@ -440,19 +697,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcb5a05019d82324199208b0a6c7a57f
+      spriteID: fb9fb10e75f2e464a8119fa7032207c3
+      internalID: 324153854973027088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NES_T
+      name: AH_Autotile_Dirt_16
       rect:
         serializedVersion: 2
         x: 64
@@ -460,19 +718,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16f3b6cc1b4049542b08dab68168dfae
+      spriteID: 97e9823321385f14fab59b1d9c85f887
+      internalID: 3669713305216211700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_IC_TL
+      name: AH_Autotile_Dirt_17
       rect:
         serializedVersion: 2
         x: 80
@@ -480,19 +739,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57b0f9cd20ab1f94fa223f75a8693f43
+      spriteID: 9b7955e2f37308247b43ae0b4c28f5c8
+      internalID: 2274567754451031726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_IC_TR
+      name: AH_Autotile_Dirt_18
       rect:
         serializedVersion: 2
         x: 96
@@ -500,19 +760,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ae6fc1b5cd0bbd4cb18ce06906ae037
+      spriteID: 8bb44d7452457da4d9c0aab0951c67e1
+      internalID: 1513184816499092738
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NSW_T
+      name: AH_Autotile_Dirt_19
       rect:
         serializedVersion: 2
         x: 112
@@ -520,19 +781,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34f2c6200f55db74f91c5c092e108ce3
+      spriteID: eea28c61163a58648aebeca3df45cba5
+      internalID: -2186957222161678101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Left
+      name: AH_Autotile_Dirt_20
       rect:
         serializedVersion: 2
         x: 128
@@ -540,19 +802,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99693c002f29a114d9c4a06422da3007
+      spriteID: 63a75e21f3284e14bb3098cde3af79d0
+      internalID: -7123522313977015862
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_SW_NE
+      name: AH_Autotile_Dirt_21
       rect:
         serializedVersion: 2
         x: 144
@@ -560,19 +823,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39ed5f2503501734fa7951bb932621ee
+      spriteID: 22443b7a5fe09af4aa3181e99a8babcd
+      internalID: -7744695495610937411
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Generic
+      name: AH_Autotile_Dirt_22
       rect:
         serializedVersion: 2
         x: 160
@@ -580,19 +844,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42573bb194e0aad4984448ffca76d6d1
+      spriteID: dd937edccb0a2ee44b36fc786ac277e0
+      internalID: -7036387886521799843
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Exit_Right
+      name: AH_Autotile_Dirt_23
       rect:
         serializedVersion: 2
         x: 176
@@ -600,19 +865,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07abf820fe027554cb550670769e693c
+      spriteID: c0835181525c681429426273374cda5a
+      internalID: 2906085953264512049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_N
+      name: AH_Autotile_Dirt_24
       rect:
         serializedVersion: 2
         x: 0
@@ -620,19 +886,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76cb6b77c5ba98540846f24237d2717c
+      spriteID: 1396bc8fc376eb944939bed22dd16390
+      internalID: -2515377605516762168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NE
+      name: AH_Autotile_Dirt_25
       rect:
         serializedVersion: 2
         x: 16
@@ -640,19 +907,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cced525d6df29b74f92d2d4b104d90fc
+      spriteID: 18fddd333f3f4b74d9720fcc97b306b6
+      internalID: 7148927007968047302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NEW
+      name: AH_Autotile_Dirt_26
       rect:
         serializedVersion: 2
         x: 32
@@ -660,19 +928,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd579f4c0a4d43449b1b5956929fea93
+      spriteID: 70d81170d85107549ac6eb92ffca54fd
+      internalID: -8775735745110184202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_NW
+      name: AH_Autotile_Dirt_27
       rect:
         serializedVersion: 2
         x: 48
@@ -680,19 +949,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 518b62fe5665c7548a826b0bdfbbfe92
+      spriteID: bd819dd564a2d1745b0dd6cfd5721645
+      internalID: -1785255963396644266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NES_B
+      name: AH_Autotile_Dirt_28
       rect:
         serializedVersion: 2
         x: 64
@@ -700,19 +970,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 958fa410ec90c41468dad7dba66967da
+      spriteID: 05ada497d2180594f9c719e82d1386e4
+      internalID: -4130331475382484112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_IC_BL
+      name: AH_Autotile_Dirt_29
       rect:
         serializedVersion: 2
         x: 80
@@ -720,19 +991,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e28aca69c4a55948aed0c01df7104f2
+      spriteID: e01762dc2477f424ba426502a90ea9e6
+      internalID: 4634440142948509975
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_IC_BR
+      name: AH_Autotile_Dirt_30
       rect:
         serializedVersion: 2
         x: 96
@@ -740,19 +1012,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 397eaa5f76d89694ba9b8cb2d21fab8a
+      spriteID: a6d658dfec892974d9029cc2306ef004
+      internalID: -7535491412351252918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NSW_B
+      name: AH_Autotile_Dirt_31
       rect:
         serializedVersion: 2
         x: 112
@@ -760,19 +1033,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 104d362e6c8f27e44853147ea14117e8
+      spriteID: 9a299c95ae754294cab0e44c482519fb
+      internalID: 1563846339914551849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Exit_Left
+      name: AH_Autotile_Dirt_32
       rect:
         serializedVersion: 2
         x: 128
@@ -780,19 +1054,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb3ddb5b4d0f8454e9a61f9ebb254a0c
+      spriteID: 7fffcd17e06de7d49b5126eaaf74b70e
+      internalID: -8894876623357386564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full
+      name: AH_Autotile_Dirt_33
       rect:
         serializedVersion: 2
         x: 144
@@ -800,19 +1075,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72355527a92686140a7149662545a177
+      spriteID: 1f0898dfc1201e94cbc3e4c15a85fcfa
+      internalID: -2271609171447806886
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NW_SE
+      name: AH_Autotile_Dirt_34
       rect:
         serializedVersion: 2
         x: 160
@@ -820,19 +1096,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 293a3ae41feab4740985ace886a19467
+      spriteID: de0116e97df473b41bd5ecdf51e55b46
+      internalID: -245517229914399537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Right
+      name: AH_Autotile_Dirt_35
       rect:
         serializedVersion: 2
         x: 176
@@ -840,19 +1117,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83e43536736264441872105a1508a9dc
+      spriteID: 056205ee5d122f24f97b9e05fce12b65
+      internalID: 9066358030196341473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_
+      name: AH_Autotile_Dirt_36
       rect:
         serializedVersion: 2
         x: 0
@@ -860,19 +1138,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08ea32c8b1d77e5439c59c20f42f6386
+      spriteID: e4110c2fc01273c40ae65b4fb075fed7
+      internalID: -7825619114461214595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_E
+      name: AH_Autotile_Dirt_37
       rect:
         serializedVersion: 2
         x: 16
@@ -880,19 +1159,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 176028c4523f78247a35e7cb77c99e17
+      spriteID: 0a515f763cc4510449fe2a81d2de826e
+      internalID: 6015219264082867715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_EW
+      name: AH_Autotile_Dirt_38
       rect:
         serializedVersion: 2
         x: 32
@@ -900,19 +1180,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b52b08151fcca1d48a35a85fc07bc018
+      spriteID: 7e356969fb59ab2428ff2f0a3eb165d9
+      internalID: 261002025229436444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_W
+      name: AH_Autotile_Dirt_39
       rect:
         serializedVersion: 2
         x: 48
@@ -920,19 +1201,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fc262cd898a9c24a85e88962e65c326
+      spriteID: c998092cf9a0fd64482a19e7f645466f
+      internalID: -4037376482576877024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Dia_NE
+      name: AH_Autotile_Dirt_40
       rect:
         serializedVersion: 2
         x: 64
@@ -940,19 +1222,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a39fb4b5999ce5e4c958f57515c9f300
+      spriteID: 6437c9ddfcd0b6446b7607ad2e01e603
+      internalID: -4926805634647872893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NEW_L
+      name: AH_Autotile_Dirt_41
       rect:
         serializedVersion: 2
         x: 80
@@ -960,19 +1243,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec3c2717c4fd6be4da19d3d12492082e
+      spriteID: 6dc065abfbf3af14e99f35f068883310
+      internalID: -1961327607617156289
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Full_NEW_R
+      name: AH_Autotile_Dirt_42
       rect:
         serializedVersion: 2
         x: 96
@@ -980,19 +1264,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f32c5a3fc489b604784db790948e4627
+      spriteID: 1fd81655d72be014f8e7f15ed06f9912
+      internalID: 9006539083475795562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Dia_NW
+      name: AH_Autotile_Dirt_43
       rect:
         serializedVersion: 2
         x: 112
@@ -1000,19 +1285,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17b5485a25c7820498248c815869b60c
+      spriteID: eeaf92f992ab455498ebf118c0c57d9e
+      internalID: 7709525404373616614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_BL
+      name: AH_Autotile_Dirt_44
       rect:
         serializedVersion: 2
         x: 128
@@ -1020,19 +1306,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45f8d008705ff0946ae80b556fda2bcb
+      spriteID: 3695d78f9aec6434db4492269927fa0d
+      internalID: 7358758861632361533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Bottom
+      name: AH_Autotile_Dirt_45
       rect:
         serializedVersion: 2
         x: 144
@@ -1040,19 +1327,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28d6f307c1b77b244ba5848a622b5171
+      spriteID: 5f66f1663d269724e9c81c5aad9f6b00
+      internalID: 651708390402551725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_Exit_Bottom
+      name: AH_Autotile_Dirt_46
       rect:
         serializedVersion: 2
         x: 160
@@ -1060,19 +1348,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfaaca904b65fcd46b643d8ea63e3934
+      spriteID: cc407f10ee32d444dac9c0784391e967
+      internalID: -6856803711370629522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dirt_BR
+      name: AH_Autotile_Dirt_47
       rect:
         serializedVersion: 2
         x: 176
@@ -1080,13 +1369,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44cf99f55a06bd64883c3c196a5081d8
+      spriteID: 23d90959bed65e74bb03b23dfcc2193d
+      internalID: 3080401611917734129
       vertices: []
       indices: 
       edges: []
@@ -1095,10 +1385,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 566ccb4327835a44899967ee66412fc2
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
