@@ -24,8 +24,9 @@ public class Character {
             myJob = WorldController.Instance.World.jobQueue.Dequeue ();
             if (myJob != null) {
                 destTile = myJob.tilePos;
-                myJob.RegisterJobCancelledCallback(onJobEnded);
-                myJob.RegisterJobCompleteCallback(onJobEnded);
+
+                myJob.RegisterJobCompleteCallback (onJobEnded);
+                myJob.RegisterJobCancelledCallback (onJobEnded);
             }
         }
 
@@ -79,7 +80,7 @@ public class Character {
 
     void onJobEnded (Job job) {
         //Job completed of cancelled
-        if (job != myJob) { Debug.LogError ("Character being told about a job that isn't his. Forgot to unregister something"); return; }
+        //if (job != myJob) { Debug.LogError ("Character being told about a job that isn't his. Forgot to unregister something"); return; }
         myJob = null;
     }
 }

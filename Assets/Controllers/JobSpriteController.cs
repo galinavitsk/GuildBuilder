@@ -11,7 +11,7 @@ public class JobSpriteController : MonoBehaviour {
     }
 
     void OnJobCreated (Job j) {
-        TileBase tile_to_build = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (j.objectType);
+        TileBase tile_to_build = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (j.objectType,j.tilePos);
         tilemapJobs.GetComponent<Tilemap> ().SetTile (j.tilePos, tile_to_build);
         tilemapJobs.GetComponent<Tilemap> ().SetColor (j.tilePos, new Color (1.0f, 1.0f, 1.0f, 0.5f));
         j.RegisterJobCompleteCallback (OnJobEnded);
