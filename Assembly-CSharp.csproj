@@ -45,12 +45,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Controllers\BuildModeController.cs" />
+     <Compile Include="Assets\Controllers\CharacterSpriteController.cs" />
+     <Compile Include="Assets\Controllers\InstalledObjectSpriteController.cs" />
+     <Compile Include="Assets\Controllers\JobSpriteController.cs" />
      <Compile Include="Assets\Controllers\MouseController.cs" />
      <Compile Include="Assets\Controllers\WorldController.cs" />
      <Compile Include="Assets\ExtensionsMethods\ExtensionMethods.cs" />
+     <Compile Include="Assets\Model\Character.cs" />
      <Compile Include="Assets\Model\CustomTileBase.cs" />
      <Compile Include="Assets\Model\InstalledObject.cs" />
      <Compile Include="Assets\Model\Job.cs" />
+     <Compile Include="Assets\Model\JobQueue.cs" />
      <Compile Include="Assets\Model\LooseObject.cs" />
      <Compile Include="Assets\Model\World.cs" />
      <Compile Include="Assets\UI\AutomaticHorizonalSize.cs" />

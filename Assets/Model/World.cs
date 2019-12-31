@@ -11,10 +11,12 @@ public class World {
     int width;
     int height;
     Action<InstalledObject> cbInstalledObjectCreated;
+    Action<Character> cbCharacterCreated;
     //int iniChance = 50; //0-100
     int birthLimit = 4; //1-8
     int deathLimit = 4; //1-8
     //int numR = 5;
+    List<Character> characters;
 
     public int Width {
         get {
@@ -27,15 +29,15 @@ public class World {
         }
     }
     //TODO: Create dedicated job queue class later on
-   public Queue<Job> jobQueue;
-    public List<Vector3Int> jobPositions;
+    public JobQueue jobQueue;
 
     public World (int width = 20, int height = 20) {
         this.width = width;
         this.height = height;
         CreateInstalledObjectPrototypes ();
-        jobQueue = new Queue<Job>();
-        jobPositions = new List<Vector3Int>();
+        jobQueue = new JobQueue ();
+        characters = new List<Character> ();
+
     }
 
     public void RandomizeTiles () {
@@ -103,6 +105,18 @@ public class World {
         return newmap;
     }
 
+    public void Update (float deltaTime) {
+        foreach (Character c in characters) {
+            c.Update (deltaTime);
+        }
+    }
+
+    public Character CreateCharacter (Vector3Int tile) {
+        Character c = new Character (tile);
+        characters.Add (c);
+        if (cbCharacterCreated != null) { cbCharacterCreated (c); }
+        return c;
+    }
     void CreateInstalledObjectPrototypes () {
         InstalledObjectPrototypes = new Dictionary<string, InstalledObject> ();
 
@@ -119,7 +133,16 @@ public class World {
         cbInstalledObjectCreated -= callbackfunc;
     }
 
-    public bool IsInstalledObjectPlacementValid(string objType, int x, int y){
-        return InstalledObjectPrototypes[objType].funcPositionValidation(x, y);
+    public void RegisterCharacterCreated (Action<Character> callbackfunc) {
+        cbCharacterCreated += callbackfunc;
     }
+
+    public void UnregisterCharacterCreated (Action<Character> callbackfunc) {
+        cbCharacterCreated -= callbackfunc;
+    }
+
+    public bool IsInstalledObjectPlacementValid (string objType, int x, int y) {
+        return InstalledObjectPrototypes[objType].funcPositionValidation (x, y);
+    }
+
 }

@@ -58,7 +58,7 @@ public class InstalledObject {
     public void UnregisterOnChangedCallback (Action<InstalledObject> callbackFunc) {
         cbOnChanged -= callbackFunc;
     }
-    
+
     bool IsValidPosition (int x, int y) {
         if (x >= WorldController.Instance.World.Width - 1 || y >= WorldController.Instance.World.Height - 1 || x < 1 || y < 1) { return false; }
 
@@ -74,14 +74,12 @@ public class InstalledObject {
                     tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
                     tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true) {
-                    sprite = objectType + "_EW";
                     return true;
                 } else if (
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true) {
-                    sprite = objectType + "_NS";
                     return true;
                 } else {
                     Debug.LogError ("Can't place Door here");

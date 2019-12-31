@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class Job {
 
-    Vector3Int tilePos;
+    public Vector3Int tilePos;
+    public string objectType;
     float jobTime;
 
     Action<Job> cbJobComplete;
     Action<Job> cbJobCancelled;
+    Action<Job> cbJobCreated;
 
-    public Job (Vector3Int tile, Action<Job> cbJobComplete, float jobTime = 1f) {
+    public Job (Vector3Int tile, string objectType, Action<Job> cbJobComplete, float jobTime = 1f) {
         this.tilePos = tile;
+        this.objectType = objectType;
         this.cbJobComplete += cbJobComplete;
     }
     public void RegisterJobCompleteCallback (Action<Job> cb) {
@@ -24,7 +27,8 @@ public class Job {
     public void DoWork (float workTIme) {
         jobTime -= workTIme;
         if (jobTime <= 0) {
-            if (cbJobComplete != null) { cbJobComplete (this); }
+            if (cbJobComplete != null) { 
+                cbJobComplete (this); }
         }
     }
     public void CancelJob (float workTIme) {
