@@ -201,6 +201,19 @@ public class BuildModeController : MonoBehaviour {
 		tilemapLandscape.ClearAllTiles ();
 		WorldController.Instance.World.RandomizeTiles ();
 	}
+
+	public void Build_Test_Room () {
+		buildModeObjectType = "Wall";
+		int l = WorldController.Instance.World.Width / 2 - 5;
+		int b = WorldController.Instance.World.Height / 2 - 5;
+		for (int x = l - 5; x < l + 15; x++) {
+			for (int y = b - 5; y < b + 15; y++) {
+				if (x == l || x == (l + 9) || y == b || y == (b + 9)) {
+					if (x != (l + 9) && y != (b + 4)) { Build_Wall (new Vector3Int (x, y, 0)); }
+				}
+			}
+		}
+	}
 	void Build_DoorWindow (Vector3Int tilePos) {
 		WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
 		WorldController.Instance.PlaceInstalledObject (tilePos, buildModeObjectType);
@@ -215,6 +228,7 @@ public class BuildModeController : MonoBehaviour {
 		WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 		WorldController.Instance.tilemapFoundation.SetTile (tilePos, null);
 	}
+
 	void Build_Wall (Vector3Int tilePos) {
 		WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
 		TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Dirt");
