@@ -23,17 +23,20 @@ public class Job {
         this.cbJobComplete += cb;
     }
     public void RegisterJobCancelledCallback (Action<Job> cb) {
-        this.cbJobComplete += cb;
+        this.cbJobCancelled += cb;
     }
     public void DoWork (float workTIme) {
         jobTime -= workTIme;
         if (jobTime <= 0) {
-            if (cbJobComplete != null) { 
-                cbJobComplete (this); }
+            if (cbJobComplete != null) {
+                cbJobComplete (this);
+            }
         }
     }
-    public void CancelJob (float workTIme) {
+    public void CancelJob () {
 
-        if (cbJobCancelled != null) { cbJobCancelled (this); }
+        if (cbJobCancelled != null) {
+            cbJobCancelled (this);
+        }
     }
 }

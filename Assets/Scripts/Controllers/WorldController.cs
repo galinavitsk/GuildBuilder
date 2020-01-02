@@ -11,6 +11,7 @@ public class WorldController : MonoBehaviour {
     public World World { get; protected set; }
     public Tilemap tilemapLandscape;
     public Tilemap tilemapFoundation;
+    public Tilemap tilemapWalkable;
 
     //public Tilemap tilemap;
     //sprites for walls, windows, doors
@@ -31,14 +32,17 @@ public class WorldController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //TODO: speed controls, pause unpause, etc
-        World.Update(Time.deltaTime);
+        World.Update (Time.deltaTime);
     }
 
     public void PlaceInstalledObject (Vector3Int tile_position, string buildModeObjectType) {
         InstalledObject object_to_place = World.InstalledObjectPrototypes[buildModeObjectType];
         object_to_place = InstalledObject.PlaceInstance (object_to_place, tilemapFoundation.GetTile (tile_position), tile_position);
-        TileBase tile = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (buildModeObjectType,tile_position);
-        if (tile == null) { Debug.LogError ("Something went wrong"); } else { tilemapFoundation.SetTile (tile_position, tile); }
+        TileBase tile = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (buildModeObjectType, tile_position);
+        if (tile == null) { Debug.LogError ("Something went wrong"); } else {
+            tilemapFoundation.SetTile (tile_position, tile);
+            World.InvalidateTileGraph ();
+        }
 
     }
 

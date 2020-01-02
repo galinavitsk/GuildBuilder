@@ -14,11 +14,8 @@ public class MouseController : MonoBehaviour {
 	Vector3 dragStartPosition;
 	public GameObject circleCursorPrefab;
 	public GameObject mainMenu;
-	String buildModeTile = "Generic";
-	string buildModeObjectType;
+	String buildModeTile;
 	List<GameObject> dragPreviewGameObjects;
-	String buildModeIsObject = "ground";
-	String floorType = "Wood";
 	int start_x;
 	int end_x;
 	int start_y;

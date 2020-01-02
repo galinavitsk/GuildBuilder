@@ -10,13 +10,14 @@ using UnityEngine.Tilemaps;
 
 public class InstalledObjectSpriteController : MonoBehaviour {
     public Dictionary<string, Sprite> installedObjectSprites { get; protected set; }
+    public Dictionary<string, Sprite> movementSprites { get; protected set; }
     void Start () {
         LoadSprites ();
     }
     public TileBase GetTileBase (string objectType, Vector3Int tilePos) {
         TileBase tile = null;
 
-        if (objectType == "Door" || objectType == "Window") { objectType = IsRotatable (objectType,tilePos); }
+        if (objectType == "Door" || objectType == "Window") { objectType = IsRotatable (objectType, tilePos); }
         if (objectType == null) { Debug.LogError ("Passed a null objectType"); } else {
 
             if (installedObjectSprites.ContainsKey (objectType) == false) { //IF sprite doesn't exist then it's likely a RuleTile(see: dirt/grass/walls)
@@ -39,6 +40,11 @@ public class InstalledObjectSpriteController : MonoBehaviour {
         Sprite[] installedObjectSpritesNames = Resources.LoadAll<Sprite> ("Images/InstalledObjects/");
         foreach (var s in installedObjectSpritesNames) {
             installedObjectSprites.Add (s.name.ToString (), s);
+        }
+        movementSprites = new Dictionary<string, Sprite> ();
+        Sprite[] movementSpritesNames = Resources.LoadAll<Sprite> ("Images/MovementTiles/");
+        foreach (var s in movementSpritesNames) {
+            movementSprites.Add (s.name.ToString (), s);
         }
     }
     string IsRotatable (string objectType, Vector3Int tilePos) {

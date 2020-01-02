@@ -28,8 +28,8 @@ public class World {
             return height;
         }
     }
-    //TODO: Create dedicated job queue class later on
     public JobQueue jobQueue;
+    public Path_TileGraph tileGraph;
 
     public World (int width = 20, int height = 20) {
         this.width = width;
@@ -53,7 +53,8 @@ public class World {
         for (int index = 0; index < tileArray.Length; index++) {
             tileArray[index] = UnityEngine.Random.Range (0, 2) == 0 ? tileGrass : tileDirt;
         }
-        tilemapLandscape.SetTilesBlock (area, tileArray); //Actually set the tiles onto the tilemapLandscape */
+        tilemapLandscape.SetTilesBlock (area, tileArray); //Actually set the tiles onto the tilemapLandscape 
+
         /* 
                 int[, ] tileGenMap = new int[width, height];
                 for (int x = 0; x < width; x++) {
@@ -122,7 +123,7 @@ public class World {
 
         InstalledObjectPrototypes.Add ("Floor_Wood", InstalledObject.CreatePrototype ("Floor_Wood", "Floor_Wood", 1, 1, 1, true));
         InstalledObjectPrototypes.Add ("Wall", InstalledObject.CreatePrototype ("Wall", "Wall", 0, 1, 1, true));
-        InstalledObjectPrototypes.Add ("Door", InstalledObject.CreatePrototype ("Door", "Door", 0, 1, 1, false));
+        InstalledObjectPrototypes.Add ("Door", InstalledObject.CreatePrototype ("Door", "Door", 1, 1, 1, false));
     }
 
     public void RegisterInstalledObjectCreated (Action<InstalledObject> callbackfunc) {
@@ -143,6 +144,35 @@ public class World {
 
     public bool IsInstalledObjectPlacementValid (string objType, int x, int y) {
         return InstalledObjectPrototypes[objType].funcPositionValidation (x, y);
+    }
+
+    public void InvalidateTileGraph () {
+        //called whenever a change to the world changes the pathfinding info
+        tileGraph = null;
+    }
+    public Vector3Int[] GetNeighbors (Vector3Int tile, bool diagOkay = false) {
+        List<Vector3Int> ns = new List<Vector3Int> ();
+        Vector3Int n;
+        n = new Vector3Int (tile.x, tile.y + 1, 0);
+        ns.Add (n); //N
+        n = new Vector3Int (tile.x + 1, tile.y, 0);
+        ns.Add (n); //E
+        n = new Vector3Int (tile.x, tile.y - 1, 0);
+        ns.Add (n); //S
+        n = new Vector3Int (tile.x - 1, tile.y, 0);
+        ns.Add (n); //W
+
+        if (diagOkay == true) {
+            n = new Vector3Int (tile.x + 1, tile.y + 1, 0);
+            ns.Add (n); //NE
+            n = new Vector3Int (tile.x + 1, tile.y - 1, 0);
+            ns.Add (n); //SE
+            n = new Vector3Int (tile.x - 1, tile.y - 1, 0);
+            ns.Add (n); //SW
+            n = new Vector3Int (tile.x - 1, tile.y + 1, 0);
+            ns.Add (n); //NW
+        }
+        return ns.ToArray ();
     }
 
 }

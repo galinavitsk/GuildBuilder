@@ -20,8 +20,6 @@ public class JobSpriteController : MonoBehaviour {
     }
     void OnJobEnded (Job j) {
         tilemapJobs.GetComponent<Tilemap> ().SetTile (j.tilePos, null);
-        //TODO:Delete building sprites
-
     }
     // Update is called once per frame
     void Update () {
