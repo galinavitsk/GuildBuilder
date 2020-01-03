@@ -21,6 +21,10 @@ public class MouseController : MonoBehaviour {
 	int start_y;
 	int end_y;
 
+	string buildModeObjectType;
+	String buildModeIsObject;
+	String floorType = "Wood";
+
 	// Start is called before the first frame update
 	void Start () {
 		dragPreviewGameObjects = new List<GameObject> ();
@@ -99,23 +103,39 @@ public class MouseController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonUp (0)) { //Stop to Build
-			GameObject.FindObjectOfType<BuildModeController> ().DoBuild (start_x, start_y, end_x, end_y);
+			FindObjectOfType<BuildModeController> ().DoBuild (start_x, start_y, end_x, end_y, buildModeIsObject, buildModeObjectType, floorType);
 
 		}
 		if (Input.GetMouseButtonUp (1)) { //BULDOZING 
-			GameObject.FindObjectOfType<BuildModeController> ().DoBuldoze (start_x, start_y, end_x, end_y);
+			FindObjectOfType<BuildModeController> ().DoBuldoze (start_x, start_y, end_x, end_y, buildModeIsObject, buildModeObjectType);
 
 		}
 
 	}
+	public void SetMode_BuildGround (string objectType) {
+		buildModeIsObject = "ground";
+		buildModeTile = objectType;
+	}
 
-	public void OpenLandScapeMenu (string objectType) {
-
+	public void SetMode_BuildInstalledObject (string objectType) {
+		buildModeIsObject = "WallOnly";
+		buildModeObjectType = objectType;
+		Debug.Log (buildModeIsObject);
+	}
+	public void SetMode_BuildRoom (string roomType) {
+		String[] room = roomType.Split (',');
+		buildModeIsObject = "Room";
+		buildModeObjectType = room[0];
+		floorType = room[1];
 	}
 	public void RandomizeAllLandscapeTiles () {
 		Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
 		tilemapLandscape.ClearAllTiles ();
 		WorldController.Instance.World.RandomizeTiles ();
+	}
+
+	public void OpenLandScapeMenu (string objectType) {
+
 	}
 
 }
