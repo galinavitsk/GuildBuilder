@@ -27,6 +27,8 @@ public class Character {
     void Update_DoJob (float deltaTime) {
         if (myJob == null) {
             //Get a new job
+            //TODO:Check if the job is reachable
+            
             myJob = WorldController.Instance.World.jobQueue.Dequeue ();
             if (myJob != null) {
                 destTile = myJob.tilePos;

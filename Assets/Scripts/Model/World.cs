@@ -49,6 +49,7 @@ public class World {
         Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
         WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ().ClearAllTiles ();
         WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ().ClearAllTiles ();
+        WorldController.Instance.tilemapWalkable.GetComponent<Tilemap> ().ClearAllTiles ();
         //WorldController.Instance.tilemapFurniture.GetComponent<Tilemap> ().ClearAllTiles ();
         for (int index = 0; index < tileArray.Length; index++) {
             tileArray[index] = UnityEngine.Random.Range (0, 2) == 0 ? tileGrass : tileDirt;
@@ -151,6 +152,7 @@ public class World {
         tileGraph = null;
     }
     public Vector3Int[] GetNeighbors (Vector3Int tile, bool diagOkay = false) {
+        //is diagonal movement okay? is clipping corners okay?
         List<Vector3Int> ns = new List<Vector3Int> ();
         Vector3Int n;
         n = new Vector3Int (tile.x, tile.y + 1, 0);

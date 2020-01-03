@@ -12,7 +12,6 @@ public class Path_AStar {
         Dictionary<Vector3Int, Path_Node<Vector3Int>> nodes = world.tileGraph.nodes;
         if (nodes.ContainsKey (Tilestart) == false) {
             Debug.LogError ("Path_AStar::Starting tile is not in the list of nodes!");
-            //FIXME:??Manually adds the start tile into the list of valid nodes
             return;
         }
         if (nodes.ContainsKey (Tileend) == false) { Debug.LogError ("Path_AStar::Ending tile is not in the list of nodes!"); return; }

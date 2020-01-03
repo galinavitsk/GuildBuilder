@@ -131,7 +131,8 @@ public class MouseController : MonoBehaviour {
 	public void RandomizeAllLandscapeTiles () {
 		Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
 		tilemapLandscape.ClearAllTiles ();
-		WorldController.Instance.World.RandomizeTiles ();
+        WorldController.Instance.World.RandomizeTiles ();
+
 	}
 
 	public void OpenLandScapeMenu (string objectType) {

@@ -133,7 +133,7 @@ public class BuildModeController : MonoBehaviour {
 		}
 	}
 
-	public void DoBuldoze (int start_x, int start_y, int end_x, int end_y,string buildModeIsObject, string buildModeObjectType) {
+	public void DoBuldoze (int start_x, int start_y, int end_x, int end_y, string buildModeIsObject, string buildModeObjectType) {
 		Vector3 pos = Input.mousePosition;
 		pos = pos.Round (1);
 		Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
@@ -147,6 +147,7 @@ public class BuildModeController : MonoBehaviour {
 
 						TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Generic");
 						WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
+
 					}
 				}
 			}
@@ -159,6 +160,7 @@ public class BuildModeController : MonoBehaviour {
 							tilemapFoundation.GetTile (tilePos).name.ToString ().Contains ("Wall") == true ||
 							tilemapFoundation.GetSprite (tilePos).name.ToString ().Contains ("Door") == true)) {
 						tilemapFoundation.SetTile (tilePos, null);
+						WorldController.Instance.tilemapWalkable.SetTile (tilePos, null);
 						tilemapLandscape.SetTile (tilePos, tile);
 						if ((tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_")) == true) {
 

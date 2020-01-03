@@ -14,6 +14,7 @@ public class Path_TileGraph {
             for (int y = 0; y < world.Height; y++) {
                 Vector3Int tilePos = new Vector3Int (x, y, 0);
                 //Creates nodes FOR EVERY tile on the map
+
                 Path_Node<Vector3Int> node = new Path_Node<Vector3Int> ();
                 node.data = tilePos;
                 nodes.Add (tilePos, node);
@@ -28,11 +29,13 @@ public class Path_TileGraph {
             Vector3Int[] neighbors = world.GetNeighbors (t, true);
             for (int i = 0; i < neighbors.Length; i++) {
                 float movementSpeed = 1f;
+                //Get movement Speed based on the tile on tilemap Walkable layer
                 if (WorldController.Instance.tilemapWalkable.GetTile (neighbors[i]) != null) {
                     movementSpeed = float.Parse (WorldController.Instance.tilemapWalkable.GetSprite (neighbors[i]).name.ToString ());
                 }
                 if (WorldController.Instance.tilemapWalkable.GetTile (neighbors[i]) == null ||
                     (WorldController.Instance.tilemapWalkable.GetTile (neighbors[i]) != null && movementSpeed > 0)) {
+                    if (isClippingCorner (nodes[t].data, neighbors[i])) { continue; }
                     Path_Edge<Vector3Int> e = new Path_Edge<Vector3Int> ();
                     e.cost = movementSpeed;
                     if (nodes.ContainsKey (neighbors[i]) == true) {
@@ -45,5 +48,30 @@ public class Path_TileGraph {
             }
             node.edges = edges.ToArray ();
         }
+    }
+    bool isClippingCorner (Vector3Int curr, Vector3Int neigh) {
+        //If the movement from curr to neigh is diagonal(eg, NE)
+        //Then check to mke sure we aren't clipping, that (N and E are both walkable.)
+        if (Mathf.Abs (curr.x - neigh.x) + Mathf.Abs (curr.y - neigh.y) == 2) {
+            //Diagonal
+            int dX = curr.x - neigh.x;
+            int dY = curr.y - neigh.y;
+            bool north = true;
+            bool east = true;
+            bool south = true;
+            bool west = true;
+            if (WorldController.Instance.tilemapWalkable.GetTile (new Vector3Int (curr.x - dX, curr.y, curr.z)) != null &&
+                float.Parse (WorldController.Instance.tilemapWalkable.GetSprite (new Vector3Int (curr.x - dX, curr.y, curr.z)).name.ToString ()) == 0) {
+                //Tile to the west or east is not walkable
+                return true;
+            }
+            if (WorldController.Instance.tilemapWalkable.GetTile (new Vector3Int (curr.x, curr.y - dY, curr.z)) != null &&
+                float.Parse (WorldController.Instance.tilemapWalkable.GetSprite (new Vector3Int (curr.x, curr.y - dY, curr.z)).name.ToString ()) == 0) {
+                //Tile to the north of south is not walkable
+                return true;
+            }
+        }
+
+        return false;
     }
 }
