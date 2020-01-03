@@ -56,10 +56,6 @@ public class Path_TileGraph {
             //Diagonal
             int dX = curr.x - neigh.x;
             int dY = curr.y - neigh.y;
-            bool north = true;
-            bool east = true;
-            bool south = true;
-            bool west = true;
             if (WorldController.Instance.tilemapWalkable.GetTile (new Vector3Int (curr.x - dX, curr.y, curr.z)) != null &&
                 float.Parse (WorldController.Instance.tilemapWalkable.GetSprite (new Vector3Int (curr.x - dX, curr.y, curr.z)).name.ToString ()) == 0) {
                 //Tile to the west or east is not walkable

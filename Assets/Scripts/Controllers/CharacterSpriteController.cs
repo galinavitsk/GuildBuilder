@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterSpriteController : MonoBehaviour {
     Dictionary<Character, GameObject> characterGameObjectMap;
     Dictionary<string, Sprite> characterSprites;
-    
+
     World world {
         get { return WorldController.Instance.World; }
     }
@@ -18,17 +18,19 @@ public class CharacterSpriteController : MonoBehaviour {
         world.RegisterCharacterCreated (OnCharacterCreated);
 
         //DEBUG
-        Character c = world.CreateCharacter (new Vector3Int (world.Width / 2, world.Height / 2, 0));
-        //c.SetDestination (new Vector3Int (world.Width / 2 + 5, world.Height / 2, 0));
+        //tile, speed, character name, build speed
+        Character c = world.CreateCharacter (new Vector3Int (world.Width / 2, world.Height / 2, 0), 5, "Astrid", 5f);
+        //Character a = world.CreateCharacter (new Vector3Int (world.Width / 2-2, world.Height / 2-2, 0), 5, "Bren", 2f);
+        
     }
     public void OnCharacterCreated (Character character) {
         GameObject char_go = new GameObject ();
         characterGameObjectMap.Add (character, char_go);
-        char_go.name = "Character";
+        char_go.name = character.name;
         char_go.transform.position = character.currTile;
         char_go.transform.SetParent (this.transform, true);
         char_go.AddComponent<SpriteRenderer> ().sprite = characterSprites["AH_SpriteSheet_People1_1"];
-        char_go.GetComponent<SpriteRenderer>().sortingLayerName = "Characters";
+        char_go.GetComponent<SpriteRenderer> ().sortingLayerName = "Characters";
         character.RegisterCharacterMovedCallback (OnCharacterMoved);
     }
 
@@ -50,7 +52,7 @@ public class CharacterSpriteController : MonoBehaviour {
         GameObject char_go = characterGameObjectMap[c];
         char_go.transform.position = new Vector3 (c.X, c.Y, 0);
     }
-    
+
     // Update is called once per frame
 
 }

@@ -25,8 +25,8 @@ public class Job {
     public void RegisterJobCancelledCallback (Action<Job> cb) {
         this.cbJobCancelled += cb;
     }
-    public void DoWork (float workTIme) {
-        jobTime -= workTIme;
+    public void DoWork (float workTime,float buildtime) {
+        jobTime -= (workTime*buildtime);
         if (jobTime <= 0) {
             if (cbJobComplete != null) {
                 cbJobComplete (this);

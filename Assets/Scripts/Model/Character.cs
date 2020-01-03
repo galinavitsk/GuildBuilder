@@ -16,19 +16,21 @@ public class Character {
     Path_AStar path_AStar;
     float movementPercentage; //goes from 0 to 1 as they move along the path
     float speed = 2f; //Tiles per second;
+    public string name;
+    float buildtime;
 
     Job myJob;
     Action<Character> cbCharacterMoved;
     public void Update (float deltaTime) {
-        Update_DoJob (deltaTime);
+        Update_DoJob (deltaTime,buildtime);
         Update_DoMovement (deltaTime);
     }
 
-    void Update_DoJob (float deltaTime) {
+    void Update_DoJob (float deltaTime,float buildtime) {
         if (myJob == null) {
             //Get a new job
             //TODO:Check if the job is reachable
-            
+
             myJob = WorldController.Instance.World.jobQueue.Dequeue ();
             if (myJob != null) {
                 destTile = myJob.tilePos;
@@ -39,7 +41,7 @@ public class Character {
         //Movement code
         if (currTile == destTile) {
             if (myJob != null) {
-                myJob.DoWork (deltaTime);
+                myJob.DoWork (deltaTime,buildtime);
             }
         }
     }
@@ -87,8 +89,11 @@ public class Character {
             cbCharacterMoved (this);
         }
     }
-    public Character (Vector3Int tile) {
+    public Character(Vector3Int tile, float speed, string name, float buildtime) {
         currTile = destTile = nextTile = tile;
+        this.speed = speed;
+        this.name = name;
+        this.buildtime = buildtime;
     }
     public void SetDestination (Vector3Int tile) {
         destTile = tile;

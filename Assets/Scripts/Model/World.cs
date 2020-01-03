@@ -113,8 +113,8 @@ public class World {
         }
     }
 
-    public Character CreateCharacter (Vector3Int tile) {
-        Character c = new Character (tile);
+    public Character CreateCharacter(Vector3Int tile, float speed, string name,float buildtime) {
+        Character c = new Character (tile,speed,name,buildtime);
         characters.Add (c);
         if (cbCharacterCreated != null) { cbCharacterCreated (c); }
         return c;
