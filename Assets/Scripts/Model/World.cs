@@ -131,7 +131,7 @@ public class World {
         //ObjectType, Sprite, movementCost, width, height, linkstoneighbor
         InstalledObjectPrototypes.Add ("Floor_Wood", new InstalledObject ("Floor_Wood", "Floor_Wood", 1, 1, 1, true));
         InstalledObjectPrototypes.Add ("Wall", new InstalledObject ("Wall", "Wall", 0, 1, 1, true));
-        InstalledObjectPrototypes.Add ("Door",new  InstalledObject ("Door", "Door", 1, 1, 1, false));
+        InstalledObjectPrototypes.Add ("Door",new  InstalledObject ("Door", "Door", 10, 1, 1, false));
         InstalledObjectPrototypes["Door"].installedObjectParamenters["openess"] = 0;
         InstalledObjectPrototypes["Door"].updateActions += InstalledObjectActions.Door_UpdateAction;
     }

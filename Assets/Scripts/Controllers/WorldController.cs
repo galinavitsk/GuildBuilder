@@ -55,7 +55,6 @@ public class WorldController : MonoBehaviour {
             tilemapFoundation.GetTile(tile_position).name = buildModeObjectType;
             World.InvalidateTileGraph ();
             if(object_to_place!=null){
-               // World.objectsGameMap.Remove(tile_position);
                 World.objectsGameMap.Add (tile_position, object_to_place);}
         }
 

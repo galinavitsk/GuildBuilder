@@ -76,7 +76,17 @@ public class Character {
         }
 
         float totalDisToTravel = Vector3Int.Distance (currTile, nextTile); //total distance from A to B
-        float distanceThisFrame = speed * deltaTime; //how much distance can character tavel this update
+        float movementCost = 1;
+        if (WorldController.Instance.World.objectsGameMap.ContainsKey(nextTile) == true) {
+            movementCost = WorldController.Instance.World.objectsGameMap[nextTile].movementCost;
+        }
+        if(movementCost==0){
+            Debug.LogError("Character " + name + " was trying to enter an unwalkable tile");
+            nextTile = currTile;
+            path_AStar = null;
+            return;
+        }
+        float distanceThisFrame = speed / movementCost * deltaTime; //how much distance can character tavel this update
         float percantageThisFrame = distanceThisFrame / totalDisToTravel; //how much is that in percentage
         movementPercentage += percantageThisFrame; //increase percentage moved
         if (movementPercentage >= 1) {
