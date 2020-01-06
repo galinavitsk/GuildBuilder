@@ -48,17 +48,18 @@ public class SaveManager : MonoBehaviour {
                 WorldController.Instance.tilemapLandscape.SetTile (tilePos, Resources.Load<RuleTile> ("Images/Landscape/" + landscapeTiles[tilePos]));
             }
         }
-        Debug.Log ("Loading Foundation Tilemap");
+        //Debug.Log ("Loading Foundation Tilemap");
         Dictionary<SerializableVector3Int, string> foundationTiles = data.FoundationTilemap.tilemapToSave;
+        Dictionary<Vector3Int, string> afterwallplacements = new Dictionary<Vector3Int, string> ();
         foreach (SerializableVector3Int tilePos in foundationTiles.Keys) {
-            if (foundationTiles[tilePos].Contains ("Wall") == true) {
+            if (foundationTiles[tilePos] == "Wall") {
                 WorldController.Instance.PlaceInstalledObject (tilePos, foundationTiles[tilePos]);
             } else {
-
-                CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
-                tile.sprite = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().installedObjectSprites[foundationTiles[tilePos]];
-                WorldController.Instance.tilemapFoundation.SetTile (tilePos, tile);
+                afterwallplacements.Add (tilePos, foundationTiles[tilePos]);
             }
+        }
+        foreach (Vector3Int tilePos in afterwallplacements.Keys) {
+            WorldController.Instance.PlaceInstalledObject (tilePos, afterwallplacements[tilePos]);
         }
     }
 

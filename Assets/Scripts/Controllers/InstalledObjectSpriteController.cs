@@ -36,7 +36,7 @@ public class InstalledObjectSpriteController : MonoBehaviour {
     }
 
     void LoadSprites () {
-        Debug.Log("LoadSprites");
+        //Debug.Log("LoadSprites");
         installedObjectSprites = new Dictionary<string, Sprite> ();
         Sprite[] installedObjectSpritesNames = Resources.LoadAll<Sprite> ("Images/InstalledObjects/");
         foreach (var s in installedObjectSpritesNames) {
@@ -61,7 +61,7 @@ public class InstalledObjectSpriteController : MonoBehaviour {
                 tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true) {
                 return objectType + "_NS";
             } else {
-                Debug.LogError ("Can't place Door here");
+                Debug.LogError ("Can't place Door here Sprite Pass");
                 return null;
             }
         }

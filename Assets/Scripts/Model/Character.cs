@@ -15,18 +15,18 @@ public class Character {
     Vector3Int destTile; //if the character is not moving then destTile=currTile
     Path_AStar path_AStar;
     float movementPercentage; //goes from 0 to 1 as they move along the path
-   public  float speed = 2f; //Tiles per second;
+    public float speed = 2f; //Tiles per second;
     public string name;
-   public float buildtime;
+    public float buildtime;
 
     Job myJob;
     Action<Character> cbCharacterMoved;
     public void Update (float deltaTime) {
-        Update_DoJob (deltaTime,buildtime);
+        Update_DoJob (deltaTime, buildtime);
         Update_DoMovement (deltaTime);
     }
 
-    void Update_DoJob (float deltaTime,float buildtime) {
+    void Update_DoJob (float deltaTime, float buildtime) {
         if (myJob == null) {
             //Get a new job
             //TODO:Check if the job is reachable
@@ -41,7 +41,7 @@ public class Character {
         //Movement code
         if (currTile == destTile) {
             if (myJob != null) {
-                myJob.DoWork (deltaTime,buildtime);
+                myJob.DoWork (deltaTime, buildtime);
             }
         }
     }
@@ -89,7 +89,7 @@ public class Character {
             cbCharacterMoved (this);
         }
     }
-    public Character(Vector3Int tile, float speed, string name, float buildtime) {
+    public Character (Vector3Int tile, float speed, string name, float buildtime) {
         currTile = destTile = nextTile = tile;
         this.speed = speed;
         this.name = name;

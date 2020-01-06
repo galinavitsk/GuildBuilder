@@ -29,7 +29,7 @@ public class WorldController : MonoBehaviour {
             loadWorld = false;
         } else {
             CreateEmptyWorld ();
-            Debug.Log ("Creating a character");
+            //Debug.Log ("Creating a character");
             Character c = World.CreateCharacter (new Vector3Int (World.Width / 2, World.Height / 2, 0), 5, "Caleb", 5f);
         }
 
@@ -46,14 +46,17 @@ public class WorldController : MonoBehaviour {
         Camera.main.transform.position = new Vector3 (World.Width / 2, World.Height / 2, Camera.main.transform.position.z);
     }
     public void PlaceInstalledObject (Vector3Int tile_position, string buildModeObjectType) {
+        Debug.Log(buildModeObjectType);
         InstalledObject object_to_place = World.InstalledObjectPrototypes[buildModeObjectType];
         object_to_place = InstalledObject.PlaceInstance (object_to_place, tile_position);
         TileBase tile = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (buildModeObjectType, tile_position);
         if (tile == null) { Debug.LogError ("Something went wrong"); } else {
             tilemapFoundation.SetTile (tile_position, tile);
+            tilemapFoundation.GetTile(tile_position).name = buildModeObjectType;
             World.InvalidateTileGraph ();
             if(object_to_place!=null){
-            World.objectsGameMap.Add (tile_position, object_to_place);}
+               // World.objectsGameMap.Remove(tile_position);
+                World.objectsGameMap.Add (tile_position, object_to_place);}
         }
 
     }

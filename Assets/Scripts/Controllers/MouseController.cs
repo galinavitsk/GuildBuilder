@@ -120,19 +120,12 @@ public class MouseController : MonoBehaviour {
 	public void SetMode_BuildInstalledObject (string objectType) {
 		buildModeIsObject = "WallOnly";
 		buildModeObjectType = objectType;
-		Debug.Log (buildModeIsObject);
 	}
 	public void SetMode_BuildRoom (string roomType) {
 		String[] room = roomType.Split (',');
 		buildModeIsObject = "Room";
 		buildModeObjectType = room[0];
 		floorType = room[1];
-	}
-	public void RandomizeAllLandscapeTiles () {
-		Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
-		tilemapLandscape.ClearAllTiles ();
-        WorldController.Instance.World.RandomizeTiles ();
-
 	}
 
 	public void OpenLandScapeMenu (string objectType) {

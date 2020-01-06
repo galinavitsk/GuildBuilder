@@ -20,11 +20,17 @@ public class InstalledObject {
     Action<InstalledObject> cbOnChanged;
     public Func<int, int, bool> funcPositionValidation;
 
-    
-    public void Update(float deltaTime){
-        
+    public Dictionary<string, object> installedObjectParamenters;
+    public Action<InstalledObject, float> updateActions;
+
+    public void Update (float deltaTime) {
+        // Debug.Log("InstalledObject::Update");
+        if (updateActions != null) {
+            updateActions (this, deltaTime);
+        }
     }
-    protected InstalledObject () { }
+    public InstalledObject () { }
+
     protected InstalledObject (InstalledObject proto) {
         this.sprite = proto.sprite;
         this.objectType = proto.objectType;
@@ -32,8 +38,16 @@ public class InstalledObject {
         this.width = proto.width;
         this.height = proto.height;
         this.funcPositionValidation = proto.funcPositionValidation;
+        this.installedObjectParamenters = new Dictionary<string, object> (proto.installedObjectParamenters);
+        if (proto.updateActions != null) {
+
+            this.updateActions = (Action<InstalledObject, float>) proto.updateActions.Clone ();
+        }
     }
 
+    virtual public InstalledObject Clone () {
+        return new InstalledObject (this);
+    }
     public InstalledObject (string objectType, string SpriteName, float movementCost = 1f, int width = 1, int height = 1, bool linksToNeightbor = false) {
         this.objectType = objectType;
         this.movementCost = movementCost;
@@ -41,7 +55,8 @@ public class InstalledObject {
         this.height = height;
         this.sprite = SpriteName;
         this.funcPositionValidation += this.DoorValidPosition;
-        this.funcPositionValidation += this.IsValidPosition;
+        //this.funcPositionValidation += this.IsValidPosition;
+        this.installedObjectParamenters = new Dictionary<string, object> ();
         return;
     }
 
@@ -51,7 +66,7 @@ public class InstalledObject {
             Debug.LogError ("Invalid Function Position");
             return null;
         }
-        InstalledObject obj = new InstalledObject (proto);
+        InstalledObject obj = proto.Clone ();
         obj.tile = tile_position;
         return obj;
 
@@ -65,40 +80,34 @@ public class InstalledObject {
     }
 
     bool IsValidPosition (int x, int y) {
-        if (x >= WorldController.Instance.World.Width - 1 || y >= WorldController.Instance.World.Height - 1 || x < 1 || y < 1) { return false; }
+        if (WorldController.Instance.World.objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true ||
+            x >= WorldController.Instance.World.Width - 1 || y >= WorldController.Instance.World.Height - 1 || x < 1 || y < 1) { return false; }
 
         return true;
     }
     bool DoorValidPosition (int x, int y) {
         if (objectType == "Door" || objectType == "Window") {
-            if (IsValidPosition (x, y) == true) { //If general position is valid
                 Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
+                Dictionary<Vector3Int, InstalledObject> objectsGameMap = WorldController.Instance.World.objectsGameMap;
                 // Debug.Log ("Placing Door at position:" + x + "_" + y);
                 //            Debug.Log (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall"));
-                if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
-                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
-                    tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
-                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true && (
-                        tilemapFoundation.GetTile (new Vector3Int (x, y, 0)) != null && (
-                            tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall") == true ||
-                            tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall")) == false
-                    )) {
-                    return true;
-                } else if (
+                if ((objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true && objectsGameMap[new Vector3Int (x, y, 0)].objectType.Contains ("Wall")) ||
+                    objectsGameMap.ContainsKey (new Vector3Int (x, y, 0))==false){
+                    if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
+                        tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
+                        tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
+                        tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true ) {
+                        return true;
+                    } else if (
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true &&
-                    tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true && (
-                        tilemapFoundation.GetTile (new Vector3Int (x, y, 0)) != null && (
-                            tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall") == true ||
-                            tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall") == false
-                        ))) {
+                    tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true) {
                     return true;
                 } else {
-                    Debug.LogError ("Can't place Door here");
+                    Debug.LogError ("Can't place Door here Valid Object Pass");
                     return false;
-                }
-            }
+                }}
         }
         return IsValidPosition (x, y);
     }

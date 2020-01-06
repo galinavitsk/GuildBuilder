@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Model\Character.cs" />
      <Compile Include="Assets\Scripts\Model\CustomTileBase.cs" />
      <Compile Include="Assets\Scripts\Model\InstalledObject.cs" />
+     <Compile Include="Assets\Scripts\Model\InstalledObjectActions.cs" />
      <Compile Include="Assets\Scripts\Model\Job.cs" />
      <Compile Include="Assets\Scripts\Model\JobQueue.cs" />
      <Compile Include="Assets\Scripts\Model\LooseObject.cs" />

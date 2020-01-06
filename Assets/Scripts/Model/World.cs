@@ -113,6 +113,10 @@ public class World {
         foreach (Character c in characters) {
             c.Update (deltaTime);
         }
+        foreach (Vector3Int tilePos in objectsGameMap.Keys)
+        {
+            objectsGameMap[tilePos].Update(deltaTime);
+        }
     }
 
     public Character CreateCharacter (Vector3Int tile, float speed, string name, float buildtime) {
@@ -125,9 +129,11 @@ public class World {
     void CreateInstalledObjectPrototypes () {
         InstalledObjectPrototypes = new Dictionary<string, InstalledObject> ();
         //ObjectType, Sprite, movementCost, width, height, linkstoneighbor
-        InstalledObjectPrototypes.Add ("Floor_Wood", new InstalledObject ("Floor_Wood", "Floor_Wood", 0.5f, 1, 1, true));
+        InstalledObjectPrototypes.Add ("Floor_Wood", new InstalledObject ("Floor_Wood", "Floor_Wood", 1, 1, 1, true));
         InstalledObjectPrototypes.Add ("Wall", new InstalledObject ("Wall", "Wall", 0, 1, 1, true));
         InstalledObjectPrototypes.Add ("Door",new  InstalledObject ("Door", "Door", 1, 1, 1, false));
+        InstalledObjectPrototypes["Door"].installedObjectParamenters["openess"] = 0;
+        InstalledObjectPrototypes["Door"].updateActions += InstalledObjectActions.Door_UpdateAction;
     }
 
     public void RegisterInstalledObjectCreated (Action<InstalledObject> callbackfunc) {
