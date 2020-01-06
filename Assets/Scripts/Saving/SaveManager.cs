@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class SaveManager : MonoBehaviour {
     // Start is called before the first frame update
@@ -41,18 +42,17 @@ public class SaveManager : MonoBehaviour {
         Dictionary<SerializableVector3Int, string> landscapeTiles = data.LandscapeTilemap.tilemapToSave;
         foreach (SerializableVector3Int tilePos in landscapeTiles.Keys) {
             if (landscapeTiles[tilePos].Contains ("Floor") == true) {
-                CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
-                tile.sprite = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().installedObjectSprites[landscapeTiles[tilePos]];
+                TileBase tile = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (landscapeTiles[tilePos], tilePos);
                 WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
             } else {
                 WorldController.Instance.tilemapLandscape.SetTile (tilePos, Resources.Load<RuleTile> ("Images/Landscape/" + landscapeTiles[tilePos]));
             }
         }
-
+        Debug.Log ("Loading Foundation Tilemap");
         Dictionary<SerializableVector3Int, string> foundationTiles = data.FoundationTilemap.tilemapToSave;
         foreach (SerializableVector3Int tilePos in foundationTiles.Keys) {
             if (foundationTiles[tilePos].Contains ("Wall") == true) {
-                WorldController.Instance.tilemapFoundation.SetTile (tilePos, Resources.Load<RuleTile> ("Images/InstalledObjects/" + foundationTiles[tilePos]));
+                WorldController.Instance.PlaceInstalledObject (tilePos, foundationTiles[tilePos]);
             } else {
 
                 CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
@@ -64,7 +64,7 @@ public class SaveManager : MonoBehaviour {
 
     public void LoadCharacters (SaveData data) {
         foreach (SerializableVector3Int tilePos in data.CharactersSaveData.characters.Keys) {
-            WorldController.Instance.World.CreateCharacter(tilePos, data.CharactersSaveData.characters[tilePos].speed, data.CharactersSaveData.characters[tilePos].name, data.CharactersSaveData.characters[tilePos].buildspeed);
+            WorldController.Instance.World.CreateCharacter (tilePos, data.CharactersSaveData.characters[tilePos].speed, data.CharactersSaveData.characters[tilePos].name, data.CharactersSaveData.characters[tilePos].buildspeed);
         }
     }
 }

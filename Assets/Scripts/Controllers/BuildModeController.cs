@@ -165,11 +165,11 @@ public class BuildModeController : MonoBehaviour {
 						tilemapFoundation.SetTile (tilePos, null);
 						tilemapLandscape.SetTile (tilePos, tile);
 						if ((tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_")) == true) {
-
 							tilemapLandscape.SetTile (tilePos, tile);
 						}
+                        
 
-					} else {
+                    } else {
 						Debug.LogError ("Trying to place an object where one already exists");
 					}
 				}

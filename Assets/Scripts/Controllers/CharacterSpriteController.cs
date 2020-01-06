@@ -15,7 +15,7 @@ public class CharacterSpriteController : MonoBehaviour {
     void Start () {
         LoadSprites ();
         characterGameObjectMap = new Dictionary<Character, GameObject> ();
-        Debug.Log (WorldController.Instance.World);
+//        Debug.Log (WorldController.Instance.World);
         WorldController.Instance.World.RegisterCharacterCreated (OnCharacterCreated);
 
         //DEBUG

@@ -35,14 +35,13 @@ public class World {
     public World (int width = 20, int height = 20) {
         this.width = width;
         this.height = height;
-        RandomizeTiles();
+        RandomizeTiles ();
         CreateInstalledObjectPrototypes ();
         jobQueue = new JobQueue ();
         characters = new List<Character> ();
-        objectsGameMap = new Dictionary<Vector3Int, InstalledObject>();
+        objectsGameMap = new Dictionary<Vector3Int, InstalledObject> ();
 
     }
-    
 
     public void RandomizeTiles () {
         BoundsInt area = new BoundsInt (new Vector3Int (0, 0, 0), new Vector3Int (width, height, 1));
@@ -116,19 +115,19 @@ public class World {
         }
     }
 
-    public Character CreateCharacter(Vector3Int tile, float speed, string name,float buildtime) {
-        Character c = new Character (tile,speed,name,buildtime);
+    public Character CreateCharacter (Vector3Int tile, float speed, string name, float buildtime) {
+        Character c = new Character (tile, speed, name, buildtime);
         characters.Add (c);
-        if (cbCharacterCreated != null) { cbCharacterCreated (c); }else { //Debug.Log("cbCharacterCreates is null"); 
+        if (cbCharacterCreated != null) { cbCharacterCreated (c); } else { //Debug.Log("cbCharacterCreates is null"); 
         }
         return c;
     }
     void CreateInstalledObjectPrototypes () {
         InstalledObjectPrototypes = new Dictionary<string, InstalledObject> ();
-
-        InstalledObjectPrototypes.Add ("Floor_Wood", InstalledObject.CreatePrototype ("Floor_Wood", "Floor_Wood", 1, 1, 1, true));
-        InstalledObjectPrototypes.Add ("Wall", InstalledObject.CreatePrototype ("Wall", "Wall", 0, 1, 1, true));
-        InstalledObjectPrototypes.Add ("Door", InstalledObject.CreatePrototype ("Door", "Door", 1, 1, 1, false));
+        //ObjectType, Sprite, movementCost, width, height, linkstoneighbor
+        InstalledObjectPrototypes.Add ("Floor_Wood", new InstalledObject ("Floor_Wood", "Floor_Wood", 0.5f, 1, 1, true));
+        InstalledObjectPrototypes.Add ("Wall", new InstalledObject ("Wall", "Wall", 0, 1, 1, true));
+        InstalledObjectPrototypes.Add ("Door",new  InstalledObject ("Door", "Door", 1, 1, 1, false));
     }
 
     public void RegisterInstalledObjectCreated (Action<InstalledObject> callbackfunc) {
@@ -140,7 +139,7 @@ public class World {
     }
 
     public void RegisterCharacterCreated (Action<Character> callbackfunc) {
-       // Debug.Log("RegisterCharacterCreated");
+        // Debug.Log("RegisterCharacterCreated");
         cbCharacterCreated += callbackfunc;
     }
 
