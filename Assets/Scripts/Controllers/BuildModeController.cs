@@ -163,7 +163,6 @@ public class BuildModeController : MonoBehaviour {
 							tilemapFoundation.GetTile (tilePos).name.ToString ().Contains ("Wall") == true ||
 							tilemapFoundation.GetSprite (tilePos).name.ToString ().Contains ("Door") == true)) {
 						tilemapFoundation.SetTile (tilePos, null);
-						WorldController.Instance.tilemapWalkable.SetTile (tilePos, null);
 						tilemapLandscape.SetTile (tilePos, tile);
 						if ((tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_")) == true) {
 
@@ -186,7 +185,8 @@ public class BuildModeController : MonoBehaviour {
 		for (int x = l - 5; x < l + 15; x++) {
 			for (int y = b - 5; y < b + 15; y++) {
 				if (x == l || x == (l + 9) || y == b || y == (b + 9)) {
-					if (x != (l + 9) && y != (b + 4)) { Build_Wall (new Vector3Int (x, y, 0), "Wall"); }
+					if (x != (l + 9) && y != (b + 4)) { 
+						Build_Wall (new Vector3Int (x, y, 0), "Wall"); }
 				}
 			}
 		}
@@ -214,14 +214,9 @@ public class BuildModeController : MonoBehaviour {
 		TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Dirt");
 		Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
 		Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
-		Tilemap tilemapWalkable = WorldController.Instance.tilemapWalkable.GetComponent<Tilemap> ();
-
-		CustomTileBase wtile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
-		wtile.sprite = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().movementSprites["0"];
 		if ((tilemapFoundation.GetSprite (tilePos) == null)) {
 			WorldController.Instance.PlaceInstalledObject (tilePos, objectType);
 			tilemapLandscape.SetTile (tilePos, tile);
-			tilemapWalkable.SetTile (tilePos, wtile);
 		} else {
 			Debug.LogError ("Trying to place an object where one already exists");
 		}

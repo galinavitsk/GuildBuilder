@@ -12,7 +12,7 @@ public class InstalledObject {
 
     //multiplier for movement, value of 2 means twice as slow(half speed)
     //SPECIAL: IF movementCost=0 then the tile is impassable(e.g. a wall)
-    float movementCost;
+    public float movementCost;
     int width;
     int height;
     public string sprite { get; protected set; }

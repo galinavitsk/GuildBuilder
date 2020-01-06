@@ -17,6 +17,7 @@ public class World {
     int deathLimit = 4; //1-8
     //int numR = 5;
     List<Character> characters;
+    public Dictionary<Vector3Int, InstalledObject> objectsGameMap;
 
     public int Width {
         get {
@@ -34,11 +35,14 @@ public class World {
     public World (int width = 20, int height = 20) {
         this.width = width;
         this.height = height;
+        RandomizeTiles();
         CreateInstalledObjectPrototypes ();
         jobQueue = new JobQueue ();
         characters = new List<Character> ();
+        objectsGameMap = new Dictionary<Vector3Int, InstalledObject>();
 
     }
+    
 
     public void RandomizeTiles () {
         BoundsInt area = new BoundsInt (new Vector3Int (0, 0, 0), new Vector3Int (width, height, 1));
@@ -49,7 +53,6 @@ public class World {
         Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
         WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ().ClearAllTiles ();
         WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ().ClearAllTiles ();
-        WorldController.Instance.tilemapWalkable.GetComponent<Tilemap> ().ClearAllTiles ();
         //WorldController.Instance.tilemapFurniture.GetComponent<Tilemap> ().ClearAllTiles ();
         for (int index = 0; index < tileArray.Length; index++) {
             tileArray[index] = UnityEngine.Random.Range (0, 2) == 0 ? tileGrass : tileDirt;

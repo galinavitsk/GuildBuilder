@@ -62,7 +62,11 @@
      <Compile Include="Assets\Scripts\Pathfinding\Path_Edge.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Path_Node.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Path_TileGraph.cs" />
+     <Compile Include="Assets\Scripts\Saving\SaveData.cs" />
+     <Compile Include="Assets\Scripts\Saving\SaveManager.cs" />
      <Compile Include="Assets\Scripts\Utilities\ExtensionsMethods\ExtensionMethods.cs" />
+     <Compile Include="Assets\Scripts\Utilities\ExtensionsMethods\SerializableVector3.cs" />
+     <Compile Include="Assets\Scripts\Utilities\ExtensionsMethods\SerializableVector3Int.cs" />
      <Compile Include="Assets\Scripts\Utilities\Priority_Queue\Priority Queue\FastPriorityQueue.cs" />
      <Compile Include="Assets\Scripts\Utilities\Priority_Queue\Priority Queue\FastPriorityQueueNode.cs" />
      <Compile Include="Assets\Scripts\Utilities\Priority_Queue\Priority Queue\IPriorityQueue.cs" />
