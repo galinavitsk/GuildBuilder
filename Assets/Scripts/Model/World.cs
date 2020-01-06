@@ -16,7 +16,7 @@ public class World {
     int birthLimit = 4; //1-8
     int deathLimit = 4; //1-8
     //int numR = 5;
-    List<Character> characters;
+    public List<Character> characters;
     public Dictionary<Vector3Int, InstalledObject> objectsGameMap;
 
     public int Width {
@@ -119,7 +119,8 @@ public class World {
     public Character CreateCharacter(Vector3Int tile, float speed, string name,float buildtime) {
         Character c = new Character (tile,speed,name,buildtime);
         characters.Add (c);
-        if (cbCharacterCreated != null) { cbCharacterCreated (c); }
+        if (cbCharacterCreated != null) { cbCharacterCreated (c); }else { //Debug.Log("cbCharacterCreates is null"); 
+        }
         return c;
     }
     void CreateInstalledObjectPrototypes () {
@@ -139,6 +140,7 @@ public class World {
     }
 
     public void RegisterCharacterCreated (Action<Character> callbackfunc) {
+       // Debug.Log("RegisterCharacterCreated");
         cbCharacterCreated += callbackfunc;
     }
 

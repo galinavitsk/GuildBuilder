@@ -15,9 +15,9 @@ public class Character {
     Vector3Int destTile; //if the character is not moving then destTile=currTile
     Path_AStar path_AStar;
     float movementPercentage; //goes from 0 to 1 as they move along the path
-    float speed = 2f; //Tiles per second;
+   public  float speed = 2f; //Tiles per second;
     public string name;
-    float buildtime;
+   public float buildtime;
 
     Job myJob;
     Action<Character> cbCharacterMoved;

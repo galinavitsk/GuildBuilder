@@ -15,13 +15,16 @@ public class CharacterSpriteController : MonoBehaviour {
     void Start () {
         LoadSprites ();
         characterGameObjectMap = new Dictionary<Character, GameObject> ();
-        world.RegisterCharacterCreated (OnCharacterCreated);
+        Debug.Log (WorldController.Instance.World);
+        WorldController.Instance.World.RegisterCharacterCreated (OnCharacterCreated);
 
         //DEBUG
         //tile, speed, character name, build speed
-        Character c = world.CreateCharacter (new Vector3Int (world.Width / 2, world.Height / 2, 0), 5, "Astrid", 5f);
+        foreach (Character c in world.characters) {
+            OnCharacterCreated (c);
+        }
         //Character a = world.CreateCharacter (new Vector3Int (world.Width / 2-2, world.Height / 2-2, 0), 5, "Bren", 2f);
-        
+
     }
     public void OnCharacterCreated (Character character) {
         GameObject char_go = new GameObject ();
@@ -29,7 +32,7 @@ public class CharacterSpriteController : MonoBehaviour {
         char_go.name = character.name;
         char_go.transform.position = character.currTile;
         char_go.transform.SetParent (this.transform, true);
-        char_go.AddComponent<SpriteRenderer> ().sprite = characterSprites["AH_SpriteSheet_People1_1"];
+        char_go.AddComponent<SpriteRenderer> ().sprite = characterSprites["Caleb"];
         char_go.GetComponent<SpriteRenderer> ().sortingLayerName = "Characters";
         character.RegisterCharacterMovedCallback (OnCharacterMoved);
     }

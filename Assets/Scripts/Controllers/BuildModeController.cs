@@ -44,7 +44,7 @@ public class BuildModeController : MonoBehaviour {
 							Debug.LogError ("Can't place a " + buildModeObjectType + " here");
 
 						} else {
-                            Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
+							Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
 							WorldController.Instance.World.jobQueue.Enqueue (j);
 
 						}
@@ -70,8 +70,8 @@ public class BuildModeController : MonoBehaviour {
 			for (int x = start_x; x <= end_x; x++) {
 				Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, start_y, 0));
 
-				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false || 
-				WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
+				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false ||
+					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
 					Debug.LogError ("Can't place a " + buildModeObjectType + " here");
 
 				} else {
@@ -81,8 +81,8 @@ public class BuildModeController : MonoBehaviour {
 
 				}
 				Vector3Int tilePos2 = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, end_y, 0));
-				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos2.x, tilePos2.y) == false || 
-				WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos2) == true) {
+				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos2.x, tilePos2.y) == false ||
+					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos2) == true) {
 					Debug.LogError ("Can't place a " + buildModeObjectType + " here");
 
 				} else {
@@ -92,8 +92,8 @@ public class BuildModeController : MonoBehaviour {
 			}
 			for (int y = start_y; y <= end_y; y++) {
 				Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (start_x, y, 0));
-				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false || 
-				WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
+				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false ||
+					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
 					Debug.LogError ("Can't place a " + buildModeObjectType + " here");
 
 				} else {
@@ -103,8 +103,8 @@ public class BuildModeController : MonoBehaviour {
 
 				}
 				Vector3Int tilePos2 = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (end_x, y, 0));
-				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos2.x, tilePos2.y) == false || 
-				WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos2) == true) {
+				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos2.x, tilePos2.y) == false ||
+					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos2) == true) {
 					Debug.LogError ("Can't place a " + buildModeObjectType + " here");
 
 				} else {
@@ -185,8 +185,9 @@ public class BuildModeController : MonoBehaviour {
 		for (int x = l - 5; x < l + 15; x++) {
 			for (int y = b - 5; y < b + 15; y++) {
 				if (x == l || x == (l + 9) || y == b || y == (b + 9)) {
-					if (x != (l + 9) && y != (b + 4)) { 
-						Build_Wall (new Vector3Int (x, y, 0), "Wall"); }
+					if (x != (l + 9) && y != (b + 4)) {
+						if (WorldController.Instance.World.IsInstalledObjectPlacementValid("Wall",x,y)) { Build_Wall (new Vector3Int (x, y, 0), "Wall"); }
+					}
 				}
 			}
 		}

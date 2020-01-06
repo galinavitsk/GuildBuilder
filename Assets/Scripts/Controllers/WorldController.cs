@@ -25,8 +25,13 @@ public class WorldController : MonoBehaviour {
 
         Instance = this;
         if (loadWorld == true) {
+            FindObjectOfType<SaveManager> ().Load ();
             loadWorld = false;
-        } else { CreateEmptyWorld (); }
+        } else {
+            CreateEmptyWorld ();
+            Debug.Log ("Creating a character");
+            Character c = World.CreateCharacter (new Vector3Int (World.Width / 2, World.Height / 2, 0), 5, "Caleb", 5f);
+        }
 
     }
 
@@ -36,7 +41,7 @@ public class WorldController : MonoBehaviour {
         World.Update (Time.deltaTime);
     }
 
-    void CreateEmptyWorld (int width = 20, int height = 20) {
+    public void CreateEmptyWorld (int width = 20, int height = 20) {
         World = new World (width, height);
         Camera.main.transform.position = new Vector3 (World.Width / 2, World.Height / 2, Camera.main.transform.position.z);
     }
@@ -47,19 +52,21 @@ public class WorldController : MonoBehaviour {
         if (tile == null) { Debug.LogError ("Something went wrong"); } else {
             tilemapFoundation.SetTile (tile_position, tile);
             World.InvalidateTileGraph ();
-            World.objectsGameMap.Add(tile_position, object_to_place);
+            if(object_to_place!=null){
+            World.objectsGameMap.Add (tile_position, object_to_place);}
         }
 
     }
     public void NewWorld () {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
         CreateEmptyWorld ();
     }
 
-    public void SaveWorld(){
-    
+    public void SaveWorld () {
+        FindObjectOfType<SaveManager> ().Save ();
     }
-    public void LoadWorld(){
-
+    public void LoadWorld () {
+        loadWorld = true;
+        SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
     }
 }

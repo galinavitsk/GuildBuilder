@@ -27,10 +27,12 @@ public class Path_TileGraph {
             Path_Node<Vector3Int> node = nodes[t];
             List<Path_Edge<Vector3Int>> edges = new List<Path_Edge<Vector3Int>> ();
             Vector3Int[] neighbors = world.GetNeighbors (t, true);
-            for (int i = 0; i < neighbors.Length; i++) {
+            for (int i = 0; i < neighbors.Length; i++)
+            {
                 float movementSpeed = 1f;
                 //Get movement Speed based on the tile on tilemap Walkable layer
-                if (WorldController.Instance.World.objectsGameMap.ContainsKey (neighbors[i]) == true) {
+                if (WorldController.Instance.World.objectsGameMap.ContainsKey(neighbors[i]) == true)
+                {
                     movementSpeed = WorldController.Instance.World.objectsGameMap[neighbors[i]].movementCost;
                 }
                 if (WorldController.Instance.World.objectsGameMap.ContainsKey (neighbors[i]) == false ||

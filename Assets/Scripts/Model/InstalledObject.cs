@@ -73,13 +73,19 @@ public class InstalledObject {
                 if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
-                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true) {
+                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true && (
+                        tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall") == true ||
+                        tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall") == false
+                    )) {
                     return true;
                 } else if (
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true &&
-                    tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true) {
+                    tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true && (
+                        tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall") == true ||
+                        tilemapFoundation.GetTile (new Vector3Int (x, y, 0)).name.ToString ().Contains ("Wall") == false
+                    )) {
                     return true;
                 } else {
                     Debug.LogError ("Can't place Door here");
@@ -87,6 +93,6 @@ public class InstalledObject {
                 }
             }
         }
-        return IsValidPosition(x,y);
+        return IsValidPosition (x, y);
     }
 }
