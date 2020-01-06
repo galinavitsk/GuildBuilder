@@ -28,8 +28,8 @@ public class InstalledObject {
         obj.width = width;
         obj.height = height;
         obj.sprite = SpriteName;
-        obj.funcPositionValidation = obj.IsValidPosition;
         obj.funcPositionValidation += obj.DoorValidPosition;
+        obj.funcPositionValidation += obj.IsValidPosition;
         return obj;
     }
 
@@ -40,7 +40,7 @@ public class InstalledObject {
             return null;
         }
         InstalledObject obj = new InstalledObject ();
-        if (proto.objectType == "Door") {  proto.DoorValidPosition (tile_position.x, tile_position.y); } else { obj.sprite = proto.sprite; }
+        if (proto.objectType == "Door") { proto.DoorValidPosition (tile_position.x, tile_position.y); } else { obj.sprite = proto.sprite; }
         obj.objectType = proto.objectType;
         obj.movementCost = proto.movementCost;
         obj.width = proto.width;
@@ -65,7 +65,7 @@ public class InstalledObject {
         return true;
     }
     bool DoorValidPosition (int x, int y) {
-        if (objectType == "Door" || objectType=="Window") {
+        if (objectType == "Door" || objectType == "Window") {
             if (IsValidPosition (x, y) == true) { //If general position is valid
                 Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
                 // Debug.Log ("Placing Door at position:" + x + "_" + y);
@@ -87,6 +87,6 @@ public class InstalledObject {
                 }
             }
         }
-        return true;
+        return IsValidPosition(x,y);
     }
 }
