@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+public enum ENTERABILITY { Yes, Never, Soon }
 
 public class InstalledObject {
+
     public Vector3Int tile { get; protected set; } //BASE tile, but in practice large objects may occupy multiple tiles
 
     //ObjectType queried by visual system to know what sprite to render for this object
@@ -20,8 +22,9 @@ public class InstalledObject {
     Action<InstalledObject> cbOnChanged;
     public Func<int, int, bool> funcPositionValidation;
 
-    public Dictionary<string, object> installedObjectParamenters;
+    public Dictionary<string, float> installedObjectParamenters;
     public Action<InstalledObject, float> updateActions;
+    public Func<InstalledObject, ENTERABILITY> IsEnterable;
 
     public void Update (float deltaTime) {
         // Debug.Log("InstalledObject::Update");
@@ -38,10 +41,13 @@ public class InstalledObject {
         this.width = proto.width;
         this.height = proto.height;
         this.funcPositionValidation = proto.funcPositionValidation;
-        this.installedObjectParamenters = new Dictionary<string, object> (proto.installedObjectParamenters);
+        this.installedObjectParamenters = new Dictionary<string, float> (proto.installedObjectParamenters);
         if (proto.updateActions != null) {
 
             this.updateActions = (Action<InstalledObject, float>) proto.updateActions.Clone ();
+        }
+        if(proto.IsEnterable!=null){
+this.IsEnterable = ( Func<InstalledObject, ENTERABILITY>) proto.IsEnterable.Clone();
         }
     }
 
@@ -56,7 +62,7 @@ public class InstalledObject {
         this.sprite = SpriteName;
         this.funcPositionValidation += this.DoorValidPosition;
         //this.funcPositionValidation += this.IsValidPosition;
-        this.installedObjectParamenters = new Dictionary<string, object> ();
+        this.installedObjectParamenters = new Dictionary<string, float> ();
         return;
     }
 
@@ -87,18 +93,18 @@ public class InstalledObject {
     }
     bool DoorValidPosition (int x, int y) {
         if (objectType == "Door" || objectType == "Window") {
-                Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
-                Dictionary<Vector3Int, InstalledObject> objectsGameMap = WorldController.Instance.World.objectsGameMap;
-                // Debug.Log ("Placing Door at position:" + x + "_" + y);
-                //            Debug.Log (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall"));
-                if ((objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true && objectsGameMap[new Vector3Int (x, y, 0)].objectType.Contains ("Wall")) ||
-                    objectsGameMap.ContainsKey (new Vector3Int (x, y, 0))==false){
-                    if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
-                        tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
-                        tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
-                        tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true ) {
-                        return true;
-                    } else if (
+            Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
+            Dictionary<Vector3Int, InstalledObject> objectsGameMap = WorldController.Instance.World.objectsGameMap;
+            // Debug.Log ("Placing Door at position:" + x + "_" + y);
+            //            Debug.Log (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall"));
+            if ((objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true && objectsGameMap[new Vector3Int (x, y, 0)].objectType.Contains ("Wall")) ||
+                objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == false) {
+                if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
+                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
+                    tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
+                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true) {
+                    return true;
+                } else if (
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true &&
@@ -107,8 +113,18 @@ public class InstalledObject {
                 } else {
                     Debug.LogError ("Can't place Door here Valid Object Pass");
                     return false;
-                }}
+                }
+            }
         }
         return IsValidPosition (x, y);
+    }
+
+    public ENTERABILITY EnterCheck () {
+        if (movementCost == 0) { return ENTERABILITY.Never; }
+        if (objectType.Contains ("Door") && IsEnterable!=null) {
+            return IsEnterable (this);
+        }
+        return ENTERABILITY.Yes;
+
     }
 }

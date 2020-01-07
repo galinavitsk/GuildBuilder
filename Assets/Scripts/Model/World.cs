@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class World {
-    Tile[, ] tiles;
     public Dictionary<string, InstalledObject> InstalledObjectPrototypes { get; protected set; }
     int width;
     int height;
@@ -113,9 +112,8 @@ public class World {
         foreach (Character c in characters) {
             c.Update (deltaTime);
         }
-        foreach (Vector3Int tilePos in objectsGameMap.Keys)
-        {
-            objectsGameMap[tilePos].Update(deltaTime);
+        foreach (Vector3Int tilePos in objectsGameMap.Keys) {
+            objectsGameMap[tilePos].Update (deltaTime);
         }
     }
 
@@ -131,9 +129,11 @@ public class World {
         //ObjectType, Sprite, movementCost, width, height, linkstoneighbor
         InstalledObjectPrototypes.Add ("Floor_Wood", new InstalledObject ("Floor_Wood", "Floor_Wood", 1, 1, 1, true));
         InstalledObjectPrototypes.Add ("Wall", new InstalledObject ("Wall", "Wall", 0, 1, 1, true));
-        InstalledObjectPrototypes.Add ("Door",new  InstalledObject ("Door", "Door", 10, 1, 1, false));
+        InstalledObjectPrototypes.Add ("Door", new InstalledObject ("Door", "Door", 1, 1, 1, false));
         InstalledObjectPrototypes["Door"].installedObjectParamenters["openess"] = 0;
+        InstalledObjectPrototypes["Door"].installedObjectParamenters["is_opening"] = 0;
         InstalledObjectPrototypes["Door"].updateActions += InstalledObjectActions.Door_UpdateAction;
+        InstalledObjectPrototypes["Door"].IsEnterable += InstalledObjectActions.Door_IsEnterable;
     }
 
     public void RegisterInstalledObjectCreated (Action<InstalledObject> callbackfunc) {

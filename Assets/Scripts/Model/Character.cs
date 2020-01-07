@@ -68,22 +68,29 @@ public class Character {
                     path_AStar = null;
                     return;
                 }
+                nextTile = path_AStar.GetNextTile ();
             }
             nextTile = path_AStar.GetNextTile (); //removes it from the path list
             if (nextTile == currTile) {
-                Debug.Log ("Update_DoMovement-Nexttile is curr tile ?");
+                Debug.Log ("Update_DoMovement::NextTile is curr tile ?");
             }
         }
 
         float totalDisToTravel = Vector3Int.Distance (currTile, nextTile); //total distance from A to B
         float movementCost = 1;
-        if (WorldController.Instance.World.objectsGameMap.ContainsKey(nextTile) == true) {
+        ENTERABILITY enterability = ENTERABILITY.Yes;
+        if (WorldController.Instance.World.objectsGameMap.ContainsKey (nextTile) == true) {
             movementCost = WorldController.Instance.World.objectsGameMap[nextTile].movementCost;
+            enterability = WorldController.Instance.World.objectsGameMap[nextTile].IsEnterable (WorldController.Instance.World.objectsGameMap[nextTile]);
         }
-        if(movementCost==0){
-            Debug.LogError("Character " + name + " was trying to enter an unwalkable tile");
+        if (enterability == ENTERABILITY.Never) {
+            Debug.LogError ("Character " + name + " was trying to enter an unwalkable tile");
             nextTile = currTile;
             path_AStar = null;
+            return;
+        } else if (enterability == ENTERABILITY.Soon) {
+            //Have to wait to enter the tile, this is likely a door
+            //No bailing on the movement/path, but we do return now and don't actually process the movement;
             return;
         }
         float distanceThisFrame = speed / movementCost * deltaTime; //how much distance can character tavel this update

@@ -53,6 +53,9 @@ public class Path_AStar {
                 if (OpenSet.Contains (neighbor.node) == false) {
                     OpenSet.Enqueue (neighbor.node, f_score[neighbor.node]);
                 }
+                else{
+                    OpenSet.UpdatePriority(neighbor.node,f_score[neighbor.node]);
+                }
             }
 
         }
