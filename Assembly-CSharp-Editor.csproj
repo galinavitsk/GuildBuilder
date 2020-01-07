@@ -45,6 +45,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Utilities\Advanced Rule Tiles\Editor\AdvancedRuleTileEditor.cs" />
      <Compile Include="Assets\UI\Editor\AutomaticHorizonalSizeEditor.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/Galina/source/repos/Guild Builder/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>

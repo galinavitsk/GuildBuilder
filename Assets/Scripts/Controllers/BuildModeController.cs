@@ -182,7 +182,7 @@ public class BuildModeController : MonoBehaviour {
 			for (int y = b - 5; y < b + 15; y++) {
 				if (x == l || x == (l + 9) || y == b || y == (b + 9)) {
 					if (x != (l + 9) && y != (b + 4)) {
-						if (WorldController.Instance.World.IsInstalledObjectPlacementValid ("Wall", x, y)) { Build_Wall (new Vector3Int (x, y, 0), "Wall"); }
+						if (WorldController.Instance.World.IsInstalledObjectPlacementValid ("Wall_Wood", x, y)) { Build_Wall (new Vector3Int (x, y, 0), "Wall_Wood"); }
 					}
 				}
 			}
@@ -194,15 +194,14 @@ public class BuildModeController : MonoBehaviour {
 		WorldController.Instance.PlaceInstalledObject (tilePos, objectType);
 		if (WorldController.Instance.tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_") == false) {
 			CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
-			tile.sprite = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().installedObjectSprites["Floor_Wood"];
+			tile.sprite = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().installedObjectSprites["Floor_Wood_01"];
 			WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 		}
 	}
 	void Build_Floor (Vector3Int tilePos, string floor) {
 
-		CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
-		tile.sprite = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().installedObjectSprites[floor];
-		WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
+        TileBase tile = Resources.Load<AdvancedRuleTile>("Images/InstalledObjects/" + floor);
+        WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
 		WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 		WorldController.Instance.tilemapFoundation.SetTile (tilePos, null);
 	}

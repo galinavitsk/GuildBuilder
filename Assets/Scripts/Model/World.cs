@@ -11,10 +11,10 @@ public class World {
     int height;
     Action<InstalledObject> cbInstalledObjectCreated;
     Action<Character> cbCharacterCreated;
-    //int iniChance = 50; //0-100
-    int birthLimit = 4; //1-8
-    int deathLimit = 4; //1-8
-    //int numR = 5;
+    int iniChance = 50; //0-100
+    int birthLimit = 7; //1-8
+    int deathLimit = 2; //1-8
+    int numR = 10;
     public List<Character> characters;
     public Dictionary<Vector3Int, InstalledObject> objectsGameMap;
 
@@ -44,8 +44,8 @@ public class World {
 
     public void RandomizeTiles () {
         BoundsInt area = new BoundsInt (new Vector3Int (0, 0, 0), new Vector3Int (width, height, 1));
-        TileBase tileGrass = Resources.Load<RuleTile> ("Images/Landscape/Grass");
-        TileBase tileDirt = Resources.Load<RuleTile> ("Images/Landscape/Dirt");
+        TileBase tileGrass = Resources.Load<AdvancedRuleTile> ("Images/Landscape/Grass_Light");
+        TileBase tileDirt = Resources.Load<RandomTile> ("Images/Landscape/Grass_Generic");
 
         TileBase[] tileArray = new TileBase[area.size.x * area.size.y * area.size.z]; //create the tiles array
         Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
@@ -57,26 +57,25 @@ public class World {
         }
         tilemapLandscape.SetTilesBlock (area, tileArray); //Actually set the tiles onto the tilemapLandscape 
 
-        /* 
-                int[, ] tileGenMap = new int[width, height];
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
-                        tileGenMap[x, y] = UnityEngine.Random.Range (1, 101) < iniChance ? 1 : 0; //1:Grass 0:Dirt
-                    }
-                }
+        /* int[, ] tileGenMap = new int[width, height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                tileGenMap[x, y] = UnityEngine.Random.Range (1, 101) < iniChance ? 1 : 0; //1:Grass 0:Dirt
+            }
+        }
 
-                for (int i = 0; i < numR; i++) {
-                    tileGenMap = genTilePos (tileGenMap);
+        for (int i = 0; i < numR; i++) {
+            tileGenMap = genTilePos (tileGenMap);
+        }
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (tileGenMap[x, y] == 1) {
+                    tilemapLandscape.SetTile(new Vector3Int(x, y, 1), tileGrass);
+                } else {
+                    tilemapLandscape.SetTile(new Vector3Int(x, y, 1), tileDirt);
                 }
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
-                        if (tileGenMap[x, y] == 1) {
-                            tilemapLandscape.SetTile(new Vector3Int(x, y, 1), tileGrass);
-                        } else {
-                            tilemapLandscape.SetTile(new Vector3Int(x, y, 1), tileDirt);
-                        }
-                    }
-                } */
+            }
+        }  */
     }
     public int[, ] genTilePos (int[, ] oldMap) {
         int[, ] newmap = new int[width, height];
@@ -127,8 +126,8 @@ public class World {
     void CreateInstalledObjectPrototypes () {
         InstalledObjectPrototypes = new Dictionary<string, InstalledObject> ();
         //ObjectType, Sprite, movementCost, width, height, linkstoneighbor
-        InstalledObjectPrototypes.Add ("Floor_Wood", new InstalledObject ("Floor_Wood", "Floor_Wood", 1, 1, 1, true));
-        InstalledObjectPrototypes.Add ("Wall", new InstalledObject ("Wall", "Wall", 0, 1, 1, true));
+        InstalledObjectPrototypes.Add ("Floor_Wood_01", new InstalledObject ("Floor_Wood_01", "Floor_Wood_01", 1, 1, 1, true));
+        InstalledObjectPrototypes.Add ("Wall_Wood", new InstalledObject ("Wall_Wood", "Wall_Wood", 0, 1, 1, true));
         InstalledObjectPrototypes.Add ("Door", new InstalledObject ("Door", "Door", 1, 1, 1, false));
         InstalledObjectPrototypes["Door"].installedObjectParamenters["openess"] = 0;
         InstalledObjectPrototypes["Door"].installedObjectParamenters["is_opening"] = 0;
@@ -154,6 +153,7 @@ public class World {
     }
 
     public bool IsInstalledObjectPlacementValid (string objType, int x, int y) {
+        Debug.Log ("IsInstalledObjectPlacementValid " + objType);
         return InstalledObjectPrototypes[objType].funcPositionValidation (x, y);
     }
 

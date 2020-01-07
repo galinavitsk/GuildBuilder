@@ -10,19 +10,22 @@ using UnityEngine.Tilemaps;
 
 public class InstalledObjectSpriteController : MonoBehaviour {
     public Dictionary<string, Sprite> installedObjectSprites { get; protected set; }
-    void  OnEnable() {
+    void OnEnable () {
         LoadSprites ();
     }
     public TileBase GetTileBase (string objectType, Vector3Int tilePos) {
+        Debug.Log (objectType);
         TileBase tile = null;
-
         if (objectType == "Door" || objectType == "Window") { objectType = IsRotatable (objectType, tilePos); }
         if (objectType == null) { Debug.LogError ("Passed a null objectType"); } else {
             if (installedObjectSprites == null) {
-                LoadSprites();
+                LoadSprites ();
             }
             if (installedObjectSprites.ContainsKey (objectType) == false) { //IF sprite doesn't exist then it's likely a RuleTile(see: dirt/grass/walls)
                 tile = Resources.Load<RuleTile> ("Images/InstalledObjects/" + objectType);
+                if (tile == null) {
+                    tile = Resources.Load<AdvancedRuleTile> ("Images/InstalledObjects/" + objectType);
+                }
             }
             if (installedObjectSprites.ContainsKey (objectType) == true) { //IF sprite exists
                 CustomTileBase ctile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));;

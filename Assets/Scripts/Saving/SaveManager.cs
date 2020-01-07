@@ -52,7 +52,7 @@ public class SaveManager : MonoBehaviour {
         Dictionary<SerializableVector3Int, string> foundationTiles = data.FoundationTilemap.tilemapToSave;
         Dictionary<Vector3Int, string> afterwallplacements = new Dictionary<Vector3Int, string> ();
         foreach (SerializableVector3Int tilePos in foundationTiles.Keys) {
-            if (foundationTiles[tilePos] == "Wall") {
+            if (foundationTiles[tilePos].Contains("Wall")==true) {
                 WorldController.Instance.PlaceInstalledObject (tilePos, foundationTiles[tilePos]);
             } else {
                 afterwallplacements.Add (tilePos, foundationTiles[tilePos]);

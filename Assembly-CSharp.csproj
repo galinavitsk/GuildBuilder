@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Pathfinding\Path_TileGraph.cs" />
      <Compile Include="Assets\Scripts\Saving\SaveData.cs" />
      <Compile Include="Assets\Scripts\Saving\SaveManager.cs" />
+     <Compile Include="Assets\Scripts\Utilities\Advanced Rule Tiles\AdvancedRuleTile.cs" />
      <Compile Include="Assets\Scripts\Utilities\ExtensionsMethods\ExtensionMethods.cs" />
      <Compile Include="Assets\Scripts\Utilities\ExtensionsMethods\SerializableVector3.cs" />
      <Compile Include="Assets\Scripts\Utilities\ExtensionsMethods\SerializableVector3Int.cs" />
