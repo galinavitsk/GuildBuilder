@@ -12,8 +12,8 @@ public class World {
     Action<InstalledObject> cbInstalledObjectCreated;
     Action<Character> cbCharacterCreated;
     int iniChance = 50; //0-100
-    int birthLimit = 7; //1-8
-    int deathLimit = 2; //1-8
+    int birthLimit = 6; //1-8
+    int deathLimit = 3; //1-8
     int numR = 10;
     public List<Character> characters;
     public Dictionary<Vector3Int, InstalledObject> objectsGameMap;
@@ -44,20 +44,11 @@ public class World {
 
     public void RandomizeTiles () {
         BoundsInt area = new BoundsInt (new Vector3Int (0, 0, 0), new Vector3Int (width, height, 1));
-        TileBase tileGrass = Resources.Load<AdvancedRuleTile> ("Images/Landscape/Grass_Light");
+        TileBase tileGrass = Resources.Load<RuleTile> ("Images/Landscape/Grass_Light");
         TileBase tileDirt = Resources.Load<RandomTile> ("Images/Landscape/Grass_Generic");
-
-        TileBase[] tileArray = new TileBase[area.size.x * area.size.y * area.size.z]; //create the tiles array
         Tilemap tilemapLandscape = WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ();
-        WorldController.Instance.tilemapLandscape.GetComponent<Tilemap> ().ClearAllTiles ();
-        WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ().ClearAllTiles ();
-        //WorldController.Instance.tilemapFurniture.GetComponent<Tilemap> ().ClearAllTiles ();
-        for (int index = 0; index < tileArray.Length; index++) {
-            tileArray[index] = UnityEngine.Random.Range (0, 2) == 0 ? tileGrass : tileDirt;
-        }
-        tilemapLandscape.SetTilesBlock (area, tileArray); //Actually set the tiles onto the tilemapLandscape 
 
-        /* int[, ] tileGenMap = new int[width, height];
+        int[, ] tileGenMap = new int[width, height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 tileGenMap[x, y] = UnityEngine.Random.Range (1, 101) < iniChance ? 1 : 0; //1:Grass 0:Dirt
@@ -70,12 +61,12 @@ public class World {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (tileGenMap[x, y] == 1) {
-                    tilemapLandscape.SetTile(new Vector3Int(x, y, 1), tileGrass);
+                    tilemapLandscape.SetTile (new Vector3Int (x, y, 1), tileGrass);
                 } else {
-                    tilemapLandscape.SetTile(new Vector3Int(x, y, 1), tileDirt);
+                    tilemapLandscape.SetTile (new Vector3Int (x, y, 1), tileDirt);
                 }
             }
-        }  */
+        }
     }
     public int[, ] genTilePos (int[, ] oldMap) {
         int[, ] newmap = new int[width, height];

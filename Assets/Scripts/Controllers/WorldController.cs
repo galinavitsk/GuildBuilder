@@ -47,7 +47,7 @@ public class WorldController : MonoBehaviour {
     }
     public void PlaceInstalledObject (Vector3Int tile_position, string buildModeObjectType) {
         Debug.Log(buildModeObjectType);
-        InstalledObject object_to_place = World.InstalledObjectPrototypes[buildModeObjectType];
+        InstalledObject object_to_place = World.InstalledObjectPrototypes[buildModeObjectType].Clone();
         object_to_place = InstalledObject.PlaceInstance (object_to_place, tile_position);
         TileBase tile = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (buildModeObjectType, tile_position);
         if (tile == null) { Debug.LogError ("Something went wrong"); } else {

@@ -124,7 +124,7 @@ public class Character {
     }
 
     void onJobEnded (Job job) {
-        //Job completed of cancelled
+        //Job completed or cancelled
         //if (job != myJob) { Debug.LogError ("Character being told about a job that isn't his. Forgot to unregister something"); return; }
         myJob = null;
     }

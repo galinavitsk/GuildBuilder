@@ -192,18 +192,23 @@ public class BuildModeController : MonoBehaviour {
 	void Build_DoorWindow (Vector3Int tilePos, string objectType) {
 		WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
 		WorldController.Instance.PlaceInstalledObject (tilePos, objectType);
-		if (WorldController.Instance.tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_") == false) {
-			CustomTileBase tile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));
-			tile.sprite = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().installedObjectSprites["Floor_Wood_01"];
+		Debug.Log (WorldController.Instance.tilemapLandscape.GetSprite (tilePos));
+		if (WorldController.Instance.tilemapLandscape.GetSprite (tilePos) == null ||
+			WorldController.Instance.tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_") == false) {
+			TileBase tile = Resources.Load<AdvancedRuleTile> ("Images/InstalledObjects/Floor_Wood_01");
 			WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 		}
 	}
 	void Build_Floor (Vector3Int tilePos, string floor) {
 
-        TileBase tile = Resources.Load<AdvancedRuleTile>("Images/InstalledObjects/" + floor);
-        WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
+		TileBase tile = Resources.Load<AdvancedRuleTile> ("Images/InstalledObjects/" + floor);
+		if (WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos)) {
+			WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
+		}
 		WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 		WorldController.Instance.tilemapFoundation.SetTile (tilePos, null);
+		InstalledObject floorobject = WorldController.Instance.World.InstalledObjectPrototypes[floor].Clone ();
+		WorldController.Instance.World.objectsGameMap.Add (tilePos, floorobject);
 	}
 	void Build_Wall (Vector3Int tilePos, string objectType) {
 		WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);

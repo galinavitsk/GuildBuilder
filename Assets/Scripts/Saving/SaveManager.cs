@@ -42,30 +42,31 @@ public class SaveManager : MonoBehaviour {
         Dictionary<SerializableVector3Int, string> landscapeTiles = data.LandscapeTilemap.tilemapToSave;
         foreach (SerializableVector3Int tilePos in landscapeTiles.Keys) {
             if (landscapeTiles[tilePos].Contains ("Floor") == true) {
-                TileBase tile = GameObject.FindObjectOfType<InstalledObjectSpriteController> ().GetTileBase (landscapeTiles[tilePos], tilePos);
-                WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
+                WorldController.Instance.tilemapLandscape.SetTile (tilePos, Resources.Load<AdvancedRuleTile> ("Images/InstalledObjects/" + landscapeTiles[tilePos]));
+            } else if (landscapeTiles[tilePos].Contains ("Generic") == true) {
+                WorldController.Instance.tilemapLandscape.SetTile (tilePos, Resources.Load<RandomTile> ("Images/Landscape/" + landscapeTiles[tilePos]));
             } else {
                 WorldController.Instance.tilemapLandscape.SetTile (tilePos, Resources.Load<RuleTile> ("Images/Landscape/" + landscapeTiles[tilePos]));
             }
         }
-        //Debug.Log ("Loading Foundation Tilemap");
-        Dictionary<SerializableVector3Int, string> foundationTiles = data.FoundationTilemap.tilemapToSave;
-        Dictionary<Vector3Int, string> afterwallplacements = new Dictionary<Vector3Int, string> ();
-        foreach (SerializableVector3Int tilePos in foundationTiles.Keys) {
-            if (foundationTiles[tilePos].Contains("Wall")==true) {
-                WorldController.Instance.PlaceInstalledObject (tilePos, foundationTiles[tilePos]);
-            } else {
-                afterwallplacements.Add (tilePos, foundationTiles[tilePos]);
-            }
-        }
-        foreach (Vector3Int tilePos in afterwallplacements.Keys) {
-            WorldController.Instance.PlaceInstalledObject (tilePos, afterwallplacements[tilePos]);
+    //Debug.Log ("Loading Foundation Tilemap");
+    Dictionary<SerializableVector3Int, string> foundationTiles = data.FoundationTilemap.tilemapToSave;
+    Dictionary<Vector3Int, string> afterwallplacements = new Dictionary<Vector3Int, string> ();
+    foreach (SerializableVector3Int tilePos in foundationTiles.Keys) {
+        if (foundationTiles[tilePos].Contains ("Wall") == true) {
+            WorldController.Instance.PlaceInstalledObject (tilePos, foundationTiles[tilePos]);
+        } else {
+            afterwallplacements.Add (tilePos, foundationTiles[tilePos]);
         }
     }
+    foreach (Vector3Int tilePos in afterwallplacements.Keys) {
+        WorldController.Instance.PlaceInstalledObject (tilePos, afterwallplacements[tilePos]);
+    }
+}
 
-    public void LoadCharacters (SaveData data) {
-        foreach (SerializableVector3Int tilePos in data.CharactersSaveData.characters.Keys) {
-            WorldController.Instance.World.CreateCharacter (tilePos, data.CharactersSaveData.characters[tilePos].speed, data.CharactersSaveData.characters[tilePos].name, data.CharactersSaveData.characters[tilePos].buildspeed);
-        }
+public void LoadCharacters (SaveData data) {
+    foreach (SerializableVector3Int tilePos in data.CharactersSaveData.characters.Keys) {
+        WorldController.Instance.World.CreateCharacter (tilePos, data.CharactersSaveData.characters[tilePos].speed, data.CharactersSaveData.characters[tilePos].name, data.CharactersSaveData.characters[tilePos].buildspeed);
     }
+}
 }

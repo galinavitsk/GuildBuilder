@@ -30,6 +30,7 @@ public class InstalledObjectSpriteController : MonoBehaviour {
             if (installedObjectSprites.ContainsKey (objectType) == true) { //IF sprite exists
                 CustomTileBase ctile = (CustomTileBase) ScriptableObject.CreateInstance (typeof (CustomTileBase));;
                 ctile.sprite = installedObjectSprites[objectType];
+                ctile.name = objectType;
                 tile = (TileBase) ctile;
             }
 
@@ -56,15 +57,15 @@ public class InstalledObjectSpriteController : MonoBehaviour {
                 tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
                 tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
                 tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true) {
-                return objectType + "_EW";
+                return objectType + "_EW_1"; //assigns horizontal Sprite
             } else if (
                 tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
                 tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&
                 tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true &&
                 tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true) {
-                return objectType + "_NS";
+                return objectType + "_NS_1"; //assigns vertical sprite
             } else {
-                Debug.LogError ("Can't place Door here Sprite Pass");
+                Debug.LogError ("Can't place Door here Sprite Pass"); //Throws an error as you can't place a door
                 return null;
             }
         }

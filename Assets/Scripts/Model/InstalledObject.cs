@@ -17,7 +17,7 @@ public class InstalledObject {
     public float movementCost;
     int width;
     int height;
-    public string sprite { get; protected set; }
+    public string sprite { get; set; }
 
     Action<InstalledObject> cbOnChanged;
     public Func<int, int, bool> funcPositionValidation;
@@ -27,7 +27,7 @@ public class InstalledObject {
     public Func<InstalledObject, ENTERABILITY> IsEnterable;
 
     public void Update (float deltaTime) {
-        // Debug.Log("InstalledObject::Update");
+        Debug.Log ("InstalledObject::Update");
         if (updateActions != null) {
             updateActions (this, deltaTime);
         }
@@ -46,8 +46,8 @@ public class InstalledObject {
 
             this.updateActions = (Action<InstalledObject, float>) proto.updateActions.Clone ();
         }
-        if(proto.IsEnterable!=null){
-this.IsEnterable = ( Func<InstalledObject, ENTERABILITY>) proto.IsEnterable.Clone();
+        if (proto.IsEnterable != null) {
+            this.IsEnterable = (Func<InstalledObject, ENTERABILITY>) proto.IsEnterable.Clone ();
         }
     }
 
@@ -61,7 +61,7 @@ this.IsEnterable = ( Func<InstalledObject, ENTERABILITY>) proto.IsEnterable.Clon
         this.height = height;
         this.sprite = SpriteName;
         this.funcPositionValidation += this.DoorValidPosition;
-        //this.funcPositionValidation += this.IsValidPosition;
+        this.funcPositionValidation += this.IsValidPosition;
         this.installedObjectParamenters = new Dictionary<string, float> ();
         return;
     }
@@ -97,7 +97,8 @@ this.IsEnterable = ( Func<InstalledObject, ENTERABILITY>) proto.IsEnterable.Clon
             Dictionary<Vector3Int, InstalledObject> objectsGameMap = WorldController.Instance.World.objectsGameMap;
             // Debug.Log ("Placing Door at position:" + x + "_" + y);
             //            Debug.Log (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall"));
-            if ((objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true && objectsGameMap[new Vector3Int (x, y, 0)].objectType.Contains ("Wall")) ||
+            if ((objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true &&
+                    objectsGameMap[new Vector3Int (x, y, 0)].objectType.Contains ("Wall")) ||
                 objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == false) {
                 if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
                     tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
@@ -121,7 +122,7 @@ this.IsEnterable = ( Func<InstalledObject, ENTERABILITY>) proto.IsEnterable.Clon
 
     public ENTERABILITY EnterCheck () {
         if (movementCost == 0) { return ENTERABILITY.Never; }
-        if (objectType.Contains ("Door") && IsEnterable!=null) {
+        if (objectType.Contains ("Door") && IsEnterable != null) {
             return IsEnterable (this);
         }
         return ENTERABILITY.Yes;

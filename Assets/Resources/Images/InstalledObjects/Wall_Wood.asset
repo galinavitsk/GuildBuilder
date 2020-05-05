@@ -38,7 +38,7 @@ MonoBehaviour:
   DefaultNumOfNotThese: 0
   NotTheseNumberOfTiles: 000000000000
   t1:
-  - {fileID: 11400000, guid: d38086a040b8241408443f9ba04ac40f, type: 2}
+  - {fileID: 0}
   t2: []
   t3: []
   t4: []
