@@ -21,8 +21,8 @@ public class SaveManager : MonoBehaviour {
         FileStream file = File.Open (Application.persistentDataPath + "/" + "SaveTest.dat", FileMode.Create);
         SaveData data = new SaveData ();
         data.WorldSaveData = new WorldSaveData (WorldController.Instance.World);
-        data.LandscapeTilemap = new TilemapSaveData (WorldController.Instance.tilemapLandscape);
-        data.FoundationTilemap = new TilemapSaveData (WorldController.Instance.tilemapFoundation);
+        data.LandscapeTilemap = new TilemapSaveData (WorldController.Instance.tilemapLandscape,1);
+        data.FoundationTilemap = new TilemapSaveData (WorldController.Instance.tilemapFoundation, 0);
         data.CharactersSaveData = new CharactersSaveData ();
         bf.Serialize (file, data);
         file.Close ();

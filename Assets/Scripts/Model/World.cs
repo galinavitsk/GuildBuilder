@@ -16,7 +16,7 @@ public class World {
     int deathLimit = 3; //1-8
     int numR = 10;
     public List<Character> characters;
-    public Dictionary<Vector3Int, InstalledObject> objectsGameMap;
+    public Dictionary<Vector3Int, InstalledObject> foundationGameMap;
 
     public int Width {
         get {
@@ -38,7 +38,7 @@ public class World {
         CreateInstalledObjectPrototypes ();
         jobQueue = new JobQueue ();
         characters = new List<Character> ();
-        objectsGameMap = new Dictionary<Vector3Int, InstalledObject> ();
+        foundationGameMap = new Dictionary<Vector3Int, InstalledObject> ();
 
     }
 
@@ -102,8 +102,8 @@ public class World {
         foreach (Character c in characters) {
             c.Update (deltaTime);
         }
-        foreach (Vector3Int tilePos in objectsGameMap.Keys) {
-            objectsGameMap[tilePos].Update (deltaTime);
+        foreach (Vector3Int tilePos in foundationGameMap.Keys) {
+            foundationGameMap[tilePos].Update (deltaTime);
         }
     }
 
@@ -117,7 +117,7 @@ public class World {
     void CreateInstalledObjectPrototypes () {
         InstalledObjectPrototypes = new Dictionary<string, InstalledObject> ();
         //ObjectType, Sprite, movementCost, width, height, linkstoneighbor
-        InstalledObjectPrototypes.Add ("Floor_Wood_01", new InstalledObject ("Floor_Wood_01", "Floor_Wood_01", 1, 1, 1, true));
+        InstalledObjectPrototypes.Add ("Floor_Wood_01", new InstalledObject ("Floor_Wood_01", "Floor_Wood_01", 1.5f, 1, 1, true));
         InstalledObjectPrototypes.Add ("Wall_Wood", new InstalledObject ("Wall_Wood", "Wall_Wood", 0, 1, 1, true));
         InstalledObjectPrototypes.Add ("Door", new InstalledObject ("Door", "Door", 1, 1, 1, false));
         InstalledObjectPrototypes["Door"].installedObjectParamenters["openess"] = 0;

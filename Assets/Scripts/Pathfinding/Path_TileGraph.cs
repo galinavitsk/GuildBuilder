@@ -31,12 +31,12 @@ public class Path_TileGraph {
             {
                 float movementSpeed = 1f;
                 //Get movement Speed based on the tile on tilemap Walkable layer
-                if (WorldController.Instance.World.objectsGameMap.ContainsKey(neighbors[i]) == true)
+                if (WorldController.Instance.World.foundationGameMap.ContainsKey(neighbors[i]) == true)
                 {
-                    movementSpeed = WorldController.Instance.World.objectsGameMap[neighbors[i]].movementCost;
+                    movementSpeed = WorldController.Instance.World.foundationGameMap[neighbors[i]].movementCost;
                 }
-                if (WorldController.Instance.World.objectsGameMap.ContainsKey (neighbors[i]) == false ||
-                    (WorldController.Instance.World.objectsGameMap.ContainsKey (neighbors[i]) == true && movementSpeed > 0)) {
+                if (WorldController.Instance.World.foundationGameMap.ContainsKey (neighbors[i]) == false ||
+                    (WorldController.Instance.World.foundationGameMap.ContainsKey (neighbors[i]) == true && movementSpeed > 0)) {
                     if (isClippingCorner (nodes[t].data, neighbors[i])) { continue; }
                     Path_Edge<Vector3Int> e = new Path_Edge<Vector3Int> ();
                     e.cost = movementSpeed;
@@ -58,13 +58,13 @@ public class Path_TileGraph {
             //Diagonal
             int dX = curr.x - neigh.x;
             int dY = curr.y - neigh.y;
-            if (WorldController.Instance.World.objectsGameMap.ContainsKey (new Vector3Int (curr.x - dX, curr.y, curr.z)) == true &&
-                WorldController.Instance.World.objectsGameMap[new Vector3Int (curr.x - dX, curr.y, curr.z)].movementCost == 0) {
+            if (WorldController.Instance.World.foundationGameMap.ContainsKey (new Vector3Int (curr.x - dX, curr.y, curr.z)) == true &&
+                WorldController.Instance.World.foundationGameMap[new Vector3Int (curr.x - dX, curr.y, curr.z)].movementCost == 0) {
                 //Tile to the west or east is not walkable
                 return true;
             }
-            if (WorldController.Instance.World.objectsGameMap.ContainsKey (new Vector3Int (curr.x, curr.y - dY, curr.z)) == true &&
-                WorldController.Instance.World.objectsGameMap[new Vector3Int (curr.x, curr.y - dY, curr.z)].movementCost == 0) {
+            if (WorldController.Instance.World.foundationGameMap.ContainsKey (new Vector3Int (curr.x, curr.y - dY, curr.z)) == true &&
+                WorldController.Instance.World.foundationGameMap[new Vector3Int (curr.x, curr.y - dY, curr.z)].movementCost == 0) {
                 //Tile to the north of south is not walkable
                 return true;
             }

@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Jobs
   - Furniture
-  - 
+  - Foundation
   - 
   - 
   - 
@@ -41,9 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI
+    uniqueID: 1908946897
+    locked: 0
   - name: Characters
     uniqueID: 3887515959
     locked: 0
-  - name: UI
-    uniqueID: 1908946897
+  - name: Jobs
+    uniqueID: 2793182419
+    locked: 0
+  - name: Furniture
+    uniqueID: 4128937743
+    locked: 0
+  - name: Foundation
+    uniqueID: 1572894733
     locked: 0

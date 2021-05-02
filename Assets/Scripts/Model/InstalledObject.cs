@@ -60,8 +60,8 @@ public class InstalledObject {
         this.width = width;
         this.height = height;
         this.sprite = SpriteName;
-        this.funcPositionValidation += this.DoorValidPosition;
         this.funcPositionValidation += this.IsValidPosition;
+        this.funcPositionValidation += this.DoorValidPosition;
         this.installedObjectParamenters = new Dictionary<string, float> ();
         return;
     }
@@ -86,7 +86,7 @@ public class InstalledObject {
     }
 
     bool IsValidPosition (int x, int y) {
-        if (WorldController.Instance.World.objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true ||
+        if (WorldController.Instance.World.foundationGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true ||
             x >= WorldController.Instance.World.Width - 1 || y >= WorldController.Instance.World.Height - 1 || x < 1 || y < 1) { return false; }
 
         return true;
@@ -94,33 +94,57 @@ public class InstalledObject {
     bool DoorValidPosition (int x, int y) {
         if (objectType == "Door" || objectType == "Window") {
             Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
-            Dictionary<Vector3Int, InstalledObject> objectsGameMap = WorldController.Instance.World.objectsGameMap;
+            Tilemap tilemapJobs=WorldController.Instance.tilemapJobs.GetComponent<Tilemap>();
+            Dictionary<Vector3Int, InstalledObject> foundationGameMap = WorldController.Instance.World.foundationGameMap;
+            Vector3Int tile_to_check=new Vector3Int(x,y,0);
+            Vector3Int north_tile=new Vector3Int(x,y+1,0);
+            Vector3Int south_tile=new Vector3Int(x,y-1,0);
+            Vector3Int east_tile=new Vector3Int(x+1,y,0);
+            Vector3Int west_tile=new Vector3Int(x-1,y,0);
             // Debug.Log ("Placing Door at position:" + x + "_" + y);
             //            Debug.Log (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall"));
-            if ((objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == true &&
-                    objectsGameMap[new Vector3Int (x, y, 0)].objectType.Contains ("Wall")) ||
-                objectsGameMap.ContainsKey (new Vector3Int (x, y, 0)) == false) {
-                if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
-                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
-                    tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
-                    tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true) {
+            //IF There is already a wall there OR the tile is empty THEN check tiles around to check if they are walls/doors OR if they contain wall/door job
+            if ((foundationGameMap.ContainsKey(tile_to_check) && tilemapFoundation.GetTile(tile_to_check).name.ToString().Contains("Wall")) ||
+            foundationGameMap.ContainsKey(tile_to_check)==false){
+                //VERTICAL TILE CHECK NORTH+SOUTH
+                if(
+                    (
+                        (tilemapFoundation.GetTile(north_tile)!=null && (tilemapFoundation.GetTile(north_tile).name.ToString().Contains("Wall")||(tilemapFoundation.GetTile(north_tile).name.ToString().Contains("Door"))))
+                        ||
+                        (tilemapJobs.GetTile(north_tile)!=null && (tilemapJobs.GetTile(north_tile).name.ToString().Contains("Wall")||tilemapJobs.GetTile(north_tile).name.ToString().Contains("Door")))
+                    )
+                    &&
+                    (
+                        (tilemapFoundation.GetTile(south_tile)!=null && (tilemapFoundation.GetTile(south_tile).name.ToString().Contains("Wall")||tilemapFoundation.GetTile(south_tile).name.ToString().Contains("Door")))
+                        ||
+                        (tilemapJobs.GetTile(south_tile)!=null && (tilemapJobs.GetTile(south_tile).name.ToString().Contains("Wall")||tilemapJobs.GetTile(south_tile).name.ToString().Contains("Door")))
+                    )
+                ){
                     return true;
-                } else if (
-                    tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
-                    tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&
-                    tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true &&
-                    tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true) {
-                    return true;
-                } else {
-                    Debug.LogError ("Can't place Door here Valid Object Pass");
-                    return false;
                 }
+                else if(
+                    (
+                        (tilemapFoundation.GetTile(west_tile)!=null && (tilemapFoundation.GetTile(west_tile).name.ToString().Contains("Wall")||tilemapFoundation.GetTile(west_tile).name.ToString().Contains("Door")))
+                        ||
+                        (tilemapJobs.GetTile(west_tile)!=null && (tilemapJobs.GetTile(west_tile).name.ToString().Contains("Wall")||tilemapJobs.GetTile(west_tile).name.ToString().Contains("Door")))
+                    )
+                    &&
+                    (
+                        (tilemapFoundation.GetTile(east_tile)!=null && (tilemapFoundation.GetTile(east_tile).name.ToString().Contains("Wall")||tilemapFoundation.GetTile(east_tile).name.ToString().Contains("Door")))
+                        ||
+                        (tilemapJobs.GetTile(east_tile)!=null && (tilemapJobs.GetTile(east_tile).name.ToString().Contains("Wall")||tilemapJobs.GetTile(east_tile).name.ToString().Contains("Door")))
+                    )
+                ){
+                    return true;
+                }
+
             }
         }
         return IsValidPosition (x, y);
     }
 
     public ENTERABILITY EnterCheck () {
+        Debug.Log("ENTERCHECK");
         if (movementCost == 0) { return ENTERABILITY.Never; }
         if (objectType.Contains ("Door") && IsEnterable != null) {
             return IsEnterable (this);

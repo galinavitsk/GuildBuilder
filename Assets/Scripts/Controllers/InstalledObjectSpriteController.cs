@@ -14,7 +14,7 @@ public class InstalledObjectSpriteController : MonoBehaviour {
         LoadSprites ();
     }
     public TileBase GetTileBase (string objectType, Vector3Int tilePos) {
-        Debug.Log (objectType);
+      //  Debug.Log (objectType);
         TileBase tile = null;
         if (objectType == "Door" || objectType == "Window") { objectType = IsRotatable (objectType, tilePos); }
         if (objectType == null) { Debug.LogError ("Passed a null objectType"); } else {
@@ -53,16 +53,40 @@ public class InstalledObjectSpriteController : MonoBehaviour {
         int y = tilePos.y;
         if (objectType == "Door" || objectType == "Window") { //If general position is valid
             Tilemap tilemapFoundation = WorldController.Instance.tilemapFoundation.GetComponent<Tilemap> ();
-            if (tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
-                tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&
-                tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true &&
-                tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true) {
+             Tilemap tilemapJobs=WorldController.Instance.tilemapJobs.GetComponent<Tilemap>();
+            if ((tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
+                tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)) != null &&(
+                tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true||
+                
+                tilemapFoundation.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Door") == true) &&(
+                tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true||
+                
+                tilemapFoundation.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Door") == true))||(
+                    tilemapJobs.GetTile (new Vector3Int (x - 1, y, 0)) != null &&
+                tilemapJobs.GetTile (new Vector3Int (x + 1, y, 0)) != null &&(
+                tilemapJobs.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Wall") == true || 
+                tilemapJobs.GetTile (new Vector3Int (x - 1, y, 0)).name.ToString ().Contains ("Door") == true) &&(
+                tilemapJobs.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Wall") == true||
+                
+                tilemapJobs.GetTile (new Vector3Int (x + 1, y, 0)).name.ToString ().Contains ("Door") == true))
+                ) {
                 return objectType + "_EW_1"; //assigns horizontal Sprite
-            } else if (
+            } else if ((
                 tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
-                tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&
-                tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true &&
-                tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true) {
+                tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)) != null &&(
+                tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true||
+                tilemapFoundation.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Door") == true ) &&(
+                tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true||
+                tilemapFoundation.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Door") == true))||( 
+                tilemapJobs.GetTile (new Vector3Int (x, y - 1, 0)) != null &&
+                tilemapJobs.GetTile (new Vector3Int (x, y + 1, 0)) != null &&(
+                tilemapJobs.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Wall") == true||
+                
+                tilemapJobs.GetTile (new Vector3Int (x, y - 1, 0)).name.ToString ().Contains ("Door") == true) &&(
+                tilemapJobs.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Wall") == true||
+                
+                tilemapJobs.GetTile (new Vector3Int (x, y + 1, 0)).name.ToString ().Contains ("Door") == true))
+                ) {
                 return objectType + "_NS_1"; //assigns vertical sprite
             } else {
                 Debug.LogError ("Can't place Door here Sprite Pass"); //Throws an error as you can't place a door

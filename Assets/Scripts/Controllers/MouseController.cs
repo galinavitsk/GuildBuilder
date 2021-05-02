@@ -51,7 +51,7 @@ public class MouseController : MonoBehaviour {
 		lastFramePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		lastFramePosition.z = 0;
 		Camera.main.orthographicSize -= Camera.main.orthographicSize * Input.GetAxis ("Mouse ScrollWheel");
-		Camera.main.orthographicSize = Mathf.Clamp (Camera.main.orthographicSize, 3f, 25f);
+		Camera.main.orthographicSize = Mathf.Clamp (Camera.main.orthographicSize, 3f, 10f);
 
 	}
 
@@ -93,7 +93,7 @@ public class MouseController : MonoBehaviour {
 			// Display a preview of the drag area
 			for (int x = start_x; x <= end_x; x++) {
 				for (int y = start_y; y <= end_y; y++) {
-					TileBase t = WorldController.Instance.tilemapLandscape.GetTile (new Vector3Int (x, y, 0));
+					TileBase t = WorldController.Instance.tilemapLandscape.GetTile (new Vector3Int (x, y, 1));
 					if (t != null) { //LandTile Changing Mode
 						GameObject go = (GameObject) Instantiate (circleCursorPrefab, new Vector3 (x, y, 0), Quaternion.identity);
 						dragPreviewGameObjects.Add (go);

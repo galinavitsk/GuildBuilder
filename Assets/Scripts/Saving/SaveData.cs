@@ -28,11 +28,11 @@ public class WorldSaveData {
 public class TilemapSaveData {
 
     public Dictionary<SerializableVector3Int, string> tilemapToSave { get; set; }
-    public TilemapSaveData (Tilemap tilemap) {
+    public TilemapSaveData (Tilemap tilemap, int tilemapheight) {
         tilemapToSave = new Dictionary<SerializableVector3Int, string> ();
         for (int x = 0; x < WorldController.Instance.World.Width; x++) {
             for (int y = 0; y < WorldController.Instance.World.Height; y++) {
-                Vector3Int tilePos = new Vector3Int (x, y, 0);
+                Vector3Int tilePos = new Vector3Int (x, y, tilemapheight);
                 if (tilemap.GetTile (tilePos) != null) { //Checks that the tile exists
                     if (tilemap.GetTile (tilePos).name.ToString()=="") { //Checks if the tile is a RULETILE, Eliminates Floors that use single sprites, and takes their sprite as name
                         tilemapToSave.Add (tilePos, tilemap.GetSprite (tilePos).name.ToString ());
@@ -41,7 +41,6 @@ public class TilemapSaveData {
                     }
                 }
             }
-
         }
     }
 }

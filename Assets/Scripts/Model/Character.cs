@@ -30,13 +30,53 @@ public class Character {
         if (myJob == null) {
             //Get a new job
             //TODO:Check if the job is reachable
-
-            myJob = WorldController.Instance.World.jobQueue.Dequeue ();
+            myJob = WorldController.Instance.World.jobQueue.Dequeue();
+            if(myJob==null){
+                //jobQueue was empty so exit out of doing the job
+                return;
+            }
+            Vector3Int jobposition=myJob.tilePos;
+            if(WorldController.Instance.World.foundationGameMap.ContainsKey(myJob.tilePos)){
+                InstalledObject object_on_tile=WorldController.Instance.World.foundationGameMap[myJob.tilePos];
+                Debug.Log(object_on_tile);
+                Debug.Log(object_on_tile.IsEnterable(object_on_tile));
+                if(object_on_tile.IsEnterable(object_on_tile)==ENTERABILITY.Yes){
+                 jobposition=myJob.tilePos;
+                 }
+            else{
+                if(jobposition.x<WorldController.Instance.World.Width-1 &&
+                   ( WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0))==false
+                ||
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)])==ENTERABILITY.Yes)){
+                    jobposition=new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0);
+                }
+                else if(jobposition.x>0 &&(
+                    WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0))==false
+                ||
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)])==ENTERABILITY.Yes)){
+                    jobposition=new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0);
+                }
+                else if(jobposition.y<WorldController.Instance.World.Height-1 &&
+                   ( WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0))==false
+                ||
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)])==ENTERABILITY.Yes)){
+                    jobposition=new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0);
+                }
+                else if(jobposition.y>0 &&(
+                    WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0))==false
+                ||
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)])==ENTERABILITY.Yes)){
+                    jobposition=new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0);
+                }
+            }
+            }
+            
             if (myJob != null) {
-                destTile = myJob.tilePos;
+                destTile = jobposition;
                 myJob.RegisterJobCompleteCallback (onJobEnded);
                 myJob.RegisterJobCancelledCallback (onJobEnded);
             }
+            
         }
         //Movement code
         if (currTile == destTile) {
@@ -79,9 +119,15 @@ public class Character {
         float totalDisToTravel = Vector3Int.Distance (currTile, nextTile); //total distance from A to B
         float movementCost = 1;
         ENTERABILITY enterability = ENTERABILITY.Yes;
-        if (WorldController.Instance.World.objectsGameMap.ContainsKey (nextTile) == true) {
-            movementCost = WorldController.Instance.World.objectsGameMap[nextTile].movementCost;
-            enterability = WorldController.Instance.World.objectsGameMap[nextTile].IsEnterable (WorldController.Instance.World.objectsGameMap[nextTile]);
+        if (WorldController.Instance.World.foundationGameMap.ContainsKey (nextTile) == true) {
+            movementCost = WorldController.Instance.World.foundationGameMap[nextTile].movementCost;
+            try{
+            enterability = WorldController.Instance.World.foundationGameMap[nextTile].IsEnterable (WorldController.Instance.World.foundationGameMap[nextTile]);
+            }
+            catch{enterability=ENTERABILITY.Never;}
+             if(movementCost>0 && enterability==ENTERABILITY.Never){
+                enterability=ENTERABILITY.Yes;
+            }
         }
         if (enterability == ENTERABILITY.Never) {
             Debug.LogError ("Character " + name + " was trying to enter an unwalkable tile");

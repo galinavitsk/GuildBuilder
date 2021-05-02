@@ -16,6 +16,12 @@ public class BuildModeController : MonoBehaviour {
 
 	}
 
+	public void Add_Job_Build_Wall(Vector3Int tilePos, string buildModeObjectType){
+Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
+							WorldController.Instance.World.jobQueue.Enqueue (j);
+
+	}
+
 	// Update is called once per frame
 	public void DoBuild (int start_x, int start_y, int end_x, int end_y, string buildModeIsObject, string buildModeObjectType, string floorType) {
 		Vector3 pos = Input.mousePosition;
@@ -38,25 +44,33 @@ public class BuildModeController : MonoBehaviour {
 				for (int x = start_x; x <= end_x; x++) {
 					for (int y = start_y; y <= end_y; y++) {
 
-						Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
+						Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 1));
 						if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false ||
 							WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
 							Debug.LogError ("Can't place a " + buildModeObjectType + " here");
 
 						} else {
-							Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
-							WorldController.Instance.World.jobQueue.Enqueue (j);
+							Add_Job_Build_Wall(tilePos,buildModeObjectType);
 
 						}
 					}
 				}
 			}
 			if (buildModeObjectType.Contains ("Door") == true || buildModeObjectType.Contains ("Window") == true) {
-				Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (end_x, end_y, 0));
+				Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (end_x, end_y, 2));
 				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false ||
 					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
-					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here");
+						if(WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true && WorldController.Instance.World.jobQueue.JobPositonsWallCheck(tilePos)){
+							Debug.Log("ADDING DOOR JOB OVER FUTURE WALL");
+							WorldController.Instance.World.jobQueue.JobQueRemoveAt(tilePos);
+							Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_DoorWindow (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
+							WorldController.Instance.World.jobQueue.Enqueue (j);
+						}
+						else{
+							Debug.LogError ("!!!!BuildModeController::Can't place a " + buildModeObjectType + " here");
+						}
 				} else {
+					Debug.Log("ADDING DOOR JOB OVER CURRENT WALL");
 					Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_DoorWindow (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
 					WorldController.Instance.World.jobQueue.Enqueue (j);
 
@@ -65,49 +79,46 @@ public class BuildModeController : MonoBehaviour {
 
 		} else if (buildModeIsObject == "Room") {
 			for (int x = start_x; x <= end_x; x++) {
-				Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, start_y, 0));
-
+				Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, start_y, 0));//Goes along bottom wall
 				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false ||
 					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
-					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here");
+					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here: START_Y");
 
 				} else {
+							Add_Job_Build_Wall(tilePos,buildModeObjectType);
 
-					Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
-					WorldController.Instance.World.jobQueue.Enqueue (j);
-
-				}
-				Vector3Int tilePos2 = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, end_y, 0));
-				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos2.x, tilePos2.y) == false ||
-					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos2) == true) {
-					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here");
-
-				} else {
-					Job j = new Job (tilePos2, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
-					WorldController.Instance.World.jobQueue.Enqueue (j);
 				}
 			}
 			for (int y = start_y; y <= end_y; y++) {
 				Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (start_x, y, 0));
 				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos.x, tilePos.y) == false ||
 					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos) == true) {
-					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here");
+					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here: START_X");
 
 				} else {
-
-					Job j = new Job (tilePos, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
-					WorldController.Instance.World.jobQueue.Enqueue (j);
+							Add_Job_Build_Wall(tilePos,buildModeObjectType);
 
 				}
+			}
+
+			for (int x = start_x; x <= end_x; x++) {
+				Vector3Int tilePos2 = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, end_y, 0));//Goes along top wall
+				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos2.x, tilePos2.y) == false ||
+					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos2) == true) {
+					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here: END_Y");
+
+				} else {
+							Add_Job_Build_Wall(tilePos2,buildModeObjectType);
+				}
+			}
+			
+			for (int y = start_y; y <= end_y; y++) {
 				Vector3Int tilePos2 = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (end_x, y, 0));
 				if (WorldController.Instance.World.IsInstalledObjectPlacementValid (buildModeObjectType, tilePos2.x, tilePos2.y) == false ||
 					WorldController.Instance.World.jobQueue.JobPositonsContains (tilePos2) == true) {
-					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here");
-
+					Debug.LogError ("BuildModeController::Can't place a " + buildModeObjectType + " here:END_X");
 				} else {
-
-					Job j = new Job (tilePos2, buildModeObjectType, (theJob) => Build_Wall (theJob.tilePos, theJob.objectType)); //Create job, pass the method that needs to be run once the job is complete
-					WorldController.Instance.World.jobQueue.Enqueue (j);
+							Add_Job_Build_Wall(tilePos2,buildModeObjectType);
 
 				}
 			}
@@ -145,14 +156,14 @@ public class BuildModeController : MonoBehaviour {
 					Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
 					if (tilePos.x < WorldController.Instance.World.Width && tilePos.y < WorldController.Instance.World.Height && tilePos.x >= 0 && tilePos.y >= 0) {
 
-						TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Generic");
+						TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Grass_Generic");
 						WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 
 					}
 				}
 			}
 		} else if (buildModeIsObject == "WallOnly" || buildModeIsObject == "Room") {
-			TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Dirt");
+			TileBase tile = Resources.Load<RuleTile> ("Images/Landscape/Grass_Generic");
 			for (int x = start_x; x <= end_x; x++) {
 				for (int y = start_y; y <= end_y; y++) {
 					Vector3Int tilePos = WorldController.Instance.tilemapLandscape.WorldToCell (new Vector3Int (x, y, 0));
@@ -192,12 +203,12 @@ public class BuildModeController : MonoBehaviour {
 	void Build_DoorWindow (Vector3Int tilePos, string objectType) {
 		WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
 		WorldController.Instance.PlaceInstalledObject (tilePos, objectType);
-		Debug.Log (WorldController.Instance.tilemapLandscape.GetSprite (tilePos));
 		if (WorldController.Instance.tilemapLandscape.GetSprite (tilePos) == null ||
 			WorldController.Instance.tilemapLandscape.GetSprite (tilePos).name.ToString ().Contains ("Floor_") == false) {
 			TileBase tile = Resources.Load<AdvancedRuleTile> ("Images/InstalledObjects/Floor_Wood_01");
 			WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 		}
+		Debug.Log("DOOR BUILT AT:"+tilePos.x+"_"+tilePos.y);
 	}
 	void Build_Floor (Vector3Int tilePos, string floor) {
 
@@ -208,7 +219,7 @@ public class BuildModeController : MonoBehaviour {
 		WorldController.Instance.tilemapLandscape.SetTile (tilePos, tile);
 		WorldController.Instance.tilemapFoundation.SetTile (tilePos, null);
 		InstalledObject floorobject = WorldController.Instance.World.InstalledObjectPrototypes[floor].Clone ();
-		WorldController.Instance.World.objectsGameMap.Add (tilePos, floorobject);
+		WorldController.Instance.World.foundationGameMap.Add (tilePos, floorobject);
 	}
 	void Build_Wall (Vector3Int tilePos, string objectType) {
 		WorldController.Instance.World.jobQueue.JobPositonsRemove (tilePos);
