@@ -36,39 +36,41 @@ public class Character {
                 return;
             }
             Vector3Int jobposition=myJob.tilePos;
+            try{
             if(WorldController.Instance.World.foundationGameMap.ContainsKey(myJob.tilePos)){
                 InstalledObject object_on_tile=WorldController.Instance.World.foundationGameMap[myJob.tilePos];
-                Debug.Log(object_on_tile);
-                Debug.Log(object_on_tile.IsEnterable(object_on_tile));
-                if(object_on_tile.IsEnterable(object_on_tile)==ENTERABILITY.Yes){
-                 jobposition=myJob.tilePos;
+                if(object_on_tile!=null && object_on_tile.IsEnterable!=null&& object_on_tile.IsEnterable(object_on_tile)==ENTERABILITY.Yes){
+                 jobposition=myJob.tilePos; 
                  }
             else{
                 if(jobposition.x<WorldController.Instance.World.Width-1 &&
-                   ( WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0))==false
+                   ( WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0))==false || WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)].objectType.Contains("Floor")
                 ||
-                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)])==ENTERABILITY.Yes)){
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)].IsEnterable!=null&& WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0)])==ENTERABILITY.Yes)){
                     jobposition=new Vector3Int(myJob.tilePos.x+1,myJob.tilePos.y,0);
                 }
                 else if(jobposition.x>0 &&(
-                    WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0))==false
+                    WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0))==false || WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)].objectType.Contains("Floor")
                 ||
-                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)])==ENTERABILITY.Yes)){
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)].IsEnterable!=null&&WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0)])==ENTERABILITY.Yes)){
                     jobposition=new Vector3Int(myJob.tilePos.x-1,myJob.tilePos.y,0);
                 }
                 else if(jobposition.y<WorldController.Instance.World.Height-1 &&
-                   ( WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0))==false
+                   ( WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0))==false || WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)].objectType.Contains("Floor")
                 ||
-                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)])==ENTERABILITY.Yes)){
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)].IsEnterable!=null&&WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0)])==ENTERABILITY.Yes)){
                     jobposition=new Vector3Int(myJob.tilePos.x,myJob.tilePos.y+1,0);
                 }
                 else if(jobposition.y>0 &&(
-                    WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0))==false
+                    WorldController.Instance.World.foundationGameMap.ContainsKey(new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0))==false || WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)].objectType.Contains("Floor")
                 ||
-                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)])==ENTERABILITY.Yes)){
+                WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)].IsEnterable!=null&&WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)].IsEnterable(WorldController.Instance.World.foundationGameMap[new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0)])==ENTERABILITY.Yes)){
                     jobposition=new Vector3Int(myJob.tilePos.x,myJob.tilePos.y-1,0);
                 }
             }
+            }}
+            catch{
+                AbandonJob();
             }
             
             if (myJob != null) {
