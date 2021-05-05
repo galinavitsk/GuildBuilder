@@ -14,21 +14,17 @@ public class JobQueue {
         jobPositionQue = new List<JobPositionItem>();
     }
     public void Enqueue (Job j) {
-        Debug.Log("ENQUEUE START:"+jobQueue.Count);
         jobQueue.AddLast (j);
         jobPositionQue.Add (new JobPositionItem(j.tilePos,j.objectType));
         if (cbJobCreated != null) {
             cbJobCreated (j);
         }
-        Debug.Log("ENQUEUE EMD:"+jobQueue.Count);
         //TODO:Call callbacks
     }
     public Job Dequeue(){
-        Debug.Log("DEQUEUE:"+jobQueue.Count);
         if (jobQueue.Count == 0) { return null;}
         Job job= jobQueue.First.Value;
         jobQueue.RemoveFirst();
-        Debug.Log("DEQUEUE:"+jobQueue.Count);
         return job;
     }
     public bool JobPositonsContains (Vector3Int tilePos) {

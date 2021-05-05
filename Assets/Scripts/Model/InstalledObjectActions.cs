@@ -42,6 +42,7 @@ public class InstalledObjectActions {
         // Debug.Log ("CLAMP " + door.installedObjectParamenters["openess"]);
     }
     public static ENTERABILITY Door_IsEnterable (InstalledObject door) {
+        Debug.Log("DOOR CHECK");
         door.installedObjectParamenters["is_opening"] = 1;
         if (door.installedObjectParamenters["openess"] >= 1) {
             return ENTERABILITY.Yes;

@@ -27,7 +27,6 @@ public class InstalledObject {
     public Func<InstalledObject, ENTERABILITY> IsEnterable;
 
     public void Update (float deltaTime) {
-        Debug.Log ("InstalledObject::Update");
         if (updateActions != null) {
             updateActions (this, deltaTime);
         }
@@ -63,6 +62,7 @@ public class InstalledObject {
         this.funcPositionValidation += this.IsValidPosition;
         this.funcPositionValidation += this.DoorValidPosition;
         this.installedObjectParamenters = new Dictionary<string, float> ();
+        this.IsEnterable+=this.EnterCheck;
         return;
     }
 
@@ -143,8 +143,7 @@ public class InstalledObject {
         return IsValidPosition (x, y);
     }
 
-    public ENTERABILITY EnterCheck () {
-        Debug.Log("ENTERCHECK");
+    public ENTERABILITY EnterCheck (InstalledObject installedO) {
         if (movementCost == 0) { return ENTERABILITY.Never; }
         if (objectType.Contains ("Door") && IsEnterable != null) {
             return IsEnterable (this);
